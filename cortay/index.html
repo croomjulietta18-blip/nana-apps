@@ -1,0 +1,920 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>CorTay's Learning Adventures</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="CorTay's Adventures">
+<meta name="theme-color" content="#2e6b34">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Baloo+2:wght@500;700;800&display=swap">
+<style>
+:root{
+  color-scheme: light;
+  --plum:#2e6b34; --plum-deep:#1c4721; --lilac:#e6f4e2; --lilac-2:#cfe9c8;
+  --gold:#f4b23c; --gold-soft:#fff3d6; --rose:#e8588a; --mint:#2f9e7a; --mint-soft:#dcf3ea;
+  --sky:#3d7fd6; --ink:#2a1840; --ink-2:#5d4a78; --paper:#fffaf2; --card:#ffffff; --line:#e4d7f3;
+  --display:"Baloo 2","Trebuchet MS",system-ui,sans-serif;
+  --read:"Andika","Century Gothic","Avenir Next",system-ui,sans-serif;
+  --r:22px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--read);font-size:18px;line-height:1.5;
+  background-image:radial-gradient(circle at 12% 8%,#f6ecff 0,transparent 38%),radial-gradient(circle at 92% 30%,#fff1d9 0,transparent 32%);
+  touch-action:manipulation;-webkit-user-select:none;user-select:none}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;touch-action:manipulation}
+button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.wrap{max-width:900px;margin:0 auto;padding-inline:16px;padding-block:12px 40px}
+
+/* top bar */
+.bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding-block:6px 10px}
+.brand{font-family:var(--display);font-weight:800;font-size:1.25rem;color:var(--plum);display:flex;align-items:center;gap:8px;margin-right:auto;line-height:1.1}
+.brand .crown{width:34px;height:34px;flex:none}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:999px;background:var(--card);border:2px solid var(--line);font-weight:700;font-size:.95rem;min-height:44px}
+.pill[aria-pressed="false"]{opacity:.55}
+.home-btn{background:var(--plum);color:#fff;border-color:var(--plum)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;background:linear-gradient(160deg,#3f8a45,#1c4721);color:#fff;border-radius:28px;padding:22px;position:relative;overflow:hidden}
+.hero h1{font-family:var(--display);font-size:clamp(1.9rem,6vw,2.8rem);line-height:1.05;margin:0 0 4px;text-wrap:balance}
+.hero p{margin:0;font-size:1.1rem;opacity:.95}
+.heroart{display:flex;align-items:flex-end;gap:2px}.heroart .heroboy{width:clamp(110px,28vw,160px);height:auto}.heroart .danny{width:clamp(96px,24vw,160px);height:auto}
+.spark{position:absolute;color:var(--gold);font-size:18px;animation:tw 3s ease-in-out infinite}
+@keyframes tw{0%,100%{opacity:.25;transform:scale(.8)}50%{opacity:1;transform:scale(1.15)}}
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.stat{background:rgba(255,255,255,.16);border-radius:999px;padding:6px 14px;font-weight:700;font-variant-numeric:tabular-nums}
+
+/* tiles */
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px;margin-top:18px}
+.tile{background:var(--card);border:2px solid var(--line);border-radius:var(--r);padding:16px;text-align:left;display:grid;grid-template-columns:52px 1fr;gap:4px 12px;align-items:center;min-height:96px;transition:transform .15s}
+.tile:active{transform:scale(.97)}
+.tile .ic{grid-row:span 2;width:52px;height:52px;border-radius:16px;display:grid;place-items:center;font-size:28px}
+.tile b{font-family:var(--display);font-size:1.25rem;line-height:1.1}
+.tile small{color:var(--ink-2);font-size:.9rem;line-height:1.3}
+.tile.new{border-color:var(--gold);background:var(--gold-soft)}
+.tag{display:inline-block;background:var(--rose);color:#fff;font-size:.7rem;font-weight:700;padding:1px 8px;border-radius:999px;margin-left:6px;vertical-align:middle;letter-spacing:.04em}
+.note{margin-top:16px;color:var(--ink-2);text-align:center}
+
+/* screens */
+.screen h2{font-family:var(--display);font-size:clamp(1.6rem,5vw,2.2rem);color:var(--plum);margin:6px 0 2px;line-height:1.1}
+.screen .sub{color:var(--ink-2);margin:0 0 16px}
+.panel{background:var(--card);border:2px solid var(--line);border-radius:var(--r);padding:18px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--plum);color:#fff;border-radius:999px;padding:12px 22px;font-family:var(--display);font-weight:700;font-size:1.15rem;min-height:52px}
+.btn.soft{background:var(--lilac);color:var(--plum)}
+.btn.gold{background:var(--gold);color:var(--ink)}
+.btn:disabled{opacity:.4}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+
+/* story */
+.book{background:var(--card);border-radius:26px;border:2px solid var(--line);overflow:hidden}
+.book .art{height:170px;display:grid;place-items:center;font-size:84px;position:relative}
+.book .text{padding:18px 20px 8px;font-size:clamp(1.2rem,3.6vw,1.45rem);line-height:1.7;min-height:170px}
+.book .text p{margin:0 0 .7em}
+.w{border-radius:8px;padding:0 2px;cursor:pointer}
+.w.on{background:var(--gold);color:var(--ink)}
+.book .foot{display:flex;align-items:center;gap:10px;padding:12px 16px 16px;flex-wrap:wrap}
+.book .pg{margin-left:auto;font-weight:700;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.voice-badge{font-size:.85rem;font-weight:700;padding:4px 10px;border-radius:999px;background:var(--mint-soft);color:var(--mint)}
+.voice-badge.tts{background:var(--lilac);color:var(--plum)}
+.q{background:var(--lilac);border-radius:16px;padding:10px 14px;margin:0 0 10px}
+.q button{font-size:.95rem;color:var(--plum);font-weight:700;text-decoration:underline;padding:4px 0}
+.q .ans{display:block;color:var(--ink-2);font-size:1rem;margin-top:2px}
+
+/* quest */
+.target{font-family:var(--display);font-size:1.3rem;text-align:center;margin-bottom:12px}
+.choices{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.card{background:var(--card);border:3px solid var(--line);border-radius:20px;font-size:clamp(1.6rem,6vw,2.4rem);font-weight:700;padding:22px 6px;min-height:100px}
+.card.right{border-color:var(--mint);background:var(--mint-soft)}
+.card.wrong{border-color:var(--rose);animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.dots{display:flex;gap:8px;justify-content:center;margin:14px 0 4px}
+.dot{width:16px;height:16px;border-radius:50%;background:var(--line)}
+.dot.done{background:var(--gold)}.dot.cur{background:var(--plum)}
+.big-say{display:flex;justify-content:center;margin-bottom:10px}
+
+/* word wall */
+.levels{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.levels button{padding:8px 16px;border-radius:999px;border:2px solid var(--line);font-weight:700;min-height:44px;background:var(--card)}
+.levels button[aria-pressed="true"]{background:var(--plum);color:#fff;border-color:var(--plum)}
+.wall{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px}
+.wall button{background:var(--card);border:2px solid var(--line);border-radius:14px;padding:12px 4px;font-size:1.3rem;font-weight:700;position:relative;min-height:56px}
+.wall button.learned{background:var(--gold-soft);border-color:var(--gold)}
+.wall button.learned::after{content:"★";position:absolute;top:2px;right:6px;font-size:.8rem;color:var(--gold)}
+
+/* parts */
+.builder{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:start}
+.col{display:grid;gap:8px}
+.col button{background:var(--card);border:2px solid var(--line);border-radius:14px;font-size:1.5rem;font-weight:700;padding:8px;min-height:54px}
+.col button[aria-pressed="true"]{border-color:var(--plum);background:var(--lilac);color:var(--plum)}
+.plus{font-family:var(--display);font-size:2rem;color:var(--ink-2);padding-top:40px}
+.result{margin-top:16px;text-align:center;font-size:clamp(2.4rem,10vw,3.6rem);font-weight:700;letter-spacing:.02em}
+.result .on{color:var(--rose)}.result .rime{color:var(--plum)}
+.verdict{text-align:center;font-weight:700;min-height:1.6em}
+
+/* book parts */
+.bookpic{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+.bookpic svg{width:100%;height:auto;max-width:360px}
+.hot{cursor:pointer}
+.hot:hover .hl,.hot.sel .hl{stroke:var(--gold);stroke-width:5}
+.partlist{display:grid;gap:8px}
+.partlist button{text-align:left;background:var(--card);border:2px solid var(--line);border-radius:14px;padding:10px 14px;min-height:48px}
+.partlist button.sel{border-color:var(--gold);background:var(--gold-soft)}
+.partlist b{font-family:var(--display);font-size:1.15rem}
+
+/* friends */
+.friends{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
+.friend{background:var(--card);border:2px solid var(--line);border-radius:var(--r);padding:16px;text-align:left;display:grid;gap:6px}
+.friend .face{font-size:52px;line-height:1}
+.friend b{font-family:var(--display);font-size:1.25rem}
+.friend span{color:var(--ink-2)}
+
+/* sentence */
+.slots{min-height:72px;border:3px dashed var(--line);border-radius:18px;padding:10px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:#fff}
+.bank{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;justify-content:center}
+.chip{background:var(--lilac);color:var(--plum);border-radius:14px;padding:10px 16px;font-size:1.4rem;font-weight:700;min-height:54px}
+.slots .chip{background:var(--gold-soft);color:var(--ink)}
+.pic{font-size:60px;text-align:center}
+
+/* grown-up */
+.gu{display:grid;gap:14px}
+.gu h3{font-family:var(--display);margin:0 0 6px;color:var(--plum);font-size:1.3rem}
+.meter{height:16px;background:var(--lilac);border-radius:999px;overflow:hidden}
+.meter i{display:block;height:100%;background:var(--gold)}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-variant-numeric:tabular-nums}
+.kv dt{color:var(--ink-2)}.kv dd{margin:0;font-weight:700}
+select{font:inherit;padding:8px 12px;border-radius:12px;border:2px solid var(--line);background:#fff;min-height:44px}
+textarea{width:100%;font:inherit;font-size:1rem;border:2px solid var(--line);border-radius:12px;padding:10px;-webkit-user-select:text;user-select:text;background:#fff;color:var(--ink)}
+.small{font-size:.92rem;color:var(--ink-2)}
+.friend .face .danny{width:96px;height:auto}.friend .face .fp{width:112px;height:112px;display:block}.artp{display:inline-block;width:1.5em;height:1.5em;vertical-align:middle}.book .art{display:flex;align-items:center;justify-content:center;gap:8px}.book .art .artp{width:132px;height:132px}.artp .fp{width:100%;height:100%;display:block}.lbhead .artp{width:40px;height:40px}.pic .artp{width:96px;height:96px}.feelhead .fp{width:96px;height:96px;display:block;margin:0 auto}.brand .crown .fp{width:34px;height:34px;display:block}.tile .ic .fp{width:52px;height:52px;display:block}.artboy{display:inline-block;width:1.6em;vertical-align:bottom}.artboy .cb{width:100%;height:auto}.lbhead .artboy{width:36px}.friend .face .cb{width:96px;height:auto}
+.cb .bounce{animation:cbBounce 1.8s ease-in-out infinite;transform-origin:60px 160px}
+.cb .wave{animation:cbWave 1.3s ease-in-out infinite;transform-origin:90px 104px}
+.cb .blink{animation:cbBlink 4s infinite;transform-origin:60px 66px}
+.cb .locs{animation:cbSway 1.8s ease-in-out infinite;transform-origin:60px 40px}
+.cb .twinkle{animation:cbTw 2s ease-in-out infinite}
+@keyframes cbBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes cbWave{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(18deg)}}
+@keyframes cbBlink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.08)}}
+@keyframes cbSway{0%,100%{transform:rotate(-1.5deg)}50%{transform:rotate(1.5deg)}}
+@keyframes cbTw{0%,100%{opacity:.2;transform:scale(.7)}50%{opacity:1;transform:scale(1.1)}}
+.dinofx .dn .cb{position:absolute;width:62px;left:-58px;bottom:2px;animation:none}
+@media (prefers-reduced-motion:reduce){.cb *{animation:none!important}}
+.vcard{font-size:clamp(1.2rem,4.8vw,1.8rem)}
+.feels{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:10px}
+.feel{background:var(--card);border:3px solid var(--line);border-radius:18px;padding:10px 6px;font-weight:700;display:grid;gap:2px;justify-items:center;min-height:90px}
+.feel span{font-size:40px;line-height:1.1}.feel.sel{border-color:var(--gold);background:var(--gold-soft)}
+.reply{background:var(--lilac);border-radius:18px;padding:14px;margin-top:14px;text-align:left}
+.reply p{margin:0 0 6px;font-size:1.1rem}
+.breath{display:flex;align-items:center;gap:14px;justify-content:center;margin-top:8px}
+.breath i{width:40px;height:40px;border-radius:50%;background:var(--mint);opacity:.75;animation:breathe 8s ease-in-out infinite}
+@keyframes breathe{0%,100%{transform:scale(.6)}50%{transform:scale(1.4)}}
+.rqlist{display:grid;gap:12px}
+.rqcard{background:var(--card);border:2px solid var(--line);border-radius:var(--r);padding:14px;display:grid;grid-template-columns:56px 1fr;gap:12px;align-items:center;text-align:left;min-height:84px}
+.rqcard .ic{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;font-size:30px}
+.rqt{display:grid}.rqt b{font-family:var(--display);font-size:1.25rem;line-height:1.15}.rqt small{color:var(--ink-2);font-size:.95rem}
+.qtext{font-family:var(--display);font-size:clamp(1.3rem,4.5vw,1.7rem);text-align:center;margin:0 0 10px;line-height:1.25;color:var(--ink)}
+.answers{display:grid;gap:10px}
+.ans{background:var(--card);border:3px solid var(--line);border-radius:18px;padding:14px 16px;font-size:1.2rem;font-weight:700;text-align:left;min-height:60px}
+.ans.right{border-color:var(--mint);background:var(--mint-soft)}
+.ans.wrong{border-color:var(--rose);animation:shake .35s;opacity:.6}
+.lookback{background:var(--gold-soft);border-radius:16px;padding:12px 14px;margin:8px 0 12px}
+.lbhead{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.lbhead span{font-size:28px}.lbhead b{font-family:var(--display);margin-right:auto}
+.lbtext{font-size:1.15rem;line-height:1.6;margin-top:6px}.lbtext p{margin:0 0 .5em}
+.gstats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px}
+.gstats div{background:var(--lilac);border-radius:16px;padding:10px 12px;display:grid}
+.gstats b{font-family:var(--display);font-size:1.8rem;color:var(--plum);line-height:1.1;font-variant-numeric:tabular-nums}
+.gstats span{font-size:.85rem;color:var(--ink-2)}
+.gchart{display:grid;grid-template-columns:repeat(14,1fr);gap:4px;height:130px;align-items:end;border-bottom:1px solid var(--line)}
+.gbar{height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:2px;padding:0;min-width:0}
+.gbar i{display:block;width:70%;max-width:22px;background:var(--plum);border-radius:4px 4px 0 0}
+.gbar span{font-size:.7rem;color:var(--ink-2);height:16px}
+.gwords{margin:0;padding-left:18px;font-size:.95rem}
+.ok{color:var(--mint);font-weight:700}
+
+/* celebrate + overlay */
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:50}
+.overlay{position:fixed;inset:0;background:rgba(42,24,64,.6);display:grid;place-items:center;z-index:40;padding:16px}
+.overlay .panel{max-width:440px;text-align:center}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--plum-deep);color:#fff;padding:12px 20px;border-radius:999px;font-weight:700;z-index:60;max-width:90vw;text-align:center}
+
+@media (max-width:560px){
+  .hero{grid-template-columns:1fr;text-align:center}.heroart{justify-content:center}
+  .stats{justify-content:center}
+  .bookpic{grid-template-columns:1fr}
+  .tiles{grid-template-columns:1fr 1fr}
+  .tile{grid-template-columns:1fr;text-align:center;justify-items:center;padding:14px 8px}
+  .tile .ic{grid-row:auto}
+  .tile small{display:none}
+  .choices{gap:8px}
+}
+
+/* Danny page turn */
+.book.flipout{animation:flipout .38s ease-in forwards;transform-origin:left center}
+.book.flipin{animation:flipin .42s ease-out;transform-origin:left center}
+@keyframes flipout{to{transform:perspective(1200px) rotateY(-88deg);opacity:.2}}
+@keyframes flipin{from{transform:perspective(1200px) rotateY(80deg);opacity:.2}to{transform:none;opacity:1}}
+.dinofx{position:fixed;inset:0;pointer-events:none;z-index:45;overflow:hidden}
+.dinofx .dn{position:absolute;top:36%;left:-170px;width:150px;animation:stomp 1s linear forwards}
+.dinofx .dn svg{width:100%;height:auto;animation:bob .2s ease-in-out infinite alternate}
+.dinofx.back .dn{left:auto;right:-170px;animation-name:stompback}.dinofx.back .dn svg{transform:scaleX(-1)}
+@keyframes stomp{to{transform:translateX(calc(100vw + 340px))}}
+@keyframes stompback{to{transform:translateX(calc(-100vw - 340px))}}
+@keyframes bob{from{translate:0 0}to{translate:0 -8px}}
+.dinofx .fp{position:absolute;font-size:24px;opacity:0;animation:fp 1s ease-out forwards}
+@keyframes fp{0%{opacity:0}20%{opacity:.9}100%{opacity:0}}
+
+
+/* hint helper above the turn-the-page button */
+.hintme{position:relative;animation:hintGlow 1.2s ease-in-out infinite}
+.hintme::before{content:"";position:absolute;left:50%;bottom:calc(100% + 16px);width:62px;height:62px;margin-left:-31px;border-radius:50%;background:#fff url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIiB2aWV3Qm94PSIwIDAgMTIwIDEyMCIgcm9sZT0iaW1nIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9IndncyIgeDE9IjAiIHkxPSIwIiB4Mj0iMCIgeTI9IjEiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2UzZjFmZiIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2ZkZThmMyIvPjwvbGluZWFyR3JhZGllbnQ+PGNsaXBQYXRoIGlkPSJ3Z2MiPjxjaXJjbGUgY3g9IjYwIiBjeT0iNjAiIHI9IjU4Ii8+PC9jbGlwUGF0aD48L2RlZnM+PGcgY2xpcC1wYXRoPSJ1cmwoI3dnYykiPjxyZWN0IHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIiBmaWxsPSJ1cmwoI3dncykiLz48Y2lyY2xlIGN4PSIyMiIgY3k9IjI0IiByPSIxLjYiIGZpbGw9IiNmZmYiLz48Y2lyY2xlIGN4PSI5OCIgY3k9IjE4IiByPSIyIiBmaWxsPSIjZmZmIi8+PGNpcmNsZSBjeD0iMTA0IiBjeT0iNDQiIHI9IjEuMyIgZmlsbD0iI2ZmZiIvPjxwYXRoIGQ9Ik0xNiA0MGwxLjUgMy41IDMuNSAxLjUtMy41IDEuNS0xLjUgMy41LTEuNS0zLjUtMy41LTEuNSAzLjUtMS41eiIgZmlsbD0iI2ZmZDY2YiIvPjxwYXRoIGQ9Ik05NiAyOGwxIDIuNCAyLjQgMS0yLjQgMS0xIDIuNC0xLTIuNC0yLjQtMSAyLjQtMXoiIGZpbGw9IiNmZmQ2NmIiLz48ZWxsaXBzZSBjeD0iNjAiIGN5PSIxMjIiIHJ4PSI4MCIgcnk9IjIyIiBmaWxsPSIjYmZlNmI4Ii8+PGVsbGlwc2UgY3g9IjYwIiBjeT0iMTE0IiByeD0iMzYiIHJ5PSIxMiIgZmlsbD0iI2M5YTE3ZSIvPjxlbGxpcHNlIGN4PSI2MCIgY3k9IjExMCIgcng9IjMwIiByeT0iNyIgZmlsbD0iI2I4OGM2OCIvPjxwYXRoIGQ9Ik01MiAxMTAgQzQ2IDkwIDc0IDg0IDY4IDY0IEM2NCA1MiA1MiA1NCA1NCA0NCIgc3Ryb2tlPSIjZjdhOGM0IiBzdHJva2Utd2lkdGg9IjE4IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48cGF0aCBkPSJNNTAgOTYgbDYgLTIgTTYwIDgwIGw2IDIgTTY0IDY4IGwtNiAyIiBzdHJva2U9IiNlYzhmYjIiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PGNpcmNsZSBjeD0iNTUiIGN5PSI0MiIgcj0iMTUiIGZpbGw9IiNmN2E4YzQiLz48cGF0aCBkPSJNNTUgMjggUTUyIDE4IDQ0IDE4IFE0OCAyNiA1NSAyOFoiIGZpbGw9IiM4Y2M5OGEiLz48cGF0aCBkPSJNNTUgMjggUTYwIDE4IDY4IDIwIFE2MiAyNyA1NSAyOFoiIGZpbGw9IiNhNmRjYTAiLz48ZWxsaXBzZSBjeD0iNTAiIGN5PSI0MSIgcng9IjMuNTciIHJ5PSI0LjIiIGZpbGw9IiMzYjJhNGQiLz48Y2lyY2xlIGN4PSI1MS4yNiIgY3k9IjM5LjUzIiByPSIxLjU5NiIgZmlsbD0iI2ZmZiIvPjxjaXJjbGUgY3g9IjQ4Ljc0IiBjeT0iNDIuNjgiIHI9IjAuNjcyIiBmaWxsPSIjZmZmIi8+PGVsbGlwc2UgY3g9IjYxIiBjeT0iNDEiIHJ4PSIzLjU3IiByeT0iNC4yIiBmaWxsPSIjM2IyYTRkIi8+PGNpcmNsZSBjeD0iNjIuMjYiIGN5PSIzOS41MyIgcj0iMS41OTYiIGZpbGw9IiNmZmYiLz48Y2lyY2xlIGN4PSI1OS43NCIgY3k9IjQyLjY4IiByPSIwLjY3MiIgZmlsbD0iI2ZmZiIvPjxlbGxpcHNlIGN4PSI0NSIgY3k9IjQ4IiByeD0iNSIgcnk9IjMuMiIgZmlsbD0iI2ZmOWZiZiIgb3BhY2l0eT0iLjU1Ii8+PGVsbGlwc2UgY3g9IjY2IiBjeT0iNDgiIHJ4PSI1IiByeT0iMy4yIiBmaWxsPSIjZmY5ZmJmIiBvcGFjaXR5PSIuNTUiLz48cGF0aCBkPSJNNTEgNDkgUTU1LjUgNTMgNjAgNDkiIHN0cm9rZT0iIzNiMmE0ZCIgc3Ryb2tlLXdpZHRoPSIxLjgiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxjaXJjbGUgY3g9IjkwLjAiIGN5PSI5Mi42IiByPSIyLjU1IiBmaWxsPSIjZmZiM2NmIi8+PGNpcmNsZSBjeD0iOTMuMjMiIGN5PSI5NC45OCIgcj0iMi41NSIgZmlsbD0iI2ZmYjNjZiIvPjxjaXJjbGUgY3g9IjkyLjA0IiBjeT0iOTguNzIiIHI9IjIuNTUiIGZpbGw9IiNmZmIzY2YiLz48Y2lyY2xlIGN4PSI4Ny45NiIgY3k9Ijk4LjcyIiByPSIyLjU1IiBmaWxsPSIjZmZiM2NmIi8+PGNpcmNsZSBjeD0iODYuNzciIGN5PSI5NC45OCIgcj0iMi41NSIgZmlsbD0iI2ZmYjNjZiIvPjxjaXJjbGUgY3g9IjkwIiBjeT0iOTYiIHI9IjEuODciIGZpbGw9IiNmZmUyN2EiLz48cGF0aCBkPSJNOTAgMTAwIEw5MCAxMTYiIHN0cm9rZT0iIzhjYzk4YSIgc3Ryb2tlLXdpZHRoPSIxLjYiLz48Y2lyY2xlIGN4PSIxOCIgY3k9IjEwOCIgcj0iMyIgZmlsbD0iI2ZmYjNjZiIvPjxjaXJjbGUgY3g9IjE4IiBjeT0iMTA4IiByPSIxLjIiIGZpbGw9IiNmZmUyN2EiLz48Y2lyY2xlIGN4PSIxMDIiIGN5PSIxMDYiIHI9IjMiIGZpbGw9IiNkOGMzZmYiLz48Y2lyY2xlIGN4PSIxMDIiIGN5PSIxMDYiIHI9IjEuMiIgZmlsbD0iI2ZmZTI3YSIvPjwvZz48Y2lyY2xlIGN4PSI2MCIgY3k9IjYwIiByPSI1OCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZjRjODZhIiBzdHJva2Utd2lkdGg9IjMiLz48L3N2Zz4=") center/cover no-repeat;border:3px solid #f4b23c;box-shadow:0 4px 10px rgba(0,0,0,.2);animation:hintBob .7s ease-in-out infinite alternate;pointer-events:none;z-index:5}
+.hintme::after{content:"▼";position:absolute;left:50%;bottom:calc(100% - 2px);transform:translateX(-50%);color:#f4b23c;font-size:22px;line-height:1;animation:hintBob .7s ease-in-out infinite alternate;pointer-events:none;z-index:5;text-shadow:0 2px 3px rgba(0,0,0,.15)}
+@keyframes hintBob{from{translate:0 -8px}to{translate:0 0}}
+@keyframes hintGlow{0%,100%{box-shadow:0 0 0 0 rgba(244,178,60,.8)}50%{box-shadow:0 0 0 10px rgba(244,178,60,0)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="wrap">
+  <div class="bar">
+    <div class="brand">
+      <span class="crown" style="font-size:30px;line-height:1">🦕</span>
+      <span>CorTay's Learning<br>Adventures</span>
+    </div>
+    <button class="pill home-btn" id="homeBtn" hidden>🏠 Home</button>
+    <button class="pill" id="voiceBtn" aria-pressed="true">🔊 Voice</button>
+    <button class="pill" id="musicBtn" aria-pressed="false">🎵 Music</button>
+  </div>
+  <main id="app"></main>
+</div>
+<canvas id="confetti"></canvas>
+
+<script>
+/* ============ DATA ============ */
+const LEVELS = {
+  1:"a and away big blue can come down find for funny go help here I in is it jump little look make me my not one play red run said see the three to two up we where yellow you all am are at ate be black brown but came did do eat four get good have he into like must new no now on our out please pretty ran ride saw say she so soon that there they this too under want was well went what white who will with yes".split(" "),
+  2:"after again an any as ask by could every fly from give going had has her him his how just know let live may of old once open over put round some stop take thank them then think walk were when".split(" "),
+  3:"always around because been before best both buy call cold does don't fast first five found gave goes green its made many off or pull read right sing sit sleep tell their these those upon us use very wash which why wish work would write your about better bring carry clean cut done draw drink eight fall far full got grow hold hot hurt if keep kind".split(" ")
+};
+const LEVEL_NAME = {1:"Kindergarten",2:"First Grade",3:"Second Grade"};
+const ALL_WORDS = [...LEVELS[1],...LEVELS[2],...LEVELS[3]];
+/* Start with Kindergarten words; move up only after every word in a level is learned */
+function curLevel(){for(const l of [1,2,3]){if(LEVELS[l].some(w=>!S.learned.includes(w)))return l}return 3}
+
+/* Nana's voice pack: every line and word the app says, recorded in Nana Julietta's voice.
+   voice/clips.json maps each line (lowercased, no punctuation) to [file, start, length] inside the audio files. */
+const VOICE={clips:{},files:{},bufs:{},ready:false};
+async function loadVoicePack(){
+  try{
+    const j=await (await fetch("voice/clips.json")).json();
+    VOICE.clips=j.clips;VOICE.files=j.files;
+    const c=ctx();if(!c)return;
+    await Promise.all(Object.entries(j.files).map(async([name,url])=>{
+      const ab=await (await fetch(url)).arrayBuffer();
+      VOICE.bufs[name]=await new Promise((ok,no)=>{const p=c.decodeAudioData(ab,ok,no);if(p&&p.then)p.then(ok,no)});
+    }));
+    VOICE.ready=true;
+  }catch(e){VOICE.ready=false}
+}
+function vnorm(t){return String(t).toLowerCase().replace(/[’‘]/g,"'").replace(/[^a-z0-9' ]/g," ").replace(/\s+/g," ").trim()}
+function vsents(t){
+  const out=[];let cur="";
+  for(let i=0;i<t.length;i++){
+    cur+=t[i];
+    if(".!?".includes(t[i])){
+      while(i+1<t.length&&"\"”’'".includes(t[i+1])){i++;cur+=t[i]}
+      if(i+1===t.length||t[i+1]===" "){out.push(cur.trim());cur=""}
+    }
+  }
+  if(cur.trim())out.push(cur.trim());
+  return out;
+}
+/* Returns the list of Nana clips for a line (or list of lines), or null if any piece is missing. */
+function clipSeq(parts){
+  if(!VOICE.ready)return null;
+  const seq=[];
+  for(const p of (Array.isArray(parts)?parts:[parts])){
+    const whole=VOICE.clips[vnorm(p)];
+    if(whole){seq.push(whole);continue}
+    for(const s of vsents(p)){const c=VOICE.clips[vnorm(s)];if(!c)return null;seq.push(c)}
+  }
+  return seq.length?seq:null;
+}
+let vSources=[],vTimer=null;
+function stopClips(){vSources.forEach(s=>{try{s.onended=null;s.stop()}catch(e){}});vSources=[];clearTimeout(vTimer)}
+function playSeq(seq,onend,gap=.28){
+  const c=ctx();let t=c.currentTime+.05;
+  seq.forEach(([f,start,dur],n)=>{
+    const src=c.createBufferSource();src.buffer=VOICE.bufs[f];src.connect(c.destination);
+    src.start(t,start,dur);t+=dur+gap;vSources.push(src);
+    if(n===seq.length-1)src.onended=()=>{vSources=[];onend&&onend()};
+  });
+}
+const GRANDMA_CLIP = "voice/grandma-story.mp3";
+function playGrandma(btn){
+  stopTalking();
+  if(btn&&btn.dataset.playing==="1"){btn.dataset.playing="0";btn.innerHTML="💜 Nana reads to you";return}
+  audioEl=new Audio(GRANDMA_CLIP);
+  if(btn){btn.dataset.playing="1";btn.innerHTML="⏸ Stop Nana"}
+  audioEl.onended=()=>{audioEl=null;if(btn){btn.dataset.playing="0";btn.innerHTML="💜 Nana reads to you"}};
+  audioEl.play().catch(()=>{if(btn){btn.dataset.playing="0";btn.innerHTML="💜 Nana reads to you"}toast("Turn up the volume and try again.")});
+}
+
+/* Reading Quest stories: grade 1, 2 and 3 */
+const RQ = [{"id": "miles", "title": "A Story Across the Miles", "level": "Nana's story", "icon": "🌊", "color": "#e0f0fb", "pages": [{"art": "🪨🌊", "bg": "#e0f0fb", "text": ["CorTay sat beside his new cave home, turning a smooth stone in his hands.", "The waterfall was beautiful, but everything felt different."]}, {"art": "👦🏾💬", "bg": "#fff3d6", "text": ["“I miss my cousins,” he told Mommy.", "“I'm glad you told me,” Mommy said.", "“You can like something about a new place and still miss the people you love.”"]}, {"art": "📖🦕", "bg": "#e4f5ec", "text": ["That afternoon, CorTay opened his adventure book.", "On its make-believe pages, RhyLein the Long-Neck bent her tall neck toward him.", "She was the oldest and largest of their cousin trio.", "Little Leilani, the smallest, settled beside the book.", "Danny the Triceratops made room for everyone."]}, {"art": "🖍️🌼", "bg": "#fde7ef", "text": ["“Let's draw three things we want to share,” RhyLein suggested.", "CorTay drew the waterfall. Leilani drew a tiny flower.", "RhyLein drew a shady reading spot big enough for all three."]}, {"art": "🖼️💛", "bg": "#efe6fb", "text": ["When CorTay closed the book, he showed his picture to Mommy.", "Together, they asked his cousins' family about a good time to talk.", "Until then, CorTay could keep adding pictures and questions to his sharing book."]}, {"art": "👋🏾🏡", "bg": "#e4f5ec", "text": ["Later, he met a new neighbor with Mommy nearby.", "He still missed his cousins.", "He could make room for a new friend, too."]}], "qs": [{"q": "Why does CorTay feel different in his new home?", "c": ["He moved, and he misses his cousins.", "He lost his smooth stone.", "He is afraid of the waterfall."], "a": 0, "page": 1, "why": "He has moved and misses his cousins. The waterfall is beautiful, but the place is unfamiliar."}, {"q": "Who is the oldest and largest of the cousin trio?", "c": ["RhyLein", "Leilani", "Danny"], "a": 0, "page": 3, "why": "RhyLein the Long-Neck is the oldest and largest."}, {"q": "Who is the smallest?", "c": ["Leilani", "RhyLein", "CorTay"], "a": 0, "page": 3, "why": "Little Leilani is the smallest. Her size does not make her ideas less important."}, {"q": "What does CorTay do when he misses his cousins?", "c": ["He tells Mommy and makes a picture to share.", "He hides in his cave all day.", "He stops talking to everyone."], "a": 0, "page": 2, "why": "He tells Mommy and makes a picture to share."}, {"q": "Does meeting a new friend mean CorTay stops caring about his cousins?", "c": ["No. He can have new friends and still love his cousins.", "Yes. He forgets about his cousins.", "Yes. He can only have one friend."], "a": 0, "page": 6, "why": "He can care about new friends and still miss and love his cousins."}], "vocab": [["familiar", "known or recognized"], ["share", "let someone else enjoy or know something"], ["nearby", "not far away"], ["patient", "able to wait calmly"]]}, {"id": "rain", "title": "RhyLein's Rainy Day Giggles", "level": "Kindergarten", "icon": "🌧️", "color": "#e0f0fb", "pages": [{"art": "🌧️🍃", "bg": "#e0f0fb", "text": ["Plip, plop, plip! Rain fell on Dino Valley.", "CorTay, Leilani, and Danny sat under a big leaf.", "Nobody could play outside."]}, {"art": "🦕😄", "bg": "#fff3d6", "text": ["Then RhyLein poked her long neck under the leaf.", "“I have a joke,” she said with a grin.", "“Why did the dinosaur cross the road? Because chickens were not invented yet!”"]}, {"art": "😂", "bg": "#fde7ef", "text": ["Danny laughed so hard his three horns wiggled.", "CorTay giggled. Leilani covered her smile with her tail."]}, {"art": "🪱", "bg": "#e4f5ec", "text": ["A small worm peeked out of the mud. It was Wiggles.", "“Can I play too?” Wiggles asked in a tiny voice."]}, {"art": "💃🦕", "bg": "#efe6fb", "text": ["“Of course!” said RhyLein. “Let's play Dino Dance. When I say freeze, everybody stops!”", "RhyLein made the game slow, so Wiggles could play too."]}, {"art": "🌈", "bg": "#fff3d6", "text": ["They danced and froze and laughed until the rain stopped.", "A rainbow stretched across the sky.", "“Best rainy day ever,” said Wiggles."]}], "qs": [{"q": "What was the weather at the start of the story?", "c": ["Rainy", "Sunny", "Snowy"], "a": 0, "page": 1, "why": "Rain fell on Dino Valley, so nobody could play outside."}, {"q": "Who told a joke?", "c": ["RhyLein", "Danny", "Wiggles"], "a": 0, "page": 2, "why": "RhyLein said, I have a joke, and told a funny one."}, {"q": "Why did RhyLein make the game slow?", "c": ["So Wiggles could play too.", "Because she was tired.", "Because it was dark."], "a": 0, "page": 5, "why": "RhyLein made the game slow, so Wiggles could play too."}, {"q": "How did Wiggles feel at the end?", "c": ["Happy", "Scared", "Angry"], "a": 0, "page": 6, "why": "Wiggles said it was the best rainy day ever."}, {"q": "What does RhyLein show us?", "c": ["Games are best when everyone is included.", "Only big dinosaurs can play.", "Rainy days are boring."], "a": 0, "page": 5, "why": "RhyLein made sure everyone, even little Wiggles, could join the fun."}], "vocab": [["giggle", "a small, happy laugh"], ["include", "let someone join in"], ["peek", "look quickly"]]}, {"id": "quiet", "title": "Leilani's Quiet Moment", "level": "Grade 1", "icon": "🌼", "color": "#fde7ef", "pages": [{"art": "🦕🌼", "bg": "#fde7ef", "text": ["Leilani the Little Long-Neck loved her flower garden.", "Every morning, she gave each flower a sip of water."]}, {"art": "⚽💥", "bg": "#fff3d6", "text": ["One day, the friends were playing ball.", "The ball bounced into Leilani's garden and squished her favorite flower."]}, {"art": "😢", "bg": "#e0f0fb", "text": ["Leilani's eyes filled with tears.", "“I feel sad,” she said softly. “I need a quiet moment.”"]}, {"art": "🤫💛", "bg": "#efe6fb", "text": ["Her friends did not rush her.", "CorTay sat nearby. Danny waited patiently.", "RhyLein said, “We are here when you are ready.”"]}, {"art": "🤗", "bg": "#fde7ef", "text": ["After a few deep breaths, Leilani asked, “Can I have a hug?”", "RhyLein wrapped her long neck around her in a gentle hug."]}, {"art": "🌱🌷", "bg": "#e4f5ec", "text": ["Then Leilani had an idea. “Let's plant new seeds together.”", "Everyone loved her idea.", "Soon the garden had more flowers than ever."]}], "qs": [{"q": "What did Leilani love to take care of?", "c": ["Her flower garden", "Her toy box", "A pet worm"], "a": 0, "page": 1, "why": "Leilani loved her flower garden and watered it every morning."}, {"q": "What happened to her favorite flower?", "c": ["A ball squished it.", "It flew away.", "A bug ate it."], "a": 0, "page": 2, "why": "The ball bounced into the garden and squished her favorite flower."}, {"q": "How did Leilani feel when her flower was squished?", "c": ["Sad", "Silly", "Sleepy"], "a": 0, "page": 3, "why": "Leilani said, I feel sad."}, {"q": "What did her friends do during her quiet moment?", "c": ["They stayed nearby and gave her time.", "They told her to stop crying.", "They went home."], "a": 0, "page": 4, "why": "Her friends did not rush her. They stayed nearby and waited."}, {"q": "Whose idea was it to plant new seeds?", "c": ["Leilani's", "Danny's", "CorTay's"], "a": 0, "page": 6, "why": "It was Leilani's idea. Her ideas matter just as much as anyone else's."}], "vocab": [["gentle", "soft and kind"], ["comfort", "help someone feel better"], ["idea", "a thought or a plan"]]}, {"id": "dig", "title": "Danny's Big Dig", "level": "Grade 2", "icon": "🦴", "color": "#fff3d6", "pages": [{"art": "⛏️🦕", "bg": "#fff3d6", "text": ["Danny the Triceratops loved to dig.", "“Let's look for treasure,” he told CorTay."]}, {"art": "🪨", "bg": "#e4f5ec", "text": ["CorTay grabbed his little stone shovel. Danny used his three horns.", "Dig, dig, dig!"]}, {"art": "🐞", "bg": "#fde7ef", "text": ["A ladybug named Dot landed on Danny's nose.", "“What are you looking for?” she asked.", "“Treasure!” said CorTay."]}, {"art": "🕳️", "bg": "#efe6fb", "text": ["They dug and dug and dug.", "Then CorTay's shovel hit something hard. Clunk!"]}, {"art": "🦴", "bg": "#fff3d6", "text": ["It was a giant, old bone!", "“It's a fossil,” said Danny. “A fossil is part of an animal from long, long ago.”"]}, {"art": "🦴✨", "bg": "#e0f0fb", "text": ["CorTay and Danny showed the fossil to all their friends.", "“The best treasure,” said CorTay, “is the kind you can share.”"]}], "qs": [{"q": "What did Danny love to do?", "c": ["Dig", "Swim", "Sing"], "a": 0, "page": 1, "why": "Danny the Triceratops loved to dig."}, {"q": "What did Danny use to dig?", "c": ["His three horns", "A big spoon", "His tail"], "a": 0, "page": 2, "why": "CorTay used a stone shovel, and Danny used his three horns."}, {"q": "Who landed on Danny's nose?", "c": ["A ladybug named Dot", "A bird named Pip", "A worm named Wiggles"], "a": 0, "page": 3, "why": "A ladybug named Dot landed on Danny's nose."}, {"q": "What is a fossil?", "c": ["Part of an animal from long, long ago", "A kind of candy", "A brand new toy"], "a": 0, "page": 5, "why": "Danny said a fossil is part of an animal from long, long ago."}, {"q": "What did CorTay say is the best treasure?", "c": ["The kind you can share.", "The kind you keep secret.", "Shiny gold coins."], "a": 0, "page": 6, "why": "CorTay said the best treasure is the kind you can share."}], "vocab": [["fossil", "part of a plant or animal from long, long ago"], ["treasure", "something special and valuable"], ["shovel", "a tool for digging"]]}];
+
+const FAMILIES = {at:["bat","cat","fat","hat","mat","pat","rat","sat"],an:["can","fan","man","pan","ran","tan","van"],ig:["big","dig","fig","pig","wig"],op:["hop","mop","pop","top","stop"],un:["bun","fun","run","sun"],et:["get","jet","let","met","net","pet","set","vet","wet"]};
+const ONSETS = ["b","c","d","f","h","j","m","n","p","r","s","st","t","v","w"];
+
+const BOOK_PARTS = [
+  {id:"cover",name:"Cover",say:"The cover protects the pages."},
+  {id:"title",name:"Title",say:"The title tells us the book's name."},
+  {id:"author",name:"Author",say:"The author writes the words."},
+  {id:"illustrator",name:"Illustrator",say:"The illustrator creates the pictures."},
+  {id:"spine",name:"Spine",say:"The spine holds all the pages together."},
+  {id:"pages",name:"Pages",say:"The pages hold the words and pictures of the story."}
+];
+
+const FRIENDS = [{"face": "boy", "name": "CorTay", "line": "I'm a little caveboy who loves adventures. When words are tricky, I sound them out one piece at a time."}, {"face": "danny", "name": "Danny the Triceratops", "line": "Readers are like diggers. Keep digging through the word, and you'll find the treasure!"}, {"face": "big", "name": "RhyLein the Long-Neck", "line": "What do you call a dinosaur who reads a lot? A thesaurus! Ha! In my games, everybody gets a turn."}, {"face": "small", "name": "Leilani the Little Long-Neck", "line": "If reading feels hard, it's okay to take a quiet moment. Your feelings matter, and so do your ideas."}, {"face": "🪱", "name": "Wiggles the Worm", "line": "I'm small, but I can read big words, one wiggle at a time!"}, {"face": "🐞", "name": "Dot the Ladybug", "line": "Oops is how we learn. Fly back and try again!"}];
+const FEELINGS = [{"id": "happy", "face": "😊", "name": "Happy", "say": ["Hooray! I feel happy with you.", "What made you smile today? You can tell Mommy."]}, {"id": "excited", "face": "🤩", "name": "Excited", "say": ["Excited feels bouncy!", "Let's do three dino wiggles, then settle in to read."]}, {"id": "calm", "face": "😌", "name": "Calm", "say": ["Calm is a great reading feeling.", "Let's pick a story together."]}, {"id": "sad", "face": "😢", "name": "Sad", "say": ["It's okay to feel sad.", "Let's take a slow breath together. In, and out.", "You can ask someone you trust for a hug."]}, {"id": "worried", "face": "😟", "name": "Worried", "say": ["Worried feelings can feel very big.", "Take a deep breath with me.", "You can tell Mommy what is on your mind."]}, {"id": "mad", "face": "😠", "name": "Mad", "say": ["It's okay to feel mad.", "Let's stomp like dinosaurs three times. Stomp, stomp, stomp!", "Now take a big, slow breath."]}, {"id": "tired", "face": "😴", "name": "Tired", "say": ["Feeling tired is okay.", "A short rest might help.", "Reading can be cozy, too."]}];
+const SENTENCES = [{"pic": "🦕", "w": ["The", "big", "dinosaur", "can", "run."]}, {"pic": "🌊", "w": ["I", "see", "the", "waterfall."]}, {"pic": "🦴", "w": ["We", "found", "a", "big", "bone."]}, {"pic": "🌼", "w": ["Leilani", "has", "a", "yellow", "flower."]}, {"pic": "🌧️", "w": ["It", "is", "a", "rainy", "day."]}, {"pic": "😂", "w": ["RhyLein", "made", "us", "laugh."]}, {"pic": "🐞", "w": ["Look", "at", "the", "little", "bug."]}, {"pic": "🪱", "w": ["The", "worm", "can", "play", "too."]}, {"pic": "🤗", "w": ["Can", "I", "have", "a", "hug?"]}, {"pic": "📖", "w": ["We", "like", "to", "read", "together."]}];
+const VOCAB = RQ.flatMap(st=>st.vocab.map(([w,m])=>({w,m,st:st.title})));
+const CAVEBOY_SVG = "<svg class=\"cb\" viewBox=\"0 0 120 170\" role=\"img\" aria-label=\"CorTay the caveboy\"><defs><radialGradient id=\"ctSkin\" cx=\"45%\" cy=\"38%\" r=\"70%\"><stop offset=\"0\" stop-color=\"#ad7a52\"/><stop offset=\".65\" stop-color=\"#96623e\"/><stop offset=\"1\" stop-color=\"#784a2c\"/></radialGradient><linearGradient id=\"ctLimb\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#9c6842\"/><stop offset=\"1\" stop-color=\"#855634\"/></linearGradient><linearGradient id=\"ctTunic\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#f3d9a4\"/><stop offset=\"1\" stop-color=\"#e2b877\"/></linearGradient><radialGradient id=\"ctEye\" cx=\"45%\" cy=\"40%\" r=\"60%\"><stop offset=\"0\" stop-color=\"#8a5a34\"/><stop offset=\".7\" stop-color=\"#5a3419\"/><stop offset=\"1\" stop-color=\"#3a200e\"/></radialGradient><linearGradient id=\"ctHair\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#1c1614\"/><stop offset=\"1\" stop-color=\"#0a0706\"/></linearGradient></defs><ellipse cx=\"60\" cy=\"164\" rx=\"28\" ry=\"4\" fill=\"rgba(0,0,0,.12)\"/><g class=\"twinkle\" fill=\"#ffd96a\"><path d=\"M14 30 l2 5 l5 2 l-5 2 l-2 5 l-2 -5 l-5 -2 l5 -2z\"/><path d=\"M104 22 l1.5 4 l4 1.5 l-4 1.5 l-1.5 4 l-1.5 -4 l-4 -1.5 l4 -1.5z\" style=\"animation-delay:.8s\"/></g><g class=\"bounce\"><rect x=\"46\" y=\"126\" width=\"11\" height=\"30\" rx=\"5.5\" fill=\"url(#ctLimb)\"/><rect x=\"63\" y=\"126\" width=\"11\" height=\"30\" rx=\"5.5\" fill=\"url(#ctLimb)\"/><ellipse cx=\"51\" cy=\"158\" rx=\"9\" ry=\"4.6\" fill=\"#9a683f\"/><ellipse cx=\"69\" cy=\"158\" rx=\"9\" ry=\"4.6\" fill=\"#9a683f\"/><path d=\"M43 157 q8 -3 16 0 M61 157 q8 -3 16 0\" stroke=\"#e8b98a\" stroke-width=\"1.2\" fill=\"none\"/><path d=\"M38 94 Q26 108 30 122\" stroke=\"url(#ctLimb)\" stroke-width=\"10\" fill=\"none\" stroke-linecap=\"round\"/><g class=\"spear\"><rect x=\"27.6\" y=\"70\" width=\"4.2\" height=\"92\" rx=\"2\" fill=\"#8a5a32\" stroke=\"#6b4424\" stroke-width=\".8\"/><path d=\"M28 88 h3.6 M28 96 h3.6\" stroke=\"#c9a26a\" stroke-width=\"1.4\"/><path d=\"M29.7 50 L36 66 Q29.7 70 23.4 66Z\" fill=\"#9aa4ab\" stroke=\"#6f7a82\" stroke-width=\"1\"/><path d=\"M29.7 54 L32.6 65\" stroke=\"#dfe6ea\" stroke-width=\"1\"/><path d=\"M26 69 h7.4 v4 h-7.4z\" fill=\"#b08a55\"/><path d=\"M26 70 l7.4 2 M26 72 l7.4 -2\" stroke=\"#7a5a30\" stroke-width=\".8\"/></g><circle cx=\"30\" cy=\"124\" r=\"5.5\" fill=\"#96623e\"/><path d=\"M36 92 Q60 84 84 92 L88 128 Q82 124 78 130 Q72 124 66 130 Q60 124 54 130 Q48 124 42 130 Q38 124 32 128Z\" fill=\"url(#ctTunic)\" stroke=\"#d2a466\" stroke-width=\"1\" stroke-linejoin=\"round\"/><path d=\"M36 94 L72 86\" stroke=\"#c9975a\" stroke-width=\"4\" stroke-linecap=\"round\"/><circle cx=\"48\" cy=\"106\" r=\"2.6\" fill=\"#d6a566\" opacity=\".8\"/><circle cx=\"64\" cy=\"102\" r=\"2.2\" fill=\"#d6a566\" opacity=\".8\"/><circle cx=\"74\" cy=\"113\" r=\"2.8\" fill=\"#d6a566\" opacity=\".8\"/><circle cx=\"56\" cy=\"117\" r=\"2.3\" fill=\"#d6a566\" opacity=\".8\"/><path d=\"M60 99 l1.4 3 l3.2 .4 l-2.4 2.2 l.6 3.2 l-2.8 -1.6 l-2.8 1.6 l.6 -3.2 l-2.4 -2.2 l3.2 -.4z\" fill=\"#ffe08a\"/><g class=\"wave\"><path d=\"M84 96 Q98 88 99 72\" stroke=\"url(#ctLimb)\" stroke-width=\"10\" fill=\"none\" stroke-linecap=\"round\"/><circle cx=\"99\" cy=\"68\" r=\"6.2\" fill=\"#96623e\"/><path d=\"M95 63 l-1 -4 M99 61 l0 -4 M103 62 l1 -4\" stroke=\"#96623e\" stroke-width=\"2.6\" stroke-linecap=\"round\"/></g><rect x=\"54\" y=\"78\" width=\"12\" height=\"12\" rx=\"5\" fill=\"#8f5c38\"/><ellipse cx=\"33\" cy=\"60\" rx=\"4.5\" ry=\"6\" fill=\"#96623e\"/><ellipse cx=\"87\" cy=\"60\" rx=\"4.5\" ry=\"6\" fill=\"#96623e\"/><ellipse cx=\"60\" cy=\"56\" rx=\"27\" ry=\"27\" fill=\"url(#ctSkin)\"/><g class=\"locs\"><path d=\"M32 64 Q24 56 23 42 Q22 12 60 7 Q98 12 97 42 Q96 56 88 64 Q88 50 82 45 Q72 38 60 38 Q48 38 38 45 Q32 50 32 64Z\" fill=\"url(#ctHair)\"/><path d=\"M33 52 Q31 58 33 64 L36 64 Q35 57 37 51Z M87 52 Q89 58 87 64 L84 64 Q85 57 83 51Z\" fill=\"url(#ctHair)\"/><g fill=\"url(#ctHair)\"><path d=\"M21 43 Q24 34 26 30 Q28 34 31 43Z\"/><path d=\"M26 31 Q29 22 31 18 Q33 22 36 31Z\"/><path d=\"M33 22 Q36 13 38 9 Q40 13 43 22Z\"/><path d=\"M42 16 Q45 7 47 3 Q49 7 52 16Z\"/><path d=\"M51 13 Q54 4 56 0 Q58 4 61 13Z\"/><path d=\"M59 13 Q62 4 64 0 Q66 4 69 13Z\"/><path d=\"M68 16 Q71 7 73 3 Q75 7 78 16Z\"/><path d=\"M77 22 Q80 13 82 9 Q84 13 87 22Z\"/><path d=\"M84 31 Q87 22 89 18 Q91 22 94 31Z\"/><path d=\"M89 43 Q92 34 94 30 Q96 34 99 43Z\"/><path d=\"M39 24 Q42 15 44 11 Q46 15 49 24Z\"/><path d=\"M55 18 Q58 9 60 5 Q62 9 65 18Z\"/><path d=\"M71 24 Q74 15 76 11 Q78 15 81 24Z\"/></g><g fill=\"none\" stroke=\"#3a302c\" stroke-width=\"1\" opacity=\".55\"><path d=\"M34 26 q3 -2 6 0 M50 16 q3 -2 6 0 M64 16 q3 -2 6 0 M80 26 q3 -2 6 0 M42 32 q3 -2 6 0 M72 32 q3 -2 6 0 M28 42 q3 -2 6 0 M86 42 q3 -2 6 0\"/></g></g><path d=\"M43 51 Q49 48.5 55 50 M65 50 Q71 48.5 77 51\" stroke=\"#1c1210\" stroke-width=\"2.6\" fill=\"none\" stroke-linecap=\"round\"/><g class=\"blink\"><ellipse cx=\"49\" cy=\"63\" rx=\"6.4\" ry=\"7.4\" fill=\"#fff\"/><ellipse cx=\"71\" cy=\"63\" rx=\"6.4\" ry=\"7.4\" fill=\"#fff\"/><ellipse cx=\"49.5\" cy=\"64\" rx=\"5\" ry=\"6\" fill=\"url(#ctEye)\"/><ellipse cx=\"70.5\" cy=\"64\" rx=\"5\" ry=\"6\" fill=\"url(#ctEye)\"/><circle cx=\"49.5\" cy=\"65\" r=\"2.6\" fill=\"#1e1008\"/><circle cx=\"70.5\" cy=\"65\" r=\"2.6\" fill=\"#1e1008\"/><circle cx=\"51.6\" cy=\"61.4\" r=\"2\" fill=\"#fff\"/><circle cx=\"72.6\" cy=\"61.4\" r=\"2\" fill=\"#fff\"/><circle cx=\"47.8\" cy=\"67\" r=\"1\" fill=\"#fff\"/><circle cx=\"68.8\" cy=\"67\" r=\"1\" fill=\"#fff\"/><path d=\"M42.4 60 Q49 54.6 55.6 60 M64.4 60 Q71 54.6 77.6 60\" stroke=\"#2a1810\" stroke-width=\"1.4\" fill=\"none\" stroke-linecap=\"round\"/></g><path d=\"M58.6 70 Q60 72.2 61.4 70\" stroke=\"#9a643e\" stroke-width=\"1.4\" fill=\"none\" stroke-linecap=\"round\"/><ellipse cx=\"41\" cy=\"71\" rx=\"5.4\" ry=\"3.4\" fill=\"#d97a6a\" opacity=\".22\"/><ellipse cx=\"79\" cy=\"71\" rx=\"5.4\" ry=\"3.4\" fill=\"#d97a6a\" opacity=\".22\"/><path d=\"M51 75 Q60 83 70 74 Q60 78.5 51 75Z\" fill=\"#9e4a44\"/><path d=\"M53.5 75.6 Q60 78 66.5 75.6 L65.6 77 Q60 78.8 54.4 77Z\" fill=\"#fff\"/><ellipse cx=\"54\" cy=\"44\" rx=\"7\" ry=\"3.5\" fill=\"#fff\" opacity=\".12\"/></g></svg>";
+const DANNY_SVG = "<svg class=\"danny\" viewBox=\"0 0 120 80\" aria-hidden=\"true\"><path d=\"M104 44 L118 52 L102 54Z\" fill=\"#4f9a55\"/><ellipse cx=\"72\" cy=\"46\" rx=\"34\" ry=\"20\" fill=\"#5fae62\"/><rect x=\"50\" y=\"56\" width=\"11\" height=\"18\" rx=\"5\" fill=\"#4f9a55\"/><rect x=\"84\" y=\"56\" width=\"11\" height=\"18\" rx=\"5\" fill=\"#4f9a55\"/><circle cx=\"38\" cy=\"32\" r=\"20\" fill=\"#f4b23c\"/><circle cx=\"38\" cy=\"32\" r=\"14\" fill=\"#f7c867\"/><ellipse cx=\"28\" cy=\"44\" rx=\"17\" ry=\"12\" fill=\"#6fbf70\"/><path d=\"M26 30 L14 12 L32 26Z\" fill=\"#fffaf2\" stroke=\"#c9b48a\" stroke-width=\"1.5\" stroke-linejoin=\"round\"/><path d=\"M38 30 L34 8 L44 27Z\" fill=\"#fffaf2\" stroke=\"#c9b48a\" stroke-width=\"1.5\" stroke-linejoin=\"round\"/><path d=\"M13 42 L4 36 L14 38Z\" fill=\"#fffaf2\" stroke=\"#c9b48a\" stroke-width=\"1.5\" stroke-linejoin=\"round\"/><circle cx=\"26\" cy=\"39\" r=\"3\" fill=\"#1c2b1d\"/><circle cx=\"27\" cy=\"38\" r=\"1\" fill=\"#fff\"/><path d=\"M16 49 Q24 54 32 49\" stroke=\"#1c2b1d\" stroke-width=\"2\" fill=\"none\" stroke-linecap=\"round\"/><circle cx=\"66\" cy=\"40\" r=\"4\" fill=\"#4f9a55\"/><circle cx=\"80\" cy=\"48\" r=\"3\" fill=\"#4f9a55\"/><circle cx=\"90\" cy=\"38\" r=\"3.5\" fill=\"#4f9a55\"/></svg>";
+
+/* ============ STATE ============ */
+const KEY="cortay.adventures.v1";
+let S = {learned:[],minutes:0,seconds:0,storyDone:0,sentencesDone:0,questsDone:0,voice:true,music:false,limit:0,child:"CorTay",days:{},comp:{},vocab:{}};
+try{Object.assign(S,JSON.parse(localStorage.getItem(KEY)||"{}"))}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+/* Daily growth log: one entry per day on this device */
+function dayKey(d=new Date()){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function D(k=dayKey()){if(!S.days||typeof S.days!=="object")S.days={};return S.days[k]||(S.days[k]={sec:0,words:[],quests:0,right:0,tries:0,sentences:0,stories:0,qRight:0,qTries:0,vRight:0,vTries:0,feel:[]})}
+
+/* ============ SOUND ============ */
+let voices=[];
+function loadVoices(){try{voices=speechSynthesis.getVoices()}catch(e){}}
+try{loadVoices();speechSynthesis.onvoiceschanged=loadVoices}catch(e){}
+function pickVoice(){
+  const en=voices.filter(v=>/^en/i.test(v.lang));
+  const q=v=>/premium/i.test(v.name)?3:/enhanced|natural|neural|online/i.test(v.name)?2:0;
+  const pref=["Ava","Zoe","Samantha","Allison","Susan","Nicky","Karen","Moira","Tessa","Aria","Jenny","Google US English"];
+  for(const tier of [3,2]){for(const n of pref){const v=en.find(v=>v.name.includes(n)&&q(v)===tier);if(v)return v}const any=en.find(v=>q(v)===tier&&/en[-_]US/i.test(v.lang));if(any)return any}
+  for(const n of pref){const v=en.find(v=>v.name.includes(n));if(v)return v}
+  return voices.find(v=>/^en[-_]US/i.test(v.lang))||voices.find(v=>/^en/i.test(v.lang))||null;
+}
+let audioEl=null;
+function stopTalking(){try{speechSynthesis.cancel()}catch(e){} if(audioEl){audioEl.pause();audioEl=null} stopClips()}
+/* say() takes a line or a list of lines. It plays Nana's recordings when every piece is recorded,
+   and falls back to the device's reading voice for anything new (like made-up silly words). */
+function say(text,{rate=.88,onword,onend}={}){
+  if(!S.voice){onend&&onend();return}
+  stopTalking();
+  const seq=clipSeq(text);
+  if(seq){try{playSeq(seq,onend);return}catch(e){}}
+  if(Array.isArray(text))text=text.join(" ");
+  try{
+    const u=new SpeechSynthesisUtterance(text);const v=pickVoice();if(v)u.voice=v;
+    u.rate=Math.min(1,rate+.05);u.pitch=1;
+    if(onword)u.onboundary=e=>{if(e.name==="word"||e.charIndex!==undefined)onword(e.charIndex)};
+    u.onend=()=>onend&&onend();
+    speechSynthesis.speak(u);
+  }catch(e){onend&&onend()}
+}
+let actx=null;
+function ctx(){if(!actx){try{actx=new (window.AudioContext||window.webkitAudioContext)()}catch(e){}}if(actx&&actx.state==="suspended")actx.resume();return actx}
+function tone(f,t0,d,vol=.12,type="sine"){const c=ctx();if(!c)return;const o=c.createOscillator(),g=c.createGain();o.type=type;o.frequency.value=f;g.gain.setValueAtTime(0,c.currentTime+t0);g.gain.linearRampToValueAtTime(vol,c.currentTime+t0+.02);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+t0+d);o.connect(g).connect(c.destination);o.start(c.currentTime+t0);o.stop(c.currentTime+t0+d+.05)}
+function chime(){[1047,1319,1568,2093].forEach((f,i)=>tone(f,i*.08,.5,.08,"triangle"))}
+function boop(){tone(330,0,.18,.08,"sine");tone(262,.12,.25,.07,"sine")}
+let musicTimer=null;
+const MUSIC=[523,587,659,784,880,784,659,587,523,659,784,1047,880,784,659,587];
+function startMusic(){stopMusic();let i=0;musicTimer=setInterval(()=>{tone(MUSIC[i%MUSIC.length],0,1.1,.035,"triangle");if(i%4===0)tone(MUSIC[i%MUSIC.length]/2,0,1.6,.025,"sine");i++},520)}
+function stopMusic(){clearInterval(musicTimer);musicTimer=null}
+
+/* ============ CONFETTI ============ */
+const cv=document.getElementById("confetti"),cx2=cv.getContext("2d");let bits=[];
+function celebrate(){
+  if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+  cv.width=innerWidth;cv.height=innerHeight;
+  const cols=["#f4b23c","#e8588a","#5b1f96","#3d7fd6","#2f9e7a"];
+  for(let i=0;i<90;i++)bits.push({x:innerWidth/2,y:innerHeight/2.4,vx:(Math.random()-.5)*14,vy:Math.random()*-12-3,r:Math.random()*6+4,c:cols[i%5],a:1,s:Math.random()<.4});
+  if(bits.length<=90)requestAnimationFrame(drawBits);
+}
+function drawBits(){cx2.clearRect(0,0,cv.width,cv.height);bits.forEach(b=>{b.x+=b.vx;b.y+=b.vy;b.vy+=.35;b.a-=.012;cx2.globalAlpha=Math.max(b.a,0);cx2.fillStyle=b.c;if(b.s){cx2.font=b.r*3+"px serif";cx2.fillText("★",b.x,b.y)}else cx2.fillRect(b.x,b.y,b.r,b.r*1.6)});bits=bits.filter(b=>b.a>0&&b.y<cv.height+40);if(bits.length)requestAnimationFrame(drawBits);else cx2.clearRect(0,0,cv.width,cv.height)}
+
+/* ============ HELPERS ============ */
+const app=document.getElementById("app");
+const $=(s,r=document)=>r.querySelector(s);
+function h(html){app.innerHTML=html;window.scrollTo(0,0)}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function toast(msg){const t=document.createElement("div");t.className="toast";t.textContent=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),2600)}
+function learn(w){if(w&&!S.learned.includes(w)){S.learned.push(w);D().words.push(w);save()}}
+const cheers=["Great job!","You did it!","Sparkly reading!","Magic!","Wonderful!","You're a reading star!"];
+const tries=["Oops is a magic word. Try again!","So close! Look again.","Let's try one more time."];
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+
+/* ============ PLAY TIMER ============ */
+let lastTick=Date.now();
+setInterval(()=>{
+  if(document.hidden){lastTick=Date.now();return}
+  const now=Date.now();const dt=Math.min(now-lastTick,5000)/1000;S.seconds+=dt;D().sec+=dt;lastTick=now;
+  const m=Math.floor(S.seconds/60);if(m!==S.minutes){S.minutes=m;save();const el=$("#minStat");if(el)el.textContent=`⏱️ ${m} min played`}
+  if(S.limit&&sessionSecs()>=S.limit*60&&!breakShown){breakShown=true;showBreak()}
+},1000);
+const sessionStart=Date.now();let breakShown=false;
+function sessionSecs(){return (Date.now()-sessionStart)/1000}
+function showBreak(){
+  stopTalking();
+  const o=document.createElement("div");o.className="overlay";
+  o.innerHTML=`<div class="panel"><div style="font-size:64px">🌙</div><h2 style="font-family:var(--display);color:var(--plum);margin:6px 0">Time for a magic break!</h2><p>You read for ${S.limit} minutes today. Your words will be waiting for you.</p><button class="btn soft" id="brk">A grown-up says okay ✨</button></div>`;
+  document.body.appendChild(o);say(`Time for a magic break! You read for ${S.limit} minutes today.`);
+  $("#brk",o).onclick=()=>o.remove();
+}
+
+
+/* ============ DANNY PAGE TURN ============ */
+function stompSound(){
+  const c=ctx();if(!c)return;
+  [0,.22,.44].forEach(t=>{tone(70,t,.28,.22,"sine");tone(110,t,.12,.08,"triangle")});
+  [784,988,1175,1568].forEach((f,i)=>tone(f,.62+i*.06,.45,.05,"triangle"));
+}
+let turning=false;
+function wandTurn(render,back){
+  if(turning)return;stopTalking();stompSound();
+  if(matchMedia("(prefers-reduced-motion: reduce)").matches){render();return}
+  turning=true;
+  const fx=document.createElement("div");fx.className="dinofx"+(back?" back":"");
+  fx.innerHTML='<div class="dn">'+DANNY_SVG+CAVEBOY_SVG+'</div>';document.body.appendChild(fx);
+  for(let k=0;k<8;k++){const e=document.createElement("span");e.className="fp";e.textContent="🐾";const x=back?92-k*12:k*12+2;e.style.left=x+"vw";e.style.top=(k%2?49:53)+"%";e.style.animationDelay=(k*.11)+"s";fx.appendChild(e)}
+  const bk=document.querySelector(".book");if(bk)bk.classList.add("flipout");
+  setTimeout(()=>{render();const nb=document.querySelector(".book");if(nb){nb.classList.add("flipin");setTimeout(()=>nb.classList.remove("flipin"),500)}},420);
+  setTimeout(()=>{fx.remove();turning=false},1100);
+}
+
+/* ============ NAV ============ */
+const ROUTES={home,story,quest,words,parts,bookparts,friends,sentence,grownup,treasure,feelings};
+function go(r,...a){if(r!=="grownup")gateOk=false;if(r==="grownup"&&!gateOk){return gate(()=>go("grownup"))}stopTalking();$("#homeBtn").hidden=(r==="home");(ROUTES[r]||home)(...a)}
+let gateOk=false;
+function gate(then){
+  const a=6+Math.floor(Math.random()*4),b=5+Math.floor(Math.random()*4);
+  const o=document.createElement("div");o.className="overlay";
+  o.innerHTML=`<div class="panel"><div style="font-size:48px">🔐</div><h2 style="font-family:var(--display);color:var(--plum);margin:6px 0">Grown-ups only</h2><p>What is ${a} + ${b}?</p><input id="gAns" inputmode="numeric" autocomplete="off" style="font:inherit;font-size:1.4rem;width:120px;text-align:center;padding:8px;border-radius:12px;border:2px solid var(--line);-webkit-user-select:text;user-select:text"><div class="row" style="justify-content:center;margin-top:14px"><button class="btn" id="gGo">Open</button><button class="btn soft" id="gNo">Back</button></div><p class="small" id="gMsg" style="min-height:1.4em"></p></div>`;
+  document.body.appendChild(o);const inp=$("#gAns",o);setTimeout(()=>inp.focus(),50);
+  const tryIt=()=>{if(+inp.value===a+b){gateOk=true;o.remove();then()}else{$("#gMsg",o).textContent="Not quite. Ask a grown-up!";inp.value=""}};
+  $("#gGo",o).onclick=tryIt;inp.onkeydown=e=>{if(e.key==="Enter")tryIt()};$("#gNo",o).onclick=()=>o.remove();
+}
+$("#homeBtn").onclick=()=>go("home");
+function setPill(b,on){b.setAttribute("aria-pressed",String(on))}
+$("#voiceBtn").onclick=e=>{S.voice=!S.voice;save();setPill(e.currentTarget,S.voice);if(!S.voice)stopTalking();else say("Voice on")};
+$("#musicBtn").onclick=e=>{S.music=!S.music;save();setPill(e.currentTarget,S.music);S.music?startMusic():stopMusic()};
+setPill($("#voiceBtn"),S.voice);setPill($("#musicBtn"),false);S.music=false;
+
+/* ============ HOME ============ */
+function home(){
+  h(`<section class="hero">
+    <span class="spark" style="top:12px;right:20px">✦</span><span class="spark" style="bottom:18px;right:34%;animation-delay:1s">✦</span><span class="spark" style="top:40%;right:8%;animation-delay:2s">✦</span>
+    <div class="heroart"><svg class="cb heroboy" viewBox="0 0 120 170" role="img" aria-label="CorTay the caveboy"><defs><radialGradient id="ctSkin" cx="45%" cy="38%" r="70%"><stop offset="0" stop-color="#ad7a52"/><stop offset=".65" stop-color="#96623e"/><stop offset="1" stop-color="#784a2c"/></radialGradient><linearGradient id="ctLimb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9c6842"/><stop offset="1" stop-color="#855634"/></linearGradient><linearGradient id="ctTunic" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f3d9a4"/><stop offset="1" stop-color="#e2b877"/></linearGradient><radialGradient id="ctEye" cx="45%" cy="40%" r="60%"><stop offset="0" stop-color="#8a5a34"/><stop offset=".7" stop-color="#5a3419"/><stop offset="1" stop-color="#3a200e"/></radialGradient><linearGradient id="ctHair" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1c1614"/><stop offset="1" stop-color="#0a0706"/></linearGradient></defs><ellipse cx="60" cy="164" rx="28" ry="4" fill="rgba(0,0,0,.12)"/><g class="twinkle" fill="#ffd96a"><path d="M14 30 l2 5 l5 2 l-5 2 l-2 5 l-2 -5 l-5 -2 l5 -2z"/><path d="M104 22 l1.5 4 l4 1.5 l-4 1.5 l-1.5 4 l-1.5 -4 l-4 -1.5 l4 -1.5z" style="animation-delay:.8s"/></g><g class="bounce"><rect x="46" y="126" width="11" height="30" rx="5.5" fill="url(#ctLimb)"/><rect x="63" y="126" width="11" height="30" rx="5.5" fill="url(#ctLimb)"/><ellipse cx="51" cy="158" rx="9" ry="4.6" fill="#9a683f"/><ellipse cx="69" cy="158" rx="9" ry="4.6" fill="#9a683f"/><path d="M43 157 q8 -3 16 0 M61 157 q8 -3 16 0" stroke="#e8b98a" stroke-width="1.2" fill="none"/><path d="M38 94 Q26 108 30 122" stroke="url(#ctLimb)" stroke-width="10" fill="none" stroke-linecap="round"/><g class="spear"><rect x="27.6" y="70" width="4.2" height="92" rx="2" fill="#8a5a32" stroke="#6b4424" stroke-width=".8"/><path d="M28 88 h3.6 M28 96 h3.6" stroke="#c9a26a" stroke-width="1.4"/><path d="M29.7 50 L36 66 Q29.7 70 23.4 66Z" fill="#9aa4ab" stroke="#6f7a82" stroke-width="1"/><path d="M29.7 54 L32.6 65" stroke="#dfe6ea" stroke-width="1"/><path d="M26 69 h7.4 v4 h-7.4z" fill="#b08a55"/><path d="M26 70 l7.4 2 M26 72 l7.4 -2" stroke="#7a5a30" stroke-width=".8"/></g><circle cx="30" cy="124" r="5.5" fill="#96623e"/><path d="M36 92 Q60 84 84 92 L88 128 Q82 124 78 130 Q72 124 66 130 Q60 124 54 130 Q48 124 42 130 Q38 124 32 128Z" fill="url(#ctTunic)" stroke="#d2a466" stroke-width="1" stroke-linejoin="round"/><path d="M36 94 L72 86" stroke="#c9975a" stroke-width="4" stroke-linecap="round"/><circle cx="48" cy="106" r="2.6" fill="#d6a566" opacity=".8"/><circle cx="64" cy="102" r="2.2" fill="#d6a566" opacity=".8"/><circle cx="74" cy="113" r="2.8" fill="#d6a566" opacity=".8"/><circle cx="56" cy="117" r="2.3" fill="#d6a566" opacity=".8"/><path d="M60 99 l1.4 3 l3.2 .4 l-2.4 2.2 l.6 3.2 l-2.8 -1.6 l-2.8 1.6 l.6 -3.2 l-2.4 -2.2 l3.2 -.4z" fill="#ffe08a"/><g class="wave"><path d="M84 96 Q98 88 99 72" stroke="url(#ctLimb)" stroke-width="10" fill="none" stroke-linecap="round"/><circle cx="99" cy="68" r="6.2" fill="#96623e"/><path d="M95 63 l-1 -4 M99 61 l0 -4 M103 62 l1 -4" stroke="#96623e" stroke-width="2.6" stroke-linecap="round"/></g><rect x="54" y="78" width="12" height="12" rx="5" fill="#8f5c38"/><ellipse cx="33" cy="60" rx="4.5" ry="6" fill="#96623e"/><ellipse cx="87" cy="60" rx="4.5" ry="6" fill="#96623e"/><ellipse cx="60" cy="56" rx="27" ry="27" fill="url(#ctSkin)"/><g class="locs"><path d="M32 64 Q24 56 23 42 Q22 12 60 7 Q98 12 97 42 Q96 56 88 64 Q88 50 82 45 Q72 38 60 38 Q48 38 38 45 Q32 50 32 64Z" fill="url(#ctHair)"/><path d="M33 52 Q31 58 33 64 L36 64 Q35 57 37 51Z M87 52 Q89 58 87 64 L84 64 Q85 57 83 51Z" fill="url(#ctHair)"/><g fill="url(#ctHair)"><path d="M21 43 Q24 34 26 30 Q28 34 31 43Z"/><path d="M26 31 Q29 22 31 18 Q33 22 36 31Z"/><path d="M33 22 Q36 13 38 9 Q40 13 43 22Z"/><path d="M42 16 Q45 7 47 3 Q49 7 52 16Z"/><path d="M51 13 Q54 4 56 0 Q58 4 61 13Z"/><path d="M59 13 Q62 4 64 0 Q66 4 69 13Z"/><path d="M68 16 Q71 7 73 3 Q75 7 78 16Z"/><path d="M77 22 Q80 13 82 9 Q84 13 87 22Z"/><path d="M84 31 Q87 22 89 18 Q91 22 94 31Z"/><path d="M89 43 Q92 34 94 30 Q96 34 99 43Z"/><path d="M39 24 Q42 15 44 11 Q46 15 49 24Z"/><path d="M55 18 Q58 9 60 5 Q62 9 65 18Z"/><path d="M71 24 Q74 15 76 11 Q78 15 81 24Z"/></g><g fill="none" stroke="#3a302c" stroke-width="1" opacity=".55"><path d="M34 26 q3 -2 6 0 M50 16 q3 -2 6 0 M64 16 q3 -2 6 0 M80 26 q3 -2 6 0 M42 32 q3 -2 6 0 M72 32 q3 -2 6 0 M28 42 q3 -2 6 0 M86 42 q3 -2 6 0"/></g></g><path d="M43 51 Q49 48.5 55 50 M65 50 Q71 48.5 77 51" stroke="#1c1210" stroke-width="2.6" fill="none" stroke-linecap="round"/><g class="blink"><ellipse cx="49" cy="63" rx="6.4" ry="7.4" fill="#fff"/><ellipse cx="71" cy="63" rx="6.4" ry="7.4" fill="#fff"/><ellipse cx="49.5" cy="64" rx="5" ry="6" fill="url(#ctEye)"/><ellipse cx="70.5" cy="64" rx="5" ry="6" fill="url(#ctEye)"/><circle cx="49.5" cy="65" r="2.6" fill="#1e1008"/><circle cx="70.5" cy="65" r="2.6" fill="#1e1008"/><circle cx="51.6" cy="61.4" r="2" fill="#fff"/><circle cx="72.6" cy="61.4" r="2" fill="#fff"/><circle cx="47.8" cy="67" r="1" fill="#fff"/><circle cx="68.8" cy="67" r="1" fill="#fff"/><path d="M42.4 60 Q49 54.6 55.6 60 M64.4 60 Q71 54.6 77.6 60" stroke="#2a1810" stroke-width="1.4" fill="none" stroke-linecap="round"/></g><path d="M58.6 70 Q60 72.2 61.4 70" stroke="#9a643e" stroke-width="1.4" fill="none" stroke-linecap="round"/><ellipse cx="41" cy="71" rx="5.4" ry="3.4" fill="#d97a6a" opacity=".22"/><ellipse cx="79" cy="71" rx="5.4" ry="3.4" fill="#d97a6a" opacity=".22"/><path d="M51 75 Q60 83 70 74 Q60 78.5 51 75Z" fill="#9e4a44"/><path d="M53.5 75.6 Q60 78 66.5 75.6 L65.6 77 Q60 78.8 54.4 77Z" fill="#fff"/><ellipse cx="54" cy="44" rx="7" ry="3.5" fill="#fff" opacity=".12"/></g></svg><svg class="danny" viewBox="0 0 120 80" aria-hidden="true"><path d="M104 44 L118 52 L102 54Z" fill="#4f9a55"/><ellipse cx="72" cy="46" rx="34" ry="20" fill="#5fae62"/><rect x="50" y="56" width="11" height="18" rx="5" fill="#4f9a55"/><rect x="84" y="56" width="11" height="18" rx="5" fill="#4f9a55"/><circle cx="38" cy="32" r="20" fill="#f4b23c"/><circle cx="38" cy="32" r="14" fill="#f7c867"/><ellipse cx="28" cy="44" rx="17" ry="12" fill="#6fbf70"/><path d="M26 30 L14 12 L32 26Z" fill="#fffaf2" stroke="#c9b48a" stroke-width="1.5" stroke-linejoin="round"/><path d="M38 30 L34 8 L44 27Z" fill="#fffaf2" stroke="#c9b48a" stroke-width="1.5" stroke-linejoin="round"/><path d="M13 42 L4 36 L14 38Z" fill="#fffaf2" stroke="#c9b48a" stroke-width="1.5" stroke-linejoin="round"/><circle cx="26" cy="39" r="3" fill="#1c2b1d"/><circle cx="27" cy="38" r="1" fill="#fff"/><path d="M16 49 Q24 54 32 49" stroke="#1c2b1d" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="66" cy="40" r="4" fill="#4f9a55"/><circle cx="80" cy="48" r="3" fill="#4f9a55"/><circle cx="90" cy="38" r="3.5" fill="#4f9a55"/></svg></div>
+    <div>
+      <h1>Let's go on a reading adventure!</h1>
+      <p>Hi! I'm CorTay, and this is my friend Danny the Triceratops. Read with my cousin friends, RhyLein and Leilani!</p>
+      <div class="stats"><span class="stat">⭐ ${S.learned.length} / 200 words learned</span><span class="stat">📚 ${LEVEL_NAME[curLevel()]} words</span><span class="stat" id="minStat">⏱️ ${S.minutes} min played</span></div>
+      <div class="row" style="margin-top:14px"><button class="btn gold" id="grandmaHome">💜 Nana reads to you</button></div>
+    </div>
+  </section>
+  <div class="tiles">
+    ${tile("story","📖","#fde7ef","Adventure Stories","Read with the cousin friends",true)}
+    ${tile("treasure","💎","#fff3d6","Word Treasure","Match words to what they mean",true)}
+    ${tile("feelings","💛","#fde7ef","Feelings Check-In","Talk with Leilani about feelings",true)}
+    ${tile("quest","🦴","#efe6fb","Word Quest","Five new words at a time")}
+    ${tile("words","📚","#fff3d6","200 Words","Tap any word to hear it")}
+    ${tile("parts","🧠","#e0f0fb","Learn Parts","Build words with sounds")}
+    ${tile("bookparts","📕","#e4f5ec","Book Parts","Cover, title, author and more")}
+    ${tile("friends",PORTRAITS.danny,"#e4f5ec","Cousin Friends","Meet RhyLein, Leilani, Danny and more")}
+    ${tile("sentence","🧩","#fff3d6","Make a Sentence","Put the words in order")}
+    ${tile("grownup","💌","#efe6fb","Grown-up Corner","Progress, timer and settings")}
+  </div>
+  <p class="note">RhyLein, Leilani and Danny are make-believe dinosaur friends named after CorTay's cousins. 🦕💛</p>`);
+  app.querySelectorAll(".tile").forEach(b=>b.onclick=()=>go(b.dataset.r));
+  $("#grandmaHome").onclick=e=>playGrandma(e.currentTarget);
+}
+function tile(r,ic,bg,t,s,isNew){return `<button class="tile${isNew?" new":""}" data-r="${r}"><span class="ic" style="background:${bg}">${ic}</span><b>${t}${isNew?'<span class="tag">NEW</span>':""}</b><small>${s}</small></button>`}
+
+/* ============ READING QUEST ============ */
+function story(){
+  S.comp=S.comp||{};
+  h(`<section class="screen"><h2>Adventure Stories</h2><p class="sub">Read a story with the cousin friends, then answer the questions.</p>
+    <div class="rqlist">${RQ.map((st,i)=>{const r=S.comp[st.id];return `<button class="rqcard" data-s="${i}"><span class="ic" style="background:${st.color}">${st.icon}</span><span class="rqt"><b>${esc(st.title)}</b><small>${st.level}${r?` · Best: ${r.best} / ${st.qs.length} ⭐`:" · New"}</small></span></button>`}).join("")}</div></section>`);
+  say("Pick a story to read.");
+  app.querySelectorAll("[data-s]").forEach(b=>b.onclick=()=>readPage(+b.dataset.s,0));
+}
+function pageHtml(p){
+  let html="",offset=0;
+  p.text.forEach(par=>{let out="";par.split(/(\s+)/).forEach(tok=>{if(/^\s+$/.test(tok))out+=tok;else out+=`<span class="w" data-i="${offset}" data-w="${esc(tok.replace(/[^A-Za-z']/g,""))}">${esc(tok)}</span>`;offset+=tok.length});offset+=1;html+=`<p>${out}</p>`});
+  return html;
+}
+function wireWords(root){
+  const spans=[...root.querySelectorAll(".w")];
+  spans.forEach(sp=>sp.onclick=()=>{const w=sp.dataset.w;if(!w)return;spans.forEach(x=>x.classList.remove("on"));sp.classList.add("on");say(w,{rate:.75});const f=ALL_WORDS.find(x=>x.toLowerCase()===w.toLowerCase());if(f)learn(f)});
+  return spans;
+}
+function readPage(si,i){
+  const st=RQ[si],p=st.pages[i];
+  const full=p.text.join(" ");const parts=i===0?[st.title+".",full]:[full];const rec=!!clipSeq(parts);
+  h(`<section class="screen"><h2>${esc(st.title)}</h2><p class="sub">${st.level} · Adventure Stories</p>
+  <div class="book">
+    <div class="art" style="background:${p.bg}">${artHtml(p.art)}</div>
+    <div class="text" id="stext">${pageHtml(p)}</div>
+    <div class="foot">
+      <button class="btn" id="readBtn">▶ Read to me</button>
+      <span class="voice-badge ${rec?"":"tts"}">${rec?"💜 Nana's voice":"Reading voice"}</span>
+      <span class="pg">${i+1} / ${st.pages.length}</span>
+    </div>
+  </div>
+  <div class="row" style="margin-top:14px;justify-content:space-between">
+    <button class="btn soft" id="prev">${i===0?"◀ Stories":"◀ Back"}</button>
+    <button class="btn gold" id="next">${i===st.pages.length-1?"Answer questions ⭐":"Turn the page ▶"}</button>
+  </div>
+  <p class="small" style="text-align:center;margin-top:10px">Tip: tap any word to hear it.</p></section>`);
+  const spans=wireWords(app);
+  const lit=idx=>{spans.forEach(x=>x.classList.remove("on"));let best=null;for(const x of spans){if(+x.dataset.i<=idx)best=x;else break}best&&best.classList.add("on")};
+  $("#readBtn").onclick=()=>say(rec?parts:full,{onword:rec?null:lit,onend:()=>spans.forEach(x=>x.classList.remove("on"))});
+  $("#prev").onclick=()=>i===0?story():wandTurn(()=>readPage(si,i-1),true);
+  $("#next").onclick=()=>i<st.pages.length-1?wandTurn(()=>readPage(si,i+1)):questions(si);
+  if(S.voice)setTimeout(()=>{if(document.body.contains($("#readBtn")))$("#readBtn").click()},350);
+}
+function questions(si){
+  const st=RQ[si];let qi=0,score=0;
+  function show(){
+    const q=st.qs[qi];let first=true;const order=shuffle(q.c.map((_,j)=>j));
+    h(`<section class="screen"><h2>Think About It</h2><p class="sub">${esc(st.title)} · Question ${qi+1} of ${st.qs.length}</p>
+      <div class="panel">
+        <p class="qtext">${esc(q.q)}</p>
+        <div class="row" style="justify-content:center;margin-bottom:12px"><button class="btn gold" id="hearq">🔊 Hear the question</button></div>
+        <div class="answers">${order.map(j=>`<button class="ans" data-j="${j}">${esc(q.c[j])}</button>`).join("")}</div>
+        <p class="verdict" id="qv" style="margin-top:12px"></p>
+        <div id="look"></div>
+        <div class="row" id="qnav" style="justify-content:center"></div>
+        <div class="dots">${st.qs.map((_,j)=>`<span class="dot ${j<qi?"done":j===qi?"cur":""}"></span>`).join("")}</div>
+      </div></section>`);
+    const readQ=()=>say([q.q,...order.map(j=>q.c[j])]);
+    $("#hearq").onclick=readQ;
+    if(qi===0)say(["Now let's answer some questions about the story.",q.q,...order.map(j=>q.c[j])]);else readQ();
+    app.querySelectorAll(".ans").forEach(b=>b.onclick=()=>{
+      const j=+b.dataset.j;
+      if(j===q.a){
+        b.classList.add("right");chime();D().qTries++;if(first){D().qRight++;score++}save();
+        app.querySelectorAll(".ans").forEach(x=>x.disabled=true);
+        $("#qv").innerHTML=`<span class="ok">✔ ${esc(q.why)}</span>`;$("#look").innerHTML="";
+        say([pick(cheers),q.why]);
+        $("#qnav").innerHTML=`<button class="btn" id="qnext">${qi<st.qs.length-1?"Next question ▶":"See my stars ⭐"}</button>`;
+        $("#qnext").onclick=()=>{qi++;qi<st.qs.length?show():finish()};
+      }else{
+        b.classList.remove("wrong");void b.offsetWidth;b.classList.add("wrong");b.disabled=true;boop();first=false;
+        const pg=st.pages[q.page-1];
+        $("#qv").innerHTML=`Not quite. Look back at page ${q.page}.`;
+        $("#look").innerHTML=`<div class="lookback"><div class="lbhead"><span>${artHtml(pg.art)}</span><b>Page ${q.page}</b><button class="btn soft" id="lbread">🔊 Read it</button></div><div class="lbtext">${pageHtml(pg)}</div></div>`;
+        wireWords($("#look"));
+        $("#lbread").onclick=()=>say(pg.text.join(" "));
+        say(["Not quite. Let's look back at the story.",`Look back at page ${q.page}.`]);
+      }
+    });
+  }
+  function finish(){
+    S.comp=S.comp||{};const r=S.comp[st.id]||{best:0,tries:0,last:0};r.best=Math.max(r.best,score);r.tries++;r.last=score;S.comp[st.id]=r;
+    S.storyDone++;D().stories++;save();celebrate();chime();
+    const stars="⭐".repeat(score)+"☆".repeat(st.qs.length-score);
+    h(`<section class="screen"><h2>Quest complete! 🏆</h2><div class="panel" style="text-align:center">
+      <p style="font-size:1.3rem">You answered <b>${score}</b> out of ${st.qs.length} questions right on the first try!</p>
+      <p style="font-size:2.2rem;letter-spacing:.08em">${stars}</p>
+      <div class="row" style="justify-content:center"><button class="btn" id="again">Try the questions again</button><button class="btn gold" id="more">Read another story</button><button class="btn soft" id="castle">Back to the castle</button></div></div></section>`);
+    say([`You answered ${score} out of 5 questions right!`,"Great thinking!"]);
+    $("#again").onclick=()=>questions(si);$("#more").onclick=story;$("#castle").onclick=()=>go("home");
+  }
+  show();
+}
+
+/* ============ WORD QUEST ============ */
+function quest(){
+  const lv=curLevel(),lvWords=LEVELS[lv];
+  const pool=lvWords.filter(w=>!S.learned.includes(w));
+  const set=pool.length>=5?pool.slice(0,5):[...pool,...shuffle(lvWords.filter(w=>!pool.includes(w)))].slice(0,5);
+  let idx=0,firstTry=true,gotIt=0;
+  function round(){
+    const w=set[idx];
+    let others=shuffle(lvWords.filter(x=>x!==w&&x.length<=w.length+2)).slice(0,2);if(others.length<2)others=shuffle(lvWords.filter(x=>x!==w)).slice(0,2);
+    const ch=shuffle([w,...others]);
+    h(`<section class="screen"><h2>Word Quest</h2><p class="sub">${LEVEL_NAME[lv]} words · Listen, then tap the word you hear.</p>
+      <div class="panel">
+        <div class="big-say"><button class="btn gold" id="hear">🔊 Hear the word</button></div>
+        <div class="choices">${ch.map(c=>`<button class="card" data-w="${esc(c)}">${esc(c)}</button>`).join("")}</div>
+        <div class="dots">${set.map((_,j)=>`<span class="dot ${j<idx?"done":j===idx?"cur":""}"></span>`).join("")}</div>
+      </div></section>`);
+    const speak=()=>say(["Find the word:",w],{rate:.8});
+    $("#hear").onclick=speak;speak();
+    app.querySelectorAll(".card").forEach(b=>b.onclick=()=>{
+      if(b.dataset.w===w){
+        b.classList.add("right");chime();D().tries++;if(firstTry){D().right++;learn(w);gotIt++}save();
+        say([pick(cheers),w],{rate:.9});
+        app.querySelectorAll(".card").forEach(x=>x.disabled=true);
+        setTimeout(()=>{idx++;firstTry=true;idx<set.length?round():finish()},1500);
+      }else{b.classList.remove("wrong");void b.offsetWidth;b.classList.add("wrong");boop();firstTry=false;say([pick(tries),"Find the word:",w],{rate:.85})}
+    });
+  }
+  function finish(){
+    S.questsDone++;D().quests++;save();celebrate();chime();
+    h(`<section class="screen"><h2>Quest complete! 🏆</h2><div class="panel" style="text-align:center">
+      <p style="font-size:1.3rem">You learned <b>${gotIt}</b> new word${gotIt===1?"":"s"}!</p>
+      <p style="font-size:2rem;font-weight:700;letter-spacing:.04em">${set.map(esc).join(" · ")}</p>
+      <p>⭐ ${S.learned.length} / 200 words learned</p>${curLevel()>lv?`<p style="font-size:1.3rem;font-weight:700;color:var(--plum)">🎉 You learned all the ${LEVEL_NAME[lv]} words! Next up: ${LEVEL_NAME[curLevel()]} words!</p>`:`<p class="small">${LEVEL_NAME[lv]} words: ${lvWords.filter(w=>S.learned.includes(w)).length} / ${lvWords.length}</p>`}
+      <div class="row" style="justify-content:center"><button class="btn" id="again">Five more words</button><button class="btn soft" id="castle">Back to the castle</button></div></div></section>`);
+    say(["Quest complete!",`You learned ${gotIt} new words.`]);
+    $("#again").onclick=quest;$("#castle").onclick=()=>go("home");
+  }
+  round();
+}
+
+/* ============ 200 WORDS ============ */
+function words(level=curLevel()){
+  h(`<section class="screen"><h2>200 Words</h2><p class="sub">Tap a word to hear it. Gold stars are words you learned. (${S.learned.length} / 200)</p>
+    <div class="levels">${[1,2,3].map(l=>`<button data-l="${l}" aria-pressed="${l===level}">${LEVEL_NAME[l]} · ${LEVELS[l].length}</button>`).join("")}</div>
+    <div class="wall">${LEVELS[level].map(w=>`<button class="${S.learned.includes(w)?"learned":""}" data-w="${esc(w)}">${esc(w)}</button>`).join("")}</div></section>`);
+  app.querySelectorAll("[data-l]").forEach(b=>b.onclick=()=>words(+b.dataset.l));
+  app.querySelectorAll("[data-w]").forEach(b=>b.onclick=()=>say(b.dataset.w,{rate:.75}));
+}
+
+/* ============ LEARN PARTS ============ */
+/* Learn Parts: names, extra real words, and a gentle giggle for made-up words */
+const PART_NAMES={dan:"Dan is a name! Names start with a capital letter, so we write it with a big D.",jan:"Jan is a name, too! Names start with a capital letter, so we write it with a big J."};
+const PART_EXTRA={bet:"",ban:"",jig:"A jig is a happy, bouncy dance.",vat:"A vat is a big tub.",cop:"Cop is another word for a police officer."};
+const SILLY_LINE="Hee hee! That's a silly, made-up word. Let's try another sound!";
+function giggle(){[784,988,880,1175].forEach((f,i)=>tone(f,i*.09,.16,.045,"sine"))}
+function parts(){
+  let on="c",rime="at";
+  h(`<section class="screen"><h2>Learn Parts</h2><p class="sub">Pick a beginning sound and a word family. Are they a real word?</p>
+    <div class="panel">
+      <div class="builder">
+        <div class="col" id="onsets">${ONSETS.map(o=>`<button data-o="${o}" aria-pressed="${o===on}">${o}</button>`).join("")}</div>
+        <div class="plus">+</div>
+        <div class="col" id="rimes">${Object.keys(FAMILIES).map(r=>`<button data-r="${r}" aria-pressed="${r===rime}">-${r}</button>`).join("")}</div>
+      </div>
+      <div class="result" id="res"></div>
+      <div class="verdict" id="ver"></div>
+      <div class="row" style="justify-content:center;margin-top:8px"><button class="btn gold" id="blend">🔊 Say it slowly</button></div>
+    </div></section>`);
+  function upd(speak){
+    const w=on+rime,cap=w.charAt(0).toUpperCase()+w.slice(1),name=PART_NAMES[w],real=!name&&(FAMILIES[rime].includes(w)||(w in PART_EXTRA));
+    $("#res").innerHTML=`<span class="on">${name?on.toUpperCase():on}</span><span class="rime">${rime}</span>`;
+    $("#ver").innerHTML=name?`<span class="ok">✔ “${cap}” is a name! Names start with a capital letter, so we write a big ${on.toUpperCase()}.</span>`
+      :real?`<span class="ok">✔ “${w}” is a real word!${PART_EXTRA[w]?" "+PART_EXTRA[w]:""}</span>`
+      :`<span class="small">😄 Hee hee! “${w}” is a silly, made-up word. Let's try another sound!</span>`;
+    if(speak){if(name){chime();say([cap,name])}else if(real){chime();say(PART_EXTRA[w]||w,{rate:.8})}else{giggle();say(SILLY_LINE)}}
+  }
+  app.querySelectorAll("[data-o]").forEach(b=>b.onclick=()=>{on=b.dataset.o;app.querySelectorAll("[data-o]").forEach(x=>setPill(x,x===b));upd(true)});
+  app.querySelectorAll("[data-r]").forEach(b=>b.onclick=()=>{rime=b.dataset.r;app.querySelectorAll("[data-r]").forEach(x=>setPill(x,x===b));upd(true)});
+  $("#blend").onclick=()=>{const w=on+rime;say(`${on}. ${rime}. ${PART_NAMES[w]?w.charAt(0).toUpperCase()+w.slice(1):w}.`,{rate:.6})};
+  upd(false);
+}
+
+/* ============ BOOK PARTS ============ */
+function bookparts(){
+  let mode="learn",target=null;
+  h(`<section class="screen"><h2>Book Parts</h2><p class="sub">Tap a part of the book to learn its name.</p>
+    <div class="panel bookpic">
+      <svg viewBox="0 0 300 330" role="img" aria-label="A picture book">
+        <g class="hot" data-p="pages"><path class="hl" d="M58 30 h200 a8 8 0 0 1 8 8 v250 a8 8 0 0 1-8 8 h-200z" fill="#fffaf2" stroke="#d9c8ee" stroke-width="3"/><path d="M60 300 h198" stroke="#d9c8ee" stroke-width="2"/><path d="M60 306 h196" stroke="#d9c8ee" stroke-width="2"/></g>
+        <g class="hot" data-p="cover"><rect class="hl" x="40" y="20" width="210" height="270" rx="10" fill="#3f8a45" stroke="#1c4721" stroke-width="3"/><circle cx="145" cy="160" r="46" fill="#f7eefe"/><text x="145" y="176" text-anchor="middle" font-size="46">🦴</text></g>
+        <g class="hot" data-p="spine"><rect class="hl" x="26" y="20" width="22" height="270" rx="6" fill="#3a1266" stroke="#3a1266" stroke-width="3"/></g>
+        <g class="hot" data-p="title"><rect class="hl" x="62" y="40" width="166" height="54" rx="8" fill="#f4b23c" stroke="#f4b23c" stroke-width="2"/><text x="145" y="64" text-anchor="middle" font-family="Baloo 2,sans-serif" font-weight="800" font-size="17" fill="#2a1840">Danny's</text><text x="145" y="84" text-anchor="middle" font-family="Baloo 2,sans-serif" font-weight="800" font-size="17" fill="#2a1840">Big Dig</text></g>
+        <g class="hot" data-p="author"><rect class="hl" x="74" y="222" width="142" height="26" rx="6" fill="#e8588a" stroke="#e8588a" stroke-width="2"/><text x="145" y="240" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">by Nana Julietta</text></g>
+        <g class="hot" data-p="illustrator"><rect class="hl" x="74" y="254" width="142" height="24" rx="6" fill="#f7eefe" stroke="#f7eefe" stroke-width="2"/><text x="145" y="271" text-anchor="middle" font-size="13" font-weight="700" fill="#5b1f96">pictures by CorTay</text></g>
+      </svg>
+      <div>
+        <div class="partlist">${BOOK_PARTS.map(p=>`<button data-p="${p.id}"><b>${p.name}</b><br><span class="small">${p.say}</span></button>`).join("")}</div>
+        <div class="row" style="margin-top:12px"><button class="btn gold" id="game">🎯 Play "Find it"</button></div>
+        <p class="verdict" id="bver" style="margin-top:10px"></p>
+      </div>
+    </div></section>`);
+  const sel=id=>{app.querySelectorAll("[data-p]").forEach(e=>e.classList.toggle("sel",e.dataset.p===id))};
+  function tap(id){
+    const p=BOOK_PARTS.find(x=>x.id===id);
+    if(mode==="game"){
+      if(id===target){chime();celebrate();$("#bver").innerHTML=`<span class="ok">✔ You found the ${p.name.toLowerCase()}!</span>`;say([pick(cheers),`That's the ${p.name.toLowerCase()}.`]);mode="learn";sel(id)}
+      else{boop();say(`That's the ${p.name.toLowerCase()}. Try again!`)}
+    }else{sel(id);say(`${p.name}. ${p.say}`)}
+  }
+  app.querySelectorAll("svg [data-p]").forEach(g=>g.addEventListener("click",e=>{e.stopPropagation();tap(g.dataset.p)}));
+  app.querySelectorAll(".partlist [data-p]").forEach(b=>b.onclick=()=>{mode="learn";tap(b.dataset.p)});
+  $("#game").onclick=()=>{mode="game";target=pick(BOOK_PARTS).id;sel(null);const n=BOOK_PARTS.find(x=>x.id===target).name.toLowerCase();$("#bver").textContent=`Tap the ${n} on the book!`;say(`Can you find the ${n}? Tap it on the book.`)};
+}
+
+/* ============ COUSIN FRIENDS ============ */
+const ART_DINO={"📖🦕":"big","🦕😄":"big","💃🦕":"big","🦕🌼":"small","⛏️🦕":"danny"};
+function artP(k){return '<span class="artp">'+PORTRAITS[k]+'</span>'}
+function artHtml(a){let o=a.replace("👦🏾",'<span class="artboy">'+CAVEBOY_SVG+'</span>');if(ART_DINO[a])o=o.replace("🦕",artP(ART_DINO[a]));return o.replace("🪱",artP("worm")).replace("🐞",artP("bug"))}
+const PORTRAITS={"danny": "<svg class=\"fp\" viewBox=\"0 0 120 120\" role=\"img\"><defs><linearGradient id=\"dns\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#e3f1ff\"/><stop offset=\"1\" stop-color=\"#fde8f3\"/></linearGradient><clipPath id=\"dnc\"><circle cx=\"60\" cy=\"60\" r=\"58\"/></clipPath></defs><g clip-path=\"url(#dnc)\"><rect width=\"120\" height=\"120\" fill=\"url(#dns)\"/><circle cx=\"22\" cy=\"24\" r=\"1.6\" fill=\"#fff\"/><circle cx=\"98\" cy=\"18\" r=\"2\" fill=\"#fff\"/><circle cx=\"104\" cy=\"44\" r=\"1.3\" fill=\"#fff\"/><path d=\"M16 40l1.5 3.5 3.5 1.5-3.5 1.5-1.5 3.5-1.5-3.5-3.5-1.5 3.5-1.5z\" fill=\"#ffd66b\"/><path d=\"M96 28l1 2.4 2.4 1-2.4 1-1 2.4-1-2.4-2.4-1 2.4-1z\" fill=\"#ffd66b\"/><ellipse cx=\"60\" cy=\"122\" rx=\"80\" ry=\"22\" fill=\"#bfe6b8\"/><circle cx=\"20.00000000014083\" cy=\"58.000090222052975\" r=\"7\" fill=\"#ffd3a1\"/><circle cx=\"23.044773002894942\" cy=\"44.98885707324156\" r=\"7\" fill=\"#ffd3a1\"/><circle cx=\"31.715634934126836\" cy=\"33.958449185571475\" r=\"7\" fill=\"#ffd3a1\"/><circle cx=\"44.69252786764694\" cy=\"26.588143368742088\" r=\"7\" fill=\"#ffd3a1\"/><circle cx=\"59.99984078461238\" cy=\"24.00000000026934\" r=\"7\" fill=\"#ffd3a1\"/><circle cx=\"75.30717794063695\" cy=\"26.58803978937032\" r=\"7\" fill=\"#ffd3a1\"/><circle cx=\"88.28413990116331\" cy=\"33.95825779582203\" r=\"7\" fill=\"#ffd3a1\"/><circle cx=\"96.95510513863027\" cy=\"44.98860701042026\" r=\"7\" fill=\"#ffd3a1\"/><circle cx=\"99.99999999943668\" cy=\"57.99981955589405\" r=\"7\" fill=\"#ffd3a1\"/><ellipse cx=\"60\" cy=\"58\" rx=\"40\" ry=\"34\" fill=\"#ffd3a1\"/><ellipse cx=\"60\" cy=\"60\" rx=\"33\" ry=\"27\" fill=\"#ffe6c8\"/><circle cx=\"36\" cy=\"44\" r=\"3.5\" fill=\"#ffb38a\"/><circle cx=\"84\" cy=\"44\" r=\"3.5\" fill=\"#ffb38a\"/><circle cx=\"46\" cy=\"33\" r=\"2.6\" fill=\"#ffb38a\"/><circle cx=\"74\" cy=\"33\" r=\"2.6\" fill=\"#ffb38a\"/><path d=\"M44 58 Q40 36 36 30 Q48 38 52 56Z\" fill=\"#fff4dc\" stroke=\"#e9cf9f\" stroke-width=\"1\"/><path d=\"M76 58 Q80 36 84 30 Q72 38 68 56Z\" fill=\"#fff4dc\" stroke=\"#e9cf9f\" stroke-width=\"1\"/><path d=\"M26 120 Q28 86 60 84 Q92 86 94 120Z\" fill=\"#8fd4a4\"/><ellipse cx=\"60\" cy=\"76\" rx=\"29\" ry=\"25\" fill=\"#9fdcb0\"/><ellipse cx=\"60\" cy=\"88\" rx=\"18\" ry=\"12\" fill=\"#c6efd0\"/><path d=\"M60 76 Q57 66 60 62 Q63 66 60 76Z\" fill=\"#fff4dc\" stroke=\"#e9cf9f\" stroke-width=\"1\"/><ellipse cx=\"48\" cy=\"72\" rx=\"5.5249999999999995\" ry=\"6.5\" fill=\"#3b2a4d\"/><circle cx=\"49.95\" cy=\"69.725\" r=\"2.47\" fill=\"#fff\"/><circle cx=\"46.05\" cy=\"74.6\" r=\"1.04\" fill=\"#fff\"/><ellipse cx=\"72\" cy=\"72\" rx=\"5.5249999999999995\" ry=\"6.5\" fill=\"#3b2a4d\"/><circle cx=\"73.95\" cy=\"69.725\" r=\"2.47\" fill=\"#fff\"/><circle cx=\"70.05\" cy=\"74.6\" r=\"1.04\" fill=\"#fff\"/><ellipse cx=\"40\" cy=\"83\" rx=\"5\" ry=\"3.2\" fill=\"#ff9fbf\" opacity=\".55\"/><ellipse cx=\"80\" cy=\"83\" rx=\"5\" ry=\"3.2\" fill=\"#ff9fbf\" opacity=\".55\"/><path d=\"M52 90 Q60 97 68 90\" stroke=\"#3b2a4d\" stroke-width=\"2\" fill=\"none\" stroke-linecap=\"round\"/><circle cx=\"56\" cy=\"85\" r=\"1\" fill=\"#5c8f6a\"/><circle cx=\"64\" cy=\"85\" r=\"1\" fill=\"#5c8f6a\"/><circle cx=\"42\" cy=\"95\" r=\"2\" fill=\"#7cc393\"/><circle cx=\"80\" cy=\"97\" r=\"2.4\" fill=\"#7cc393\"/><circle cx=\"18\" cy=\"108\" r=\"3\" fill=\"#ffb3cf\"/><circle cx=\"18\" cy=\"108\" r=\"1.2\" fill=\"#ffe27a\"/><circle cx=\"102\" cy=\"106\" r=\"3\" fill=\"#d8c3ff\"/><circle cx=\"102\" cy=\"106\" r=\"1.2\" fill=\"#ffe27a\"/></g><circle cx=\"60\" cy=\"60\" r=\"58\" fill=\"none\" stroke=\"#f4c86a\" stroke-width=\"3\"/></svg>", "big": "<svg class=\"fp\" viewBox=\"0 0 120 120\" role=\"img\"><defs><linearGradient id=\"rhs\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#e3f1ff\"/><stop offset=\"1\" stop-color=\"#fde8f3\"/></linearGradient><clipPath id=\"rhc\"><circle cx=\"60\" cy=\"60\" r=\"58\"/></clipPath></defs><g clip-path=\"url(#rhc)\"><rect width=\"120\" height=\"120\" fill=\"url(#rhs)\"/><circle cx=\"22\" cy=\"24\" r=\"1.6\" fill=\"#fff\"/><circle cx=\"98\" cy=\"18\" r=\"2\" fill=\"#fff\"/><circle cx=\"104\" cy=\"44\" r=\"1.3\" fill=\"#fff\"/><path d=\"M16 40l1.5 3.5 3.5 1.5-3.5 1.5-1.5 3.5-1.5-3.5-3.5-1.5 3.5-1.5z\" fill=\"#ffd66b\"/><path d=\"M96 28l1 2.4 2.4 1-2.4 1-1 2.4-1-2.4-2.4-1 2.4-1z\" fill=\"#ffd66b\"/><ellipse cx=\"60\" cy=\"122\" rx=\"80\" ry=\"22\" fill=\"#bfe6b8\"/><ellipse cx=\"60\" cy=\"122\" rx=\"46\" ry=\"26\" fill=\"#f9bcd6\"/><path d=\"M46 118 Q44 70 58 44 L74 46 Q64 74 70 118Z\" fill=\"#f9bcd6\"/><path d=\"M56 110 Q54 80 62 56\" stroke=\"#fde0ec\" stroke-width=\"7\" fill=\"none\" stroke-linecap=\"round\"/><circle cx=\"64\" cy=\"76\" r=\"2.4\" fill=\"#a57be0\"/><circle cx=\"60\" cy=\"94\" r=\"2.8\" fill=\"#a57be0\"/><circle cx=\"66\" cy=\"62\" r=\"1.8\" fill=\"#a57be0\"/><circle cx=\"44\" cy=\"112\" r=\"3\" fill=\"#a57be0\"/><circle cx=\"78\" cy=\"110\" r=\"3.4\" fill=\"#a57be0\"/><circle cx=\"90\" cy=\"118\" r=\"2.6\" fill=\"#a57be0\"/><ellipse cx=\"66\" cy=\"40\" rx=\"25\" ry=\"19\" fill=\"#f9bcd6\"/><ellipse cx=\"80\" cy=\"46\" rx=\"13\" ry=\"10\" fill=\"#fcd3e4\"/><circle cx=\"46.0\" cy=\"20.8\" r=\"2.4000000000000004\" fill=\"#c9a8ff\"/><circle cx=\"49.04\" cy=\"23.04\" r=\"2.4000000000000004\" fill=\"#c9a8ff\"/><circle cx=\"47.92\" cy=\"26.560000000000002\" r=\"2.4000000000000004\" fill=\"#c9a8ff\"/><circle cx=\"44.08\" cy=\"26.560000000000002\" r=\"2.4000000000000004\" fill=\"#c9a8ff\"/><circle cx=\"42.96\" cy=\"23.04\" r=\"2.4000000000000004\" fill=\"#c9a8ff\"/><circle cx=\"46\" cy=\"24\" r=\"1.7600000000000002\" fill=\"#ffe27a\"/><circle cx=\"80.0\" cy=\"20.8\" r=\"2.4000000000000004\" fill=\"#ffffff\"/><circle cx=\"83.04\" cy=\"23.04\" r=\"2.4000000000000004\" fill=\"#ffffff\"/><circle cx=\"81.92\" cy=\"26.560000000000002\" r=\"2.4000000000000004\" fill=\"#ffffff\"/><circle cx=\"78.08\" cy=\"26.560000000000002\" r=\"2.4000000000000004\" fill=\"#ffffff\"/><circle cx=\"76.96\" cy=\"23.04\" r=\"2.4000000000000004\" fill=\"#ffffff\"/><circle cx=\"80\" cy=\"24\" r=\"1.7600000000000002\" fill=\"#ffe27a\"/><path d=\"M44 27 Q62 14 84 26\" stroke=\"#8cc98a\" stroke-width=\"1.6\" fill=\"none\"/><path d=\"M63 20 Q50 6 43 16 Q48 26 63 22Z\" fill=\"#b48cff\"/><path d=\"M63 20 Q76 6 83 16 Q78 26 63 22Z\" fill=\"#b48cff\"/><path d=\"M63 21 L57 32 L61 31Z M63 21 L69 32 L65 31Z\" fill=\"#9d72f0\"/><circle cx=\"63\" cy=\"21\" r=\"4\" fill=\"#9d72f0\"/><path d=\"M50 12 Q54 10 57 14\" stroke=\"#e2d2ff\" stroke-width=\"1.4\" fill=\"none\" stroke-linecap=\"round\"/><circle cx=\"48\" cy=\"44\" r=\"1.8\" fill=\"#a57be0\"/><circle cx=\"66\" cy=\"27\" r=\"1.6\" fill=\"#a57be0\"/><ellipse cx=\"58\" cy=\"38\" rx=\"5.1\" ry=\"6\" fill=\"#3b2a4d\"/><circle cx=\"59.8\" cy=\"35.9\" r=\"2.2800000000000002\" fill=\"#fff\"/><circle cx=\"56.2\" cy=\"40.4\" r=\"0.96\" fill=\"#fff\"/><path d=\"M52.3 34.7l-3.6 -2.4M54.4 32.3l-2.4 -3.6M58 31.4l0 -4M61.6 32.3l2.4 -3.6\" stroke=\"#3b2a4d\" stroke-width=\"1.8\" stroke-linecap=\"round\"/><ellipse cx=\"74\" cy=\"38\" rx=\"5.1\" ry=\"6\" fill=\"#3b2a4d\"/><circle cx=\"75.8\" cy=\"35.9\" r=\"2.2800000000000002\" fill=\"#fff\"/><circle cx=\"72.2\" cy=\"40.4\" r=\"0.96\" fill=\"#fff\"/><path d=\"M68.3 34.7l-3.6 -2.4M70.4 32.3l-2.4 -3.6M74 31.4l0 -4M77.6 32.3l2.4 -3.6\" stroke=\"#3b2a4d\" stroke-width=\"1.8\" stroke-linecap=\"round\"/><ellipse cx=\"52\" cy=\"49\" rx=\"5\" ry=\"3.2\" fill=\"#ff9fbf\" opacity=\".55\"/><ellipse cx=\"82\" cy=\"49\" rx=\"5\" ry=\"3.2\" fill=\"#ff9fbf\" opacity=\".55\"/><path d=\"M68 51 Q76 57 85 50\" stroke=\"#3b2a4d\" stroke-width=\"2\" fill=\"none\" stroke-linecap=\"round\"/><circle cx=\"84\" cy=\"44\" r=\"1\" fill=\"#a57be0\"/><circle cx=\"88\" cy=\"45\" r=\"1\" fill=\"#a57be0\"/><circle cx=\"18\" cy=\"108\" r=\"3\" fill=\"#ffb3cf\"/><circle cx=\"18\" cy=\"108\" r=\"1.2\" fill=\"#ffe27a\"/><circle cx=\"102\" cy=\"106\" r=\"3\" fill=\"#d8c3ff\"/><circle cx=\"102\" cy=\"106\" r=\"1.2\" fill=\"#ffe27a\"/></g><circle cx=\"60\" cy=\"60\" r=\"58\" fill=\"none\" stroke=\"#f4c86a\" stroke-width=\"3\"/></svg>", "small": "<svg class=\"fp\" viewBox=\"0 0 120 120\" role=\"img\"><defs><linearGradient id=\"les\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#e3f1ff\"/><stop offset=\"1\" stop-color=\"#fde8f3\"/></linearGradient><clipPath id=\"lec\"><circle cx=\"60\" cy=\"60\" r=\"58\"/></clipPath></defs><g clip-path=\"url(#lec)\"><rect width=\"120\" height=\"120\" fill=\"url(#les)\"/><circle cx=\"22\" cy=\"24\" r=\"1.6\" fill=\"#fff\"/><circle cx=\"98\" cy=\"18\" r=\"2\" fill=\"#fff\"/><circle cx=\"104\" cy=\"44\" r=\"1.3\" fill=\"#fff\"/><path d=\"M16 40l1.5 3.5 3.5 1.5-3.5 1.5-1.5 3.5-1.5-3.5-3.5-1.5 3.5-1.5z\" fill=\"#ffd66b\"/><path d=\"M96 28l1 2.4 2.4 1-2.4 1-1 2.4-1-2.4-2.4-1 2.4-1z\" fill=\"#ffd66b\"/><ellipse cx=\"60\" cy=\"122\" rx=\"80\" ry=\"22\" fill=\"#bfe6b8\"/><ellipse cx=\"60\" cy=\"118\" rx=\"34\" ry=\"20\" fill=\"#cdb8f2\"/><path d=\"M48 114 Q48 90 56 76 L68 76 Q70 92 72 114Z\" fill=\"#cdb8f2\"/><path d=\"M54 118 Q54 98 60 84 Q66 98 66 118Z\" fill=\"#fff1b8\"/><circle cx=\"54\" cy=\"100\" r=\"2.4\" fill=\"#b39ae6\"/><circle cx=\"64\" cy=\"92\" r=\"2\" fill=\"#b39ae6\"/><ellipse cx=\"60\" cy=\"62\" rx=\"27\" ry=\"23\" fill=\"#cdb8f2\"/><ellipse cx=\"60\" cy=\"72\" rx=\"17\" ry=\"11\" fill=\"#fff1b8\"/><path d=\"M62 38 Q52 26 46 34 Q50 42 62 40Z\" fill=\"#ff9fc5\"/><path d=\"M62 38 Q72 26 78 34 Q74 42 62 40Z\" fill=\"#ff9fc5\"/><circle cx=\"62\" cy=\"38\" r=\"3.6\" fill=\"#ff7fb0\"/><circle cx=\"38.0\" cy=\"49.2\" r=\"2.0999999999999996\" fill=\"#ffe27a\"/><circle cx=\"40.66\" cy=\"51.16\" r=\"2.0999999999999996\" fill=\"#ffe27a\"/><circle cx=\"39.68\" cy=\"54.24\" r=\"2.0999999999999996\" fill=\"#ffe27a\"/><circle cx=\"36.32\" cy=\"54.24\" r=\"2.0999999999999996\" fill=\"#ffe27a\"/><circle cx=\"35.34\" cy=\"51.16\" r=\"2.0999999999999996\" fill=\"#ffe27a\"/><circle cx=\"38\" cy=\"52\" r=\"1.54\" fill=\"#ffe27a\"/><ellipse cx=\"50\" cy=\"60\" rx=\"5.95\" ry=\"7\" fill=\"#3b2a4d\"/><circle cx=\"52.1\" cy=\"57.55\" r=\"2.66\" fill=\"#fff\"/><circle cx=\"47.9\" cy=\"62.8\" r=\"1.12\" fill=\"#fff\"/><path d=\"M43.35 56.15l-3.6 -2.4M45.8 53.35l-2.4 -3.6M50 52.3l0 -4M54.2 53.35l2.4 -3.6\" stroke=\"#3b2a4d\" stroke-width=\"1.8\" stroke-linecap=\"round\"/><ellipse cx=\"70\" cy=\"60\" rx=\"5.95\" ry=\"7\" fill=\"#3b2a4d\"/><circle cx=\"72.1\" cy=\"57.55\" r=\"2.66\" fill=\"#fff\"/><circle cx=\"67.9\" cy=\"62.8\" r=\"1.12\" fill=\"#fff\"/><path d=\"M63.35 56.15l-3.6 -2.4M65.8 53.35l-2.4 -3.6M70 52.3l0 -4M74.2 53.35l2.4 -3.6\" stroke=\"#3b2a4d\" stroke-width=\"1.8\" stroke-linecap=\"round\"/><ellipse cx=\"42\" cy=\"71\" rx=\"5\" ry=\"3.2\" fill=\"#ff9fbf\" opacity=\".55\"/><ellipse cx=\"78\" cy=\"71\" rx=\"5\" ry=\"3.2\" fill=\"#ff9fbf\" opacity=\".55\"/><path d=\"M54 76 Q60 81 66 76\" stroke=\"#3b2a4d\" stroke-width=\"2\" fill=\"none\" stroke-linecap=\"round\"/><circle cx=\"86\" cy=\"94\" r=\"3.0\" fill=\"#ffffff\"/><circle cx=\"89.8\" cy=\"96.8\" r=\"3.0\" fill=\"#ffffff\"/><circle cx=\"88.4\" cy=\"101.2\" r=\"3.0\" fill=\"#ffffff\"/><circle cx=\"83.6\" cy=\"101.2\" r=\"3.0\" fill=\"#ffffff\"/><circle cx=\"82.2\" cy=\"96.8\" r=\"3.0\" fill=\"#ffffff\"/><circle cx=\"86\" cy=\"98\" r=\"2.2\" fill=\"#ffe27a\"/><path d=\"M86 102 L86 118\" stroke=\"#8cc98a\" stroke-width=\"1.6\"/><circle cx=\"18\" cy=\"108\" r=\"3\" fill=\"#ffb3cf\"/><circle cx=\"18\" cy=\"108\" r=\"1.2\" fill=\"#ffe27a\"/><circle cx=\"102\" cy=\"106\" r=\"3\" fill=\"#d8c3ff\"/><circle cx=\"102\" cy=\"106\" r=\"1.2\" fill=\"#ffe27a\"/></g><circle cx=\"60\" cy=\"60\" r=\"58\" fill=\"none\" stroke=\"#f4c86a\" stroke-width=\"3\"/></svg>", "worm": "<svg class=\"fp\" viewBox=\"0 0 120 120\" role=\"img\"><defs><linearGradient id=\"wgs\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#e3f1ff\"/><stop offset=\"1\" stop-color=\"#fde8f3\"/></linearGradient><clipPath id=\"wgc\"><circle cx=\"60\" cy=\"60\" r=\"58\"/></clipPath></defs><g clip-path=\"url(#wgc)\"><rect width=\"120\" height=\"120\" fill=\"url(#wgs)\"/><circle cx=\"22\" cy=\"24\" r=\"1.6\" fill=\"#fff\"/><circle cx=\"98\" cy=\"18\" r=\"2\" fill=\"#fff\"/><circle cx=\"104\" cy=\"44\" r=\"1.3\" fill=\"#fff\"/><path d=\"M16 40l1.5 3.5 3.5 1.5-3.5 1.5-1.5 3.5-1.5-3.5-3.5-1.5 3.5-1.5z\" fill=\"#ffd66b\"/><path d=\"M96 28l1 2.4 2.4 1-2.4 1-1 2.4-1-2.4-2.4-1 2.4-1z\" fill=\"#ffd66b\"/><ellipse cx=\"60\" cy=\"122\" rx=\"80\" ry=\"22\" fill=\"#bfe6b8\"/><ellipse cx=\"60\" cy=\"114\" rx=\"36\" ry=\"12\" fill=\"#c9a17e\"/><ellipse cx=\"60\" cy=\"110\" rx=\"30\" ry=\"7\" fill=\"#b88c68\"/><path d=\"M52 110 C46 90 74 84 68 64 C64 52 52 54 54 44\" stroke=\"#f7a8c4\" stroke-width=\"18\" fill=\"none\" stroke-linecap=\"round\"/><path d=\"M50 96 l6 -2 M60 80 l6 2 M64 68 l-6 2\" stroke=\"#ec8fb2\" stroke-width=\"2\" stroke-linecap=\"round\"/><circle cx=\"55\" cy=\"42\" r=\"15\" fill=\"#f7a8c4\"/><path d=\"M55 28 Q52 18 44 18 Q48 26 55 28Z\" fill=\"#8cc98a\"/><path d=\"M55 28 Q60 18 68 20 Q62 27 55 28Z\" fill=\"#a6dca0\"/><ellipse cx=\"50\" cy=\"41\" rx=\"3.57\" ry=\"4.2\" fill=\"#3b2a4d\"/><circle cx=\"51.26\" cy=\"39.53\" r=\"1.596\" fill=\"#fff\"/><circle cx=\"48.74\" cy=\"42.68\" r=\"0.672\" fill=\"#fff\"/><ellipse cx=\"61\" cy=\"41\" rx=\"3.57\" ry=\"4.2\" fill=\"#3b2a4d\"/><circle cx=\"62.26\" cy=\"39.53\" r=\"1.596\" fill=\"#fff\"/><circle cx=\"59.74\" cy=\"42.68\" r=\"0.672\" fill=\"#fff\"/><ellipse cx=\"45\" cy=\"48\" rx=\"5\" ry=\"3.2\" fill=\"#ff9fbf\" opacity=\".55\"/><ellipse cx=\"66\" cy=\"48\" rx=\"5\" ry=\"3.2\" fill=\"#ff9fbf\" opacity=\".55\"/><path d=\"M51 49 Q55.5 53 60 49\" stroke=\"#3b2a4d\" stroke-width=\"1.8\" fill=\"none\" stroke-linecap=\"round\"/><circle cx=\"90.0\" cy=\"92.6\" r=\"2.55\" fill=\"#ffb3cf\"/><circle cx=\"93.23\" cy=\"94.98\" r=\"2.55\" fill=\"#ffb3cf\"/><circle cx=\"92.04\" cy=\"98.72\" r=\"2.55\" fill=\"#ffb3cf\"/><circle cx=\"87.96\" cy=\"98.72\" r=\"2.55\" fill=\"#ffb3cf\"/><circle cx=\"86.77\" cy=\"94.98\" r=\"2.55\" fill=\"#ffb3cf\"/><circle cx=\"90\" cy=\"96\" r=\"1.87\" fill=\"#ffe27a\"/><path d=\"M90 100 L90 116\" stroke=\"#8cc98a\" stroke-width=\"1.6\"/><circle cx=\"18\" cy=\"108\" r=\"3\" fill=\"#ffb3cf\"/><circle cx=\"18\" cy=\"108\" r=\"1.2\" fill=\"#ffe27a\"/><circle cx=\"102\" cy=\"106\" r=\"3\" fill=\"#d8c3ff\"/><circle cx=\"102\" cy=\"106\" r=\"1.2\" fill=\"#ffe27a\"/></g><circle cx=\"60\" cy=\"60\" r=\"58\" fill=\"none\" stroke=\"#f4c86a\" stroke-width=\"3\"/></svg>", "bug": "<svg class=\"fp\" viewBox=\"0 0 120 120\" role=\"img\"><defs><linearGradient id=\"dts\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#e3f1ff\"/><stop offset=\"1\" stop-color=\"#fde8f3\"/></linearGradient><clipPath id=\"dtc\"><circle cx=\"60\" cy=\"60\" r=\"58\"/></clipPath></defs><g clip-path=\"url(#dtc)\"><rect width=\"120\" height=\"120\" fill=\"url(#dts)\"/><circle cx=\"22\" cy=\"24\" r=\"1.6\" fill=\"#fff\"/><circle cx=\"98\" cy=\"18\" r=\"2\" fill=\"#fff\"/><circle cx=\"104\" cy=\"44\" r=\"1.3\" fill=\"#fff\"/><path d=\"M16 40l1.5 3.5 3.5 1.5-3.5 1.5-1.5 3.5-1.5-3.5-3.5-1.5 3.5-1.5z\" fill=\"#ffd66b\"/><path d=\"M96 28l1 2.4 2.4 1-2.4 1-1 2.4-1-2.4-2.4-1 2.4-1z\" fill=\"#ffd66b\"/><ellipse cx=\"60\" cy=\"122\" rx=\"80\" ry=\"22\" fill=\"#bfe6b8\"/><path d=\"M34 36 Q30 22 22 20\" stroke=\"#5b3a66\" stroke-width=\"2.2\" fill=\"none\" stroke-linecap=\"round\"/><path d=\"M50 32 Q52 20 60 16\" stroke=\"#5b3a66\" stroke-width=\"2.2\" fill=\"none\" stroke-linecap=\"round\"/><path d=\"M22 20 m-4 0 a3 3 0 0 1 4 -3 a3 3 0 0 1 4 3 q0 3 -4 6 q-4 -3 -4 -6z\" fill=\"#ff8fb4\"/><path d=\"M60 16 m-4 0 a3 3 0 0 1 4 -3 a3 3 0 0 1 4 3 q0 3 -4 6 q-4 -3 -4 -6z\" fill=\"#ff8fb4\"/><ellipse cx=\"66\" cy=\"80\" rx=\"38\" ry=\"32\" fill=\"#ff8a80\"/><path d=\"M66 48 L66 112\" stroke=\"#e46e67\" stroke-width=\"2\"/><circle cx=\"50\" cy=\"70\" r=\"6\" fill=\"#7a4a86\"/><circle cx=\"84\" cy=\"68\" r=\"5\" fill=\"#7a4a86\"/><circle cx=\"56\" cy=\"96\" r=\"5.5\" fill=\"#7a4a86\"/><circle cx=\"86\" cy=\"94\" r=\"6\" fill=\"#7a4a86\"/><ellipse cx=\"80\" cy=\"60\" rx=\"10\" ry=\"5\" fill=\"#fff\" opacity=\".35\" transform=\"rotate(-20 80 60)\"/><circle cx=\"42\" cy=\"50\" r=\"19\" fill=\"#6d4a7a\"/><ellipse cx=\"35\" cy=\"48\" rx=\"4.25\" ry=\"5\" fill=\"#3b2a4d\"/><circle cx=\"36.5\" cy=\"46.25\" r=\"1.9\" fill=\"#fff\"/><circle cx=\"33.5\" cy=\"50.0\" r=\"0.8\" fill=\"#fff\"/><path d=\"M30.25 45.25l-3.6 -2.4M32.0 43.25l-2.4 -3.6M35 42.5l0 -4M38.0 43.25l2.4 -3.6\" stroke=\"#3b2a4d\" stroke-width=\"1.8\" stroke-linecap=\"round\"/><ellipse cx=\"49\" cy=\"48\" rx=\"4.25\" ry=\"5\" fill=\"#3b2a4d\"/><circle cx=\"50.5\" cy=\"46.25\" r=\"1.9\" fill=\"#fff\"/><circle cx=\"47.5\" cy=\"50.0\" r=\"0.8\" fill=\"#fff\"/><path d=\"M44.25 45.25l-3.6 -2.4M46.0 43.25l-2.4 -3.6M49 42.5l0 -4M52.0 43.25l2.4 -3.6\" stroke=\"#3b2a4d\" stroke-width=\"1.8\" stroke-linecap=\"round\"/><ellipse cx=\"30\" cy=\"57\" rx=\"5\" ry=\"3.2\" fill=\"#ff9fbf\" opacity=\".55\"/><ellipse cx=\"54\" cy=\"57\" rx=\"5\" ry=\"3.2\" fill=\"#ff9fbf\" opacity=\".55\"/><path d=\"M37 57 Q42 61 47 57\" stroke=\"#fff\" stroke-width=\"1.8\" fill=\"none\" stroke-linecap=\"round\"/><circle cx=\"18\" cy=\"108\" r=\"3\" fill=\"#ffb3cf\"/><circle cx=\"18\" cy=\"108\" r=\"1.2\" fill=\"#ffe27a\"/><circle cx=\"102\" cy=\"106\" r=\"3\" fill=\"#d8c3ff\"/><circle cx=\"102\" cy=\"106\" r=\"1.2\" fill=\"#ffe27a\"/></g><circle cx=\"60\" cy=\"60\" r=\"58\" fill=\"none\" stroke=\"#f4c86a\" stroke-width=\"3\"/></svg>"};
+function faceHtml(f){return f.face==="boy"?CAVEBOY_SVG:f.face==="danny"?PORTRAITS.danny:f.face==="big"?PORTRAITS.big:f.face==="small"?PORTRAITS.small:f.face==="🪱"?PORTRAITS.worm:f.face==="🐞"?PORTRAITS.bug:f.face}
+function friends(){
+  h(`<section class="screen"><h2>Cousin Friends</h2><p class="sub">Tap a friend to hear their reading tip.</p>
+    <div class="friends">${FRIENDS.map((f,i)=>`<button class="friend" data-f="${i}"><span class="face">${faceHtml(f)}</span><b>${esc(f.name)}</b><span>${esc(f.line)}</span></button>`).join("")}</div>
+    <p class="small" style="margin-top:14px;text-align:center">RhyLein, Leilani and Danny are make-believe dinosaur friends named after CorTay's cousins.</p></section>`);
+  app.querySelectorAll("[data-f]").forEach(b=>b.onclick=()=>{const f=FRIENDS[+b.dataset.f];say(`Hi, I'm ${f.name}. ${f.line}`)});
+}
+
+/* ============ WORD TREASURE ============ */
+function treasure(){
+  const set=shuffle(VOCAB);let idx=0,found=0;S.vocab=S.vocab||{};
+  function round(){
+    const v=set[idx];let first=true;
+    const others=shuffle(VOCAB.filter(x=>x.w!==v.w)).slice(0,2).map(x=>x.w);
+    const ch=shuffle([v.w,...others]);
+    h(`<section class="screen"><h2>Word Treasure</h2><p class="sub">Which word matches the meaning? Treasure ${idx+1} of ${set.length}.</p>
+      <div class="panel">
+        <p class="qtext">💎 “${esc(v.m)}”</p>
+        <div class="row" style="justify-content:center;margin-bottom:12px"><button class="btn gold" id="hearv">🔊 Hear it</button></div>
+        <div class="choices">${ch.map(c=>`<button class="card vcard" data-w="${esc(c)}">${esc(c)}</button>`).join("")}</div>
+        <p class="verdict" id="vv" style="margin-top:12px"></p>
+        <div class="row" id="vnav" style="justify-content:center"></div>
+        <p class="small" style="text-align:center">From “${esc(v.st)}”</p>
+      </div></section>`);
+    const ask=()=>say(`Which word means ${v.m}?`);$("#hearv").onclick=ask;ask();
+    app.querySelectorAll(".vcard").forEach(b=>b.onclick=()=>{
+      if(b.dataset.w===v.w){
+        b.classList.add("right");chime();D().vTries++;if(first){D().vRight++;found++;S.vocab[v.w]=true}save();
+        app.querySelectorAll(".vcard").forEach(x=>x.disabled=true);
+        const line=`${v.w.charAt(0).toUpperCase()+v.w.slice(1)} means ${v.m}.`;
+        $("#vv").innerHTML=`<span class="ok">✔ ${esc(line)}</span>`;say([pick(cheers),line]);
+        $("#vnav").innerHTML=`<button class="btn" id="vnext">${idx<set.length-1?"Next treasure ▶":"See my treasure 💎"}</button>`;
+        $("#vnext").onclick=()=>{idx++;idx<set.length?round():finish()};
+      }else{b.classList.remove("wrong");void b.offsetWidth;b.classList.add("wrong");b.disabled=true;boop();first=false;say([pick(tries),`Which word means ${v.m}?`])}
+    });
+  }
+  function finish(){
+    S.questsDone++;save();celebrate();chime();
+    h(`<section class="screen"><h2>Word Treasure complete! 💎</h2><div class="panel" style="text-align:center">
+      <p style="font-size:1.3rem">You found <b>${found}</b> out of ${set.length} treasure words on the first try!</p>
+      <p style="font-size:2rem">${"💎".repeat(Math.min(found,13))}</p>
+      <div class="row" style="justify-content:center"><button class="btn" id="again">Dig again</button><button class="btn soft" id="castle">Back home</button></div></div></section>`);
+    say(["Word Treasure complete!",`You found ${found} out of 13 treasure words!`]);
+    $("#again").onclick=treasure;$("#castle").onclick=()=>go("home");
+  }
+  round();
+}
+
+/* ============ FEELINGS CHECK-IN ============ */
+function feelings(){
+  h(`<section class="screen"><h2>Feelings Check-In</h2><p class="sub">Leilani the Little Long-Neck wants to know how you feel. All feelings are okay.</p>
+    <div class="panel" style="text-align:center">
+      <div class="feelhead">${PORTRAITS.small}</div>
+      <p style="font-family:var(--display);font-size:1.3rem;margin:8px 0 14px">How are you feeling today?</p>
+      <div class="feels">${FEELINGS.map((f,i)=>`<button class="feel" data-i="${i}"><span>${f.face}</span>${f.name}</button>`).join("")}</div>
+      <div id="freply"></div>
+    </div></section>`);
+  say("Hi, I'm Leilani. How are you feeling today?");
+  app.querySelectorAll(".feel").forEach(b=>b.onclick=()=>{
+    const f=FEELINGS[+b.dataset.i];app.querySelectorAll(".feel").forEach(x=>x.classList.toggle("sel",x===b));
+    D().feel.push(f.id);save();
+    const breathe=["sad","worried","mad"].includes(f.id);
+    $("#freply").innerHTML=`<div class="reply"><p><b>Leilani:</b> ${f.say.map(esc).join(" ")}</p>${breathe?'<div class="breath"><i></i><span>Breathe in… and out…</span></div>':""}<div class="row" style="justify-content:center;margin-top:10px"><button class="btn gold" id="toStory">📖 Read a story</button></div></div>`;
+    $("#toStory").onclick=()=>go("story");
+    say([`I feel ${f.name.toLowerCase()}.`,...f.say]);
+  });
+}
+
+/* ============ MAKE A SENTENCE ============ */
+function sentence(n=0){
+  const s=SENTENCES[n%SENTENCES.length];let built=[];let bank=shuffle(s.w.map((w,i)=>({w,i})));
+  if(bank.every((b,i)=>b.i===i))bank.reverse();
+  function draw(){
+    h(`<section class="screen"><h2>Make a Sentence</h2><p class="sub">Tap the words in order to match the picture. Sentence ${n%SENTENCES.length+1} of ${SENTENCES.length}.</p>
+      <div class="panel">
+        <div class="pic">${artHtml(s.pic)}</div>
+        <div class="slots" id="slots">${built.map((b,j)=>`<button class="chip" data-back="${j}">${esc(b.w)}</button>`).join("")||'<span class="small">Tap words below to build your sentence…</span>'}</div>
+        <div class="bank">${bank.map((b,j)=>`<button class="chip" data-take="${j}">${esc(b.w)}</button>`).join("")}</div>
+        <div class="row" style="justify-content:center;margin-top:16px"><button class="btn soft" id="hint">🔊 Hear the sentence</button><button class="btn soft" id="skip">Next ▶</button></div>
+      </div></section>`);
+    app.querySelectorAll("[data-take]").forEach(b=>b.onclick=()=>{const it=bank.splice(+b.dataset.take,1)[0];built.push(it);say(it.w.replace(/[.?]/,""),{rate:.8});check()});
+    app.querySelectorAll("[data-back]").forEach(b=>b.onclick=()=>{bank.push(built.splice(+b.dataset.back,1)[0]);draw()});
+    $("#hint").onclick=()=>say(s.w.join(" "),{rate:.8});
+    $("#skip").onclick=()=>sentence(n+1);
+  }
+  function check(){
+    if(bank.length){draw();return}
+    const ok=built.every((b,i)=>b.w===s.w[i]);draw();
+    if(ok){S.sentencesDone++;D().sentences++;save();chime();celebrate();say([pick(cheers),s.w.join(" ")],{rate:.85});setTimeout(()=>sentence(n+1),2600)}
+    else{boop();say("Almost! Tap a word in your sentence to move it back.")}
+  }
+  draw();
+}
+
+/* ============ GROWN-UP CORNER ============ */
+function grownup(){
+  const pct=Math.round(S.learned.length/2);
+  const byLevel=[1,2,3].map(l=>LEVELS[l].filter(w=>S.learned.includes(w)).length);
+  const last=n=>{const out=[];for(let i=n-1;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);const k=dayKey(d);out.push({k,d,v:(S.days&&S.days[k])||{sec:0,words:[],quests:0,right:0,tries:0,sentences:0,stories:0}})}return out};
+  const wk=last(7),two=last(14);
+  const sum=(arr,f)=>arr.reduce((a,x)=>a+f(x.v),0);
+  const wkMin=Math.round(sum(wk,v=>v.sec)/60),wkWords=sum(wk,v=>v.words.length),wkRight=sum(wk,v=>v.right),wkTries=sum(wk,v=>v.tries);
+  const acc=wkTries?Math.round(wkRight/wkTries*100):null;
+  const wkVR=sum(wk,v=>v.vRight||0),wkVT=sum(wk,v=>v.vTries||0);const voc=wkVT?Math.round(wkVR/wkVT*100):null;
+  const fc={};wk.forEach(x=>(x.v.feel||[]).forEach(id=>fc[id]=(fc[id]||0)+1));const feelLine=Object.keys(fc).length?FEELINGS.filter(f=>fc[f.id]).map(f=>`${f.face} ${f.name} ×${fc[f.id]}`).join(", "):"None shared yet";
+  const wkQR=sum(wk,v=>v.qRight||0),wkQT=sum(wk,v=>v.qTries||0);const comp=wkQT?Math.round(wkQR/wkQT*100):null;
+  const bestLines=RQ.map(st=>{const r=(S.comp||{})[st.id];return `${st.title} (${st.level}): ${r?`best ${r.best}/${st.qs.length}, last ${r.last}/${st.qs.length}, read ${r.tries}×`:"not read yet"}`});
+  let streak=0;for(let i=0;;i++){const d=new Date();d.setDate(d.getDate()-i);const v=S.days&&S.days[dayKey(d)];if(v&&v.sec>=60)streak++;else if(i>0)break;else continue;if(i>400)break}
+  const maxMin=Math.max(5,...two.map(x=>Math.round(x.v.sec/60)));
+  const dname=d=>d.toLocaleDateString(undefined,{weekday:"short"});
+  const dlong=d=>d.toLocaleDateString(undefined,{weekday:"short",month:"short",day:"numeric"});
+  const bars=two.map(x=>{const m=Math.round(x.v.sec/60);const h=m?Math.max(4,Math.round(m/maxMin*100)):0;const tip=`${dlong(x.d)}: ${m} min, ${x.v.words.length} new word${x.v.words.length===1?"":"s"}`;return `<button class="gbar" title="${esc(tip)}" aria-label="${esc(tip)}" data-tip="${esc(tip)}"><i style="height:${h}%"></i><span>${dname(x.d).slice(0,2)}</span></button>`}).join("");
+  const recent=wk.slice().reverse().filter(x=>x.v.words.length).map(x=>`<li><b>${dlong(x.d)}:</b> ${x.v.words.map(esc).join(", ")}</li>`).join("")||'<li class="small">New words will show here as they are learned.</li>';
+  const report=`${S.child}'s Learning Adventures report ✨ (${dlong(new Date())})\n\nThis week:\n⏱️ ${wkMin} minutes of reading\n⭐ ${wkWords} new sight words\n🎯 ${acc===null?"No word quests yet":acc+"% right on the first try"}\n📖 ${comp===null?"No story questions yet":comp+"% of story questions right on the first try"}\n💎 ${voc===null?"No Word Treasure yet":voc+"% of treasure words right on the first try"}\n💛 Feelings shared: ${feelLine}\n🔥 ${streak} day reading streak\n\nAll time:\n⭐ ${S.learned.length} of 200 sight words (K: ${byLevel[0]}/${LEVELS[1].length}, 1st: ${byLevel[1]}/${LEVELS[2].length}, 2nd: ${byLevel[2]}/${LEVELS[3].length})\n⏱️ ${S.minutes} minutes total\n📖 Stories finished: ${S.storyDone}\n\nAdventure Stories:\n${bestLines.join("\n")}\n\n🏰 ${S.questsDone} word quests\n🧩 ${S.sentencesDone} sentences built\n\nDay by day:\n${wk.map(x=>`${dlong(x.d)}: ${Math.round(x.v.sec/60)} min${x.v.words.length?", new words: "+x.v.words.join(", "):""}`).join("\n")}`;
+  h(`<section class="screen"><h2>Grown-up Corner</h2><p class="sub">For parents, grandparents and teachers.</p>
+  <div class="gu">
+    <div class="panel"><h3>Progress</h3>
+      <div class="meter" aria-label="${pct}% of words learned"><i style="width:${pct}%"></i></div>
+      <dl class="kv" style="margin-top:12px">
+        <dt>Words learned</dt><dd>${S.learned.length} / 200</dd>
+        <dt>Kindergarten</dt><dd>${byLevel[0]} / ${LEVELS[1].length}</dd>
+        <dt>First grade</dt><dd>${byLevel[1]} / ${LEVELS[2].length}</dd>
+        <dt>Second grade</dt><dd>${byLevel[2]} / ${LEVELS[3].length}</dd>
+        <dt>Minutes played</dt><dd>${S.minutes}</dd>
+        <dt>Stories finished</dt><dd>${S.storyDone}</dd>
+      </dl>
+    </div>
+    <div class="panel"><h3>Growth</h3>
+      <div class="gstats">
+        <div><b>${wkMin}</b><span>minutes this week</span></div>
+        <div><b>${wkWords}</b><span>new words this week</span></div>
+        <div><b>${acc===null?"–":acc+"%"}</b><span>words right on first try</span></div>
+        <div><b>${comp===null?"–":comp+"%"}</b><span>story questions right</span></div>
+        <div><b>${voc===null?"–":voc+"%"}</b><span>treasure words right</span></div>
+        <div><b>${streak}</b><span>day streak 🔥</span></div>
+      </div>
+      <p class="small" style="margin:14px 0 6px">Minutes of reading, last 14 days (tap a bar)</p>
+      <div class="gchart">${bars}</div>
+      <p class="small" id="gtip" style="min-height:1.4em;margin:6px 0 0"></p>
+      <p class="small" style="margin:12px 0 4px"><b>Feelings shared this week</b></p>
+      <p style="margin:0 0 8px">${esc(feelLine)}</p>
+      <p class="small" style="margin:12px 0 4px"><b>Adventure Story scores</b></p>
+      <ul class="gwords">${bestLines.map(l=>`<li>${esc(l)}</li>`).join("")}</ul>
+      <p class="small" style="margin:12px 0 4px"><b>New words, last 7 days</b></p>
+      <ul class="gwords">${recent}</ul>
+    </div>
+    <div class="panel"><h3>Send progress to Nana</h3>
+      <p class="small">Tap <b>Send to Nana</b> and choose Messages or Mail. Send it once a week to keep track of growth.</p>
+      <textarea id="rep" rows="10" readonly>${esc(report)}</textarea>
+      <div class="row" style="margin-top:10px"><button class="btn gold" id="share">💌 Send to Nana</button><button class="btn soft" id="copy">Copy</button></div>
+    </div>
+    <div class="panel"><h3>Play time</h3>
+      <label class="small" for="limit">Show a gentle break screen after:</label><br>
+      <select id="limit">${[0,10,15,20,30].map(m=>`<option value="${m}" ${S.limit===m?"selected":""}>${m?m+" minutes":"No limit"}</option>`).join("")}</select>
+      <p class="small" style="margin-top:10px"><label for="cname">Reader's name:</label> <input id="cname" value="${esc(S.child)}" style="font:inherit;padding:8px 10px;border-radius:12px;border:2px solid var(--line);min-height:44px;-webkit-user-select:text;user-select:text"></p>
+    </div>
+    <div class="panel"><h3>Put CorTay's Adventures on the Home Screen</h3>
+      <p class="small"><b>iPhone or iPad:</b> open this page in Safari. Tap the Share button, choose <b>Add to Home Screen</b>, then tap <b>Add</b>. If you see <b>Open as Web App</b>, turn it on.</p>
+      <p class="small">Turn the ringer switch off silent mode (or turn up the volume) so the reading voice can be heard.</p>
+      <p class="small"><b>For the few lines that use the device voice:</b> on the iPhone or iPad, open Settings → Accessibility → Spoken Content → Voices → English. Download <b>Ava (Premium)</b> or <b>Zoe (Premium)</b>, then reopen the app. The app picks it automatically.</p>
+    </div>
+    <div class="panel"><h3>Nana's voice</h3>
+      <p class="small">CorTay's Adventures talks in Nana's own voice: the adventure stories and questions, Word Treasure, the Feelings Check-In, the Cousin Friends, the 200 words, the Magic Friends, book parts, sentences and cheers. A copy of her voice was made from her own recording, and every line was checked. The 💜 button plays her original storytelling recording. Only made-up silly words, the slow sound-it-out button, and the word "an" use the device voice.</p><p class="small" id="vstat"></p>
+      <div class="row"><button class="btn gold" id="testg">💜 Play Nana's recording</button><button class="btn soft" id="testv">🔊 Test Nana's voice</button></div>
+    </div>
+    <div class="panel"><h3>Start over</h3>
+      <p class="small">Clears stars, minutes and progress on this device.</p>
+      <div class="row"><button class="btn soft" id="reset1">Reset progress…</button><button class="btn" id="reset2" hidden style="background:var(--rose)">Yes, erase progress</button></div>
+    </div>
+  </div></section>`);
+  $("#share").onclick=async()=>{const t=$("#rep").value;if(navigator.share){try{await navigator.share({title:`${S.child}'s Word Magic report`,text:t});return}catch(e){if(e&&e.name==="AbortError")return}}$("#copy").click()};
+  app.querySelectorAll(".gbar").forEach(b=>b.onclick=()=>{$("#gtip").textContent=b.dataset.tip});
+  $("#copy").onclick=async()=>{const t=$("#rep");try{await navigator.clipboard.writeText(t.value);toast("Copied! Paste it into a text or email.")}catch(e){t.style.userSelect="text";t.focus();t.select();toast("Press and hold to copy the note.")}};
+  $("#limit").onchange=e=>{S.limit=+e.target.value;breakShown=false;save();toast(S.limit?`Break screen after ${S.limit} minutes`:"No time limit")};
+  $("#cname").onchange=e=>{S.child=e.target.value.trim()||"CorTay";save();grownup()};
+  $("#testg").onclick=e=>playGrandma(e.currentTarget);
+  $("#testv").onclick=()=>say("Hello little reader. I'm so glad you're here.");
+  $("#vstat").textContent=VOICE.ready?"✔ Nana's voice is loaded.":"Nana's voice is still loading…";
+  $("#reset1").onclick=()=>{$("#reset2").hidden=false};
+  $("#reset2").onclick=()=>{Object.assign(S,{learned:[],minutes:0,seconds:0,storyDone:0,sentencesDone:0,questsDone:0,days:{},comp:{},vocab:{}});save();toast("Progress erased");grownup()};
+}
+
+try{document.querySelector(".brand .crown").innerHTML=PORTRAITS.danny}catch(e){}
+
+/* ============ AUTO PAGE TURN ============
+   After a page is finished being read aloud, if nobody taps for 10 seconds, turn to the next page. */
+const IDLE_MS=10000;let lastAct=Date.now(),talkSince=0;
+["pointerdown","keydown","touchstart","wheel"].forEach(ev=>addEventListener(ev,()=>{lastAct=Date.now()},{passive:true,capture:true}));
+function busyTalking(){try{return (vSources&&vSources.length>0)||speechSynthesis.speaking||(audioEl&&!audioEl.paused)}catch(e){return false}}
+setInterval(()=>{
+  const talking=busyTalking();if(!talking)talkSince=0;else if(!talkSince)talkSince=Date.now();
+  const busy=(talking&&Date.now()-talkSince<90000)||(typeof turning!=="undefined"&&turning)||document.hidden||document.querySelector(".overlay");
+  if(busy)lastAct=Date.now();
+  const idle=Date.now()-lastAct,h=hintTarget();
+  document.querySelectorAll(".hintme").forEach(x=>{if(x!==h||idle<2000)x.classList.remove("hintme")});
+  if(h&&!h.disabled&&idle>=2000)h.classList.add("hintme");
+  if(busy)return;
+  const b=autoNext();
+  if(!b||b.disabled){lastAct=Date.now();return}
+  if(idle>=IDLE_MS){lastAct=Date.now();b.classList.remove("hintme");b.click()}
+},500);
+function hintTarget(){return document.querySelector(".book")?document.querySelector("#next"):null}
+function autoNext(){return document.querySelector(".book")?document.querySelector("#next"):null}
+
+home();
+loadVoicePack().then(()=>{const v=document.getElementById("vstat");if(v)v.textContent=VOICE.ready?"✔ Nana's voice is loaded.":""});
+</script>
+
+</body></html>

@@ -1,0 +1,817 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>TK's English Adventure Quest</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="TK's Quest">
+<meta name="theme-color" content="#101c4a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@500;700;800&family=M+PLUS+Rounded+1c:wght@500;700&display=swap">
+<style>
+:root{
+  color-scheme:light;
+  --navy:#101c4a;--navy-2:#1b2c6b;--sea:#1fa3c4;--sea-soft:#dff4fa;--sun:#f6b73c;--sun-soft:#fff3d6;
+  --coral:#ef6a5b;--mint:#23a37a;--mint-soft:#dcf3ea;--ink:#16213f;--ink-2:#55607f;--paper:#f6f8fc;--card:#fff;--line:#dbe2ef;
+  --display:"Baloo 2","Trebuchet MS",system-ui,sans-serif;--body:"Nunito",system-ui,sans-serif;--ja:"M PLUS Rounded 1c","Hiragino Maru Gothic ProN","Hiragino Sans",sans-serif;--r:20px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.5;touch-action:manipulation;-webkit-user-select:none;user-select:none}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+button:focus-visible{outline:3px solid var(--sun);outline-offset:3px}
+.ja{font-family:var(--ja)}
+.wrap{max-width:860px;margin:0 auto;padding:10px 16px 40px}
+.bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:4px 0 10px}
+.brand{display:flex;align-items:center;gap:8px;margin-right:auto;font-family:var(--display);font-weight:800;color:var(--navy);line-height:1.05;font-size:1.1rem}
+.brand small{display:block;font-family:var(--body);font-weight:700;color:var(--sea);font-size:.78rem}
+.brand .mini{width:42px;height:42px;border-radius:50%;overflow:hidden;flex:none}
+.brand .mini svg{width:46px;margin-top:10px}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:8px 13px;border-radius:999px;background:var(--card);border:2px solid var(--line);font-weight:800;font-size:.9rem;min-height:44px}
+.pill[aria-pressed="false"]{opacity:.55}
+.homeb{background:var(--navy);color:#fff;border-color:var(--navy)}
+.hero{background:radial-gradient(circle at 85% 20%,#2a4aa8 0,transparent 45%),linear-gradient(160deg,var(--navy-2),var(--navy));color:#fff;border-radius:26px;padding:20px;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;position:relative;overflow:hidden}
+.hero .tkart svg{width:clamp(110px,26vw,170px);height:auto;display:block}
+.hero h1{font-family:var(--display);font-size:clamp(1.6rem,5.6vw,2.4rem);line-height:1.05;margin:0 0 4px}
+.hero .tag{margin:0 0 10px;color:#bfe9f5;font-weight:800}
+.hero .route{font-weight:800;color:var(--sun);letter-spacing:.02em}
+.xp{background:rgba(255,255,255,.14);border-radius:14px;padding:10px 12px;margin-top:8px}
+.xp .top{display:flex;justify-content:space-between;font-weight:800;font-size:.95rem;gap:8px;flex-wrap:wrap}
+.meter{height:12px;background:rgba(255,255,255,.2);border-radius:999px;overflow:hidden;margin-top:6px}
+.meter i{display:block;height:100%;background:linear-gradient(90deg,var(--sun),#ffd978);border-radius:999px;transition:width .6s}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.chip{background:rgba(255,255,255,.14);border-radius:999px;padding:5px 12px;font-weight:800;font-size:.9rem}
+.cta{display:inline-flex;align-items:center;gap:8px;background:var(--sun);color:var(--navy);font-family:var(--display);font-weight:800;font-size:1.2rem;border-radius:999px;padding:12px 22px;min-height:52px;margin-top:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--navy);color:#fff;border-radius:999px;padding:11px 20px;font-family:var(--display);font-weight:800;font-size:1.1rem;min-height:50px}
+.btn.soft{background:var(--sea-soft);color:var(--navy)}
+.btn.sun{background:var(--sun);color:var(--navy)}
+.btn:disabled{opacity:.4}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+h2{font-family:var(--display);color:var(--navy);font-size:clamp(1.5rem,5vw,2rem);margin:6px 0 0;line-height:1.1}
+.sub{color:var(--ink-2);margin:2px 0 14px}
+.panel{background:var(--card);border:2px solid var(--line);border-radius:var(--r);padding:16px}
+/* map */
+.map{position:relative;display:grid;gap:14px;margin-top:6px}
+.map .end{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--ink-2)}
+.map .end span{font-size:30px}
+.node{display:grid;grid-template-columns:62px 1fr auto;gap:12px;align-items:center;background:var(--card);border:2px solid var(--line);border-radius:var(--r);padding:12px 14px;text-align:left;position:relative}
+.node .ic{width:62px;height:62px;border-radius:18px;display:grid;place-items:center;font-size:32px;color:#fff}
+.node b{font-family:var(--display);font-size:1.25rem;line-height:1.1;display:block}
+.node .ja{color:var(--ink-2);font-size:.9rem}
+.node .dots{display:flex;gap:5px;margin-top:4px}
+.node .dots i{width:12px;height:12px;border-radius:50%;background:var(--line)}
+.node .dots i.on{background:var(--mint)}
+.node .badge{font-size:30px;filter:grayscale(1);opacity:.35}
+.node .badge.got{filter:none;opacity:1}
+.node.next{border-color:var(--sun);box-shadow:0 0 0 4px var(--sun-soft)}
+.path{width:4px;height:14px;background:repeating-linear-gradient(var(--sea) 0 6px,transparent 6px 10px);margin:-10px 0 -10px 43px}
+/* mission */
+.parts{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
+.part{background:var(--card);border:2px solid var(--line);border-radius:var(--r);padding:14px;text-align:left;display:grid;grid-template-columns:48px 1fr;gap:4px 12px;align-items:center;min-height:86px}
+.part .ic{grid-row:span 2;width:48px;height:48px;border-radius:14px;display:grid;place-items:center;font-size:26px;background:var(--sea-soft)}
+.part b{font-family:var(--display);font-size:1.15rem;line-height:1.1}
+.part small{color:var(--ink-2)}
+.part.done{border-color:var(--mint);background:var(--mint-soft)}
+.part.done b::after{content:" ✓";color:var(--mint)}
+/* word card */
+.wcard{text-align:center;padding:22px 16px}
+.wcard .en{font-family:var(--display);font-size:clamp(2.2rem,10vw,3.4rem);color:var(--navy);line-height:1.05}
+.wcard .ex{font-size:1.25rem;margin:10px 0 4px}
+.hint{display:inline-flex;align-items:center;gap:8px;background:var(--sun-soft);border-radius:12px;padding:6px 12px;font-size:1.1rem;margin-top:8px}
+.hint button{font-size:1rem}
+.hintbtn{background:var(--sun-soft);color:#8a5a00;border-radius:999px;padding:6px 14px;font-weight:800;min-height:40px}
+.prog{display:flex;gap:6px;justify-content:center;margin:12px 0 2px}
+.prog i{width:14px;height:14px;border-radius:50%;background:var(--line)}
+.prog i.on{background:var(--sun)}.prog i.cur{background:var(--navy)}
+/* quiz */
+.qtext{font-family:var(--display);font-size:clamp(1.25rem,4.6vw,1.6rem);text-align:center;margin:4px 0 12px;line-height:1.25}
+.opts{display:grid;gap:10px}
+.opt{background:var(--card);border:3px solid var(--line);border-radius:16px;padding:13px 16px;font-size:1.15rem;font-weight:800;text-align:left;min-height:58px}
+.opt.ja{font-weight:700}
+.opt .oja{font-family:var(--ja);font-weight:600;color:var(--ink-2);font-size:.9em}
+.qja{text-align:center;color:var(--ink-2);font-size:1rem;margin:-6px 0 12px}
+.opt.right{border-color:var(--mint);background:var(--mint-soft)}
+.opt.wrong{border-color:var(--coral);background:#fdecea;animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.fb{min-height:1.6em;text-align:center;font-weight:800;margin-top:12px}
+.fb.good{color:var(--mint)}.fb.bad{color:var(--coral)}
+.xpgain{display:inline-block;background:var(--sun);color:var(--navy);border-radius:999px;padding:2px 10px;margin-left:6px;font-size:.9rem;animation:pop .5s}
+@keyframes pop{0%{transform:scale(.4)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
+/* story */
+.story{display:grid;gap:8px}
+.line{background:var(--card);border:2px solid var(--line);border-radius:14px;padding:10px 12px;text-align:left;font-size:1.12rem}
+.line.on{border-color:var(--sun);background:var(--sun-soft)}
+.line .ja{display:block;color:var(--ink-2);font-size:.95rem;margin-top:4px}
+/* build */
+.slots{min-height:66px;border:3px dashed var(--line);border-radius:16px;padding:10px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:#fff}
+.bank{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;justify-content:center}
+.wchip{background:var(--sea-soft);color:var(--navy);border-radius:12px;padding:9px 15px;font-size:1.3rem;font-weight:800;min-height:50px}
+.slots .wchip{background:var(--sun-soft)}
+/* dashboard */
+.gu{display:grid;gap:14px}
+.gu h3{font-family:var(--display);color:var(--navy);margin:0 0 6px;font-size:1.25rem}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
+.stats div{background:var(--sea-soft);border-radius:14px;padding:10px 12px;display:grid}
+.stats b{font-family:var(--display);font-size:1.7rem;color:var(--navy);line-height:1.1;font-variant-numeric:tabular-nums}
+.stats span{font-size:.85rem;color:var(--ink-2)}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+td,th{padding:6px 4px;border-bottom:1px solid var(--line);text-align:left;font-size:.95rem}
+textarea{width:100%;font:inherit;font-size:.95rem;border:2px solid var(--line);border-radius:12px;padding:10px;-webkit-user-select:text;user-select:text}
+select{font:inherit;padding:8px 12px;border-radius:12px;border:2px solid var(--line);background:#fff;min-height:44px}
+.small{font-size:.9rem;color:var(--ink-2)}
+.overlay{position:fixed;inset:0;background:rgba(16,28,74,.6);display:grid;place-items:center;z-index:40;padding:16px}
+.overlay .panel{max-width:420px;text-align:center}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--navy);color:#fff;padding:12px 20px;border-radius:18px;font-weight:800;z-index:60;max-width:90vw;text-align:center}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:50}
+/* TK character animation */
+.tk .head{animation:tkTilt 3.2s ease-in-out infinite;transform-origin:60px 96px}
+.tk .hair{animation:tkHair 1.6s ease-in-out infinite;transform-origin:60px 40px}
+.tk .blink{animation:tkBlink 4.2s infinite;transform-origin:60px 62px}
+.tk .wave{animation:tkWave 1.3s ease-in-out infinite;transform-origin:92px 118px}
+@keyframes tkTilt{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+@keyframes tkHair{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.5px)}}
+@keyframes tkBlink{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.08)}}
+@keyframes tkWave{0%,100%{transform:rotate(0)}50%{transform:rotate(-18deg)}}
+.coach .nod{animation:coNod 2.6s ease-in-out infinite;transform-origin:60px 100px}
+.coach .thumb{animation:coThumb 1.4s ease-in-out infinite;transform-origin:30px 128px}
+.coach .blink{animation:coBlink 4.6s infinite;transform-origin:60px 70px}
+@keyframes coNod{0%,100%{transform:rotate(0)}30%{transform:rotate(-3deg) translateY(1px)}60%{transform:rotate(2deg)}}
+@keyframes coThumb{0%,100%{transform:rotate(0)}50%{transform:rotate(-12deg) translateY(-3px)}}
+@keyframes coBlink{0%,94%,100%{transform:scaleY(1)}97%{transform:scaleY(.1)}}
+.coachcard{display:grid;grid-template-columns:92px 1fr;gap:12px;align-items:center;background:var(--card);border:2px solid var(--line);border-radius:var(--r);padding:12px 14px;margin-top:14px;text-align:left}
+.coachcard .coach{width:92px}
+.coachcard b{font-family:var(--display);color:var(--navy);font-size:1.1rem}
+.coachcard>span:last-child{display:grid;gap:2px}.bubble{display:block;background:var(--mint-soft);border-radius:14px;padding:8px 12px;margin-top:4px;font-weight:700}
+.bubble .ja{display:block;font-weight:500;color:var(--ink-2);font-size:.92rem}
+.nana .jump{animation:naJump .9s ease-in-out infinite;transform-origin:60px 160px}
+.nana .pomL{animation:naPomL .45s ease-in-out infinite alternate;transform-origin:42px 96px}
+.nana .pomR{animation:naPomR .45s ease-in-out infinite alternate;transform-origin:78px 96px}
+.nana .blink{animation:naBlink 4s infinite;transform-origin:60px 64px}
+.nana .hairsw{animation:naHair .9s ease-in-out infinite;transform-origin:60px 40px}
+@keyframes naJump{0%,100%{transform:translateY(0)}45%{transform:translateY(-10px)}}
+@keyframes naPomL{from{transform:rotate(-14deg)}to{transform:rotate(10deg)}}
+@keyframes naPomR{from{transform:rotate(14deg)}to{transform:rotate(-10deg)}}
+@keyframes naBlink{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+@keyframes naHair{0%,100%{transform:rotate(0)}45%{transform:rotate(1.5deg)}}
+.team{display:grid;grid-template-columns:1fr;gap:10px;margin-top:14px}
+@media (min-width:640px){.team{grid-template-columns:1fr 1fr}}
+.coachcard .nana{width:84px}
+.cheerpop{position:fixed;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:55;display:flex;align-items:flex-end;gap:6px;pointer-events:none;animation:cheerIn 1.9s ease forwards}
+.cheerpop .tkpop{width:104px;height:104px;border-radius:50%;animation:tkBounce .5s ease-in-out 3 alternate;box-shadow:0 6px 16px rgba(0,0,0,.25)}
+@keyframes tkBounce{from{transform:translateY(0) rotate(-4deg)}to{transform:translateY(-10px) rotate(4deg)}}
+.cheerpop .say{background:var(--sun);color:var(--navy);font-family:var(--display);font-weight:800;font-size:1.15rem;border-radius:16px 16px 4px 16px;padding:8px 12px;margin-bottom:70px;box-shadow:0 4px 12px rgba(0,0,0,.15);max-width:170px}
+@keyframes cheerIn{0%{transform:translateY(140%)}15%{transform:translateY(0)}85%{transform:translateY(0)}100%{transform:translateY(140%)}}
+.combo{display:inline-block;background:var(--coral);color:#fff;border-radius:999px;padding:2px 10px;margin-left:6px;font-size:.9rem;animation:pop .5s}
+.chal{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-top:10px}
+.cbtn{border-radius:var(--r);padding:14px;text-align:left;color:#fff;display:grid;gap:2px;min-height:96px;position:relative;overflow:hidden}
+.cbtn b{font-family:var(--display);font-size:1.25rem;line-height:1.1}
+.cbtn small{opacity:.92;font-weight:700;position:relative}
+.cbtn .big{position:absolute;right:8px;bottom:0;font-size:44px;opacity:.35}
+.cbtn.locked{filter:grayscale(.9);opacity:.6}
+.timer{height:14px;background:var(--line);border-radius:999px;overflow:hidden;margin:6px 0 12px}
+.timer i{display:block;height:100%;background:linear-gradient(90deg,var(--coral),var(--sun));transition:width 1s linear}
+.scoreline{display:flex;justify-content:space-between;font-family:var(--display);font-weight:800;font-size:1.2rem;color:var(--navy)}
+.boss{text-align:center;font-size:72px;line-height:1;margin:4px 0}
+.boss.hit{animation:shake .4s}
+.hp{height:16px;background:#fde2df;border-radius:999px;overflow:hidden;margin:6px auto 10px;max-width:320px}
+.hp i{display:block;height:100%;background:linear-gradient(90deg,#ef6a5b,#c0392b);transition:width .4s}
+.hearts{font-size:1.5rem;letter-spacing:4px}
+.bigword{font-family:var(--display);font-size:clamp(2rem,9vw,3rem);color:var(--navy);text-align:center;line-height:1.1;margin:4px 0 10px}
+.cover{position:relative;border-radius:22px;overflow:hidden;box-shadow:0 8px 22px rgba(16,28,74,.3)}
+.cover img{display:block;width:100%;height:auto}
+.coverbtn{position:absolute;left:5%;top:73.2%;width:39.4%;height:12.7%;border-radius:14px}
+.coverbtn:focus-visible{outline:4px solid #fff}
+.xpbox{margin-top:12px;background:var(--navy);color:#fff;border-color:var(--navy)}
+.xpbox .top{display:flex;justify-content:space-between;font-weight:800;gap:8px;flex-wrap:wrap}
+.xpbox .meter{height:12px;background:rgba(255,255,255,.2);border-radius:999px;overflow:hidden;margin-top:6px}
+.xpbox .small{color:#bfe9f5}
+.tkhello{display:flex;align-items:center;gap:12px;margin-bottom:10px;font-weight:800}.tkhello img{width:64px;height:64px;border-radius:50%;flex:none}
+.xpbox .chip{background:rgba(255,255,255,.14)}
+.cay .sway{animation:cySway 2.6s ease-in-out infinite;transform-origin:60px 175px}
+.cay .staff{animation:cyStaff 1.6s ease-in-out infinite;transform-origin:92px 118px}
+.cay .blink{animation:cyBlink 4.4s infinite;transform-origin:72px 62px}
+.cay .bloom{animation:cyBloom 2s ease-in-out infinite;transform-origin:center;transform-box:fill-box}
+.cay .fall{animation:cyFall 2.8s ease-in infinite}
+@keyframes cySway{0%,100%{transform:rotate(-1.2deg)}50%{transform:rotate(1.2deg)}}
+@keyframes cyStaff{0%,100%{transform:rotate(0)}50%{transform:rotate(-6deg)}}
+@keyframes cyBlink{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+@keyframes cyBloom{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+@keyframes cyFall{0%{transform:translate(0,0);opacity:1}100%{transform:translate(-6px,26px) rotate(90deg);opacity:0}}
+.cousin{display:grid;grid-template-columns:84px 1fr;gap:12px;align-items:center;background:#fff8d6;border:2px solid #ffd21f;border-radius:var(--r);padding:10px 14px;margin-top:12px}
+.cousin .cay{width:92px;height:auto}
+.cousin b{font-family:var(--display);color:#9a6a00;font-size:1.15rem}
+.cousin>span:last-child{display:grid;gap:2px}
+.cousin .bubble{display:block;background:#fff;border-radius:12px;padding:8px 12px;font-weight:700}
+.cousin .bubble .ja{display:block;font-weight:500;color:var(--ink-2);font-size:.92rem}
+.cypop .cay{width:100px;height:auto}
+.coach .nod{animation:coNod 2.6s ease-in-out infinite;transform-origin:60px 100px}
+.coach .thumb{animation:coThumb 1.4s ease-in-out infinite;transform-origin:30px 128px}
+.coach .blink{animation:coBlink 4.6s infinite;transform-origin:60px 70px}
+@keyframes coNod{0%,100%{transform:rotate(0)}30%{transform:rotate(-3deg) translateY(1px)}60%{transform:rotate(2deg)}}
+@keyframes coThumb{0%,100%{transform:rotate(0)}50%{transform:rotate(-12deg) translateY(-3px)}}
+@keyframes coBlink{0%,94%,100%{transform:scaleY(1)}97%{transform:scaleY(.1)}}
+.nana .jump{animation:naJump .9s ease-in-out infinite;transform-origin:60px 160px}
+.nana .pomL{animation:naPomL .45s ease-in-out infinite alternate;transform-origin:42px 96px}
+.nana .pomR{animation:naPomR .45s ease-in-out infinite alternate;transform-origin:78px 96px}
+.nana .blink{animation:naBlink 4s infinite;transform-origin:60px 64px}
+.nana .hairsw{animation:naHair .9s ease-in-out infinite;transform-origin:60px 40px}
+@keyframes naJump{0%,100%{transform:translateY(0)}45%{transform:translateY(-10px)}}
+@keyframes naPomL{from{transform:rotate(-14deg)}to{transform:rotate(10deg)}}
+@keyframes naPomR{from{transform:rotate(14deg)}to{transform:rotate(-10deg)}}
+@keyframes naBlink{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+@keyframes naHair{0%,100%{transform:rotate(0)}45%{transform:rotate(1.5deg)}}
+.cb .bounce{animation:cbBounce 1.8s ease-in-out infinite;transform-origin:60px 160px}
+.cb .wave{animation:cbWave 1.3s ease-in-out infinite;transform-origin:90px 104px}
+.cb .blink{animation:cbBlink 4s infinite;transform-origin:60px 66px}
+.cb .locs{animation:cbSway 1.8s ease-in-out infinite;transform-origin:60px 40px}
+.cb .twinkle{animation:cbTw 2s ease-in-out infinite}
+@keyframes cbBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes cbWave{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(18deg)}}
+@keyframes cbBlink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.08)}}
+@keyframes cbSway{0%,100%{transform:rotate(-1.5deg)}50%{transform:rotate(1.5deg)}}
+@keyframes cbTw{0%,100%{opacity:.2;transform:scale(.7)}50%{opacity:1;transform:scale(1.1)}}
+.homebtns{margin-top:12px}
+.node.lockd{opacity:.55}
+.node .place{display:block;font-size:.85rem;color:var(--sea);font-weight:800}
+.crew{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.crewcard{display:grid;grid-template-columns:90px 1fr;gap:12px;align-items:center;background:var(--card);border:2px solid var(--line);border-radius:var(--r);padding:10px 14px}
+.crewcard>span:last-child{display:grid;gap:2px}.crewcard b{font-family:var(--display);color:var(--navy);font-size:1.2rem}
+.crewcard .ja{color:var(--ink-2);font-size:.9rem}
+.crewart{display:grid;place-items:center}.crewart svg{width:84px;height:auto}.crewart img{width:78px;height:78px;border-radius:50%}
+.suit{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.souv{background:var(--card);border:2px dashed var(--line);border-radius:var(--r);padding:14px;text-align:center;display:grid;gap:4px}
+.souv.has{border:2px solid var(--sun);background:var(--sun-soft)}.souv .si{font-size:44px}.souv b{font-family:var(--display);color:var(--navy)}
+.awards{margin-top:14px}.awards h3{font-family:var(--display);color:var(--navy);margin:0 0 6px}
+@media (max-width:560px){.hero{grid-template-columns:1fr;text-align:center}.hero .tkart svg{margin:0 auto}.chips{justify-content:center}}
+
+/* hint arrow on the turn-the-page button */
+.hintme{position:relative;animation:hintGlow 1.2s ease-in-out infinite}
+.hintme::before{content:"👉";position:absolute;right:100%;top:50%;margin-right:8px;font-size:46px;line-height:1;transform:translateY(-50%);animation:hintPoint .7s ease-in-out infinite alternate;pointer-events:none;filter:drop-shadow(0 3px 4px rgba(0,0,0,.2))}
+@keyframes hintPoint{from{transform:translate(-12px,-50%)}to{transform:translate(0,-50%)}}
+@keyframes hintGlow{0%,100%{box-shadow:0 0 0 0 rgba(244,178,60,.8)}50%{box-shadow:0 0 0 10px rgba(244,178,60,0)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head><body>
+<div class="wrap">
+  <div class="bar">
+    <div class="brand"><span class="mini"><img src="img/tk-anime-sm.png" alt="TK" style="width:42px;height:42px;border-radius:50%;display:block"></span><span>TK's English<br>Adventure Quest<small>Okinawa ↔ USA</small></span></div>
+    <button class="pill homeb" id="homeBtn" hidden>🏝️ Home</button>
+    <button class="pill" id="voiceBtn" aria-pressed="true">🔊 Voice</button>
+  </div>
+  <main id="app"></main>
+</div>
+<canvas id="confetti"></canvas>
+<script>
+/* ============ DATA ============ */
+const Q = {"missions": [{"id": "touchdown", "icon": "✈️", "place": "Jackson, Mississippi", "title": "Touchdown in America", "ja": "アメリカに着陸！", "color": "#3d7fd6", "souvenir": {"icon": "🌸", "name": "Magnolia Pin", "ja": "マグノリアのピン", "desc": "The magnolia is Mississippi's state flower."}, "story": {"title": "Mission 1: The Runaway Suitcase", "lines": [{"en": "TK stepped off the plane in Jackson, Mississippi, wearing his coolest sunglasses.", "ja": "TKはいちばんかっこいいサングラスをかけて、ミシシッピ州ジャクソンで飛行機を降りました。"}, {"en": "“Welcome to America!” shouted Nana and Papaw, waving a giant sign with his name on it.", "ja": "「アメリカへようこそ！」ナナとパパウが、TKの名前の大きなサインをふって叫びました。"}, {"en": "Suddenly, his suitcase rolled away down the busy hallway.", "ja": "そのとき、スーツケースがにぎやかな通路を転がっていってしまいました。"}, {"en": "TK ran, jumped over a bench, and grabbed the handle like an anime hero.", "ja": "TKは走ってベンチを飛びこえ、アニメのヒーローのように取っ手をつかみました。"}, {"en": "Everyone clapped, and a little girl asked, “Are you a movie star?”", "ja": "みんなが拍手して、小さな女の子が「映画スターなの？」と聞きました。"}, {"en": "TK smiled and said, “Not yet. I am just a very fast traveler.”", "ja": "TKはほほえんで「まだだよ。とても速い旅人なだけさ」と言いました。"}, {"en": "Outside, the air was hot and humid, just like summer in Okinawa.", "ja": "外は暑くてむしむしして、沖縄の夏のようでした。"}, {"en": "Papaw laughed. “Get ready, TK. Your American adventure starts now!”", "ja": "パパウは笑いました。「準備はいいかい、TK。アメリカの冒険のはじまりだ！」"}], "qs": [{"q": "Who met TK at the airport?", "c": ["Nana and Papaw", "His teacher", "A movie star"], "a": 0, "why": "Nana and Papaw waved a giant sign with his name on it.", "qj": "空港でTKをむかえたのはだれ？", "cj": ["ナナとパパウ", "TKの先生", "映画スター"]}, {"q": "What happened to TK's suitcase?", "c": ["It rolled away down the hallway.", "It stayed in Okinawa.", "It fell into a pool."], "a": 0, "why": "His suitcase rolled away down the busy hallway.", "qj": "TKのスーツケースはどうなった？", "cj": ["通路を転がっていった。", "沖縄に置いたままだった。", "プールに落ちた。"]}, {"q": "Why did the little girl ask if TK was a movie star?", "c": ["He caught the suitcase like an action hero.", "He was singing loudly.", "He was on television."], "a": 0, "why": "He jumped over a bench and grabbed the handle like an anime hero.", "qj": "女の子はなぜTKに「映画スターなの？」と聞いたの？", "cj": ["アクションヒーローのようにスーツケースをつかまえたから。", "大声で歌っていたから。", "テレビに出ていたから。"]}, {"q": "How was the weather in Mississippi?", "c": ["Hot and humid", "Cold and snowy", "Cool and windy"], "a": 0, "why": "The air was hot and humid, just like summer in Okinawa.", "qj": "ミシシッピの天気はどうだった？", "cj": ["暑くてむしむし", "寒くて雪", "すずしくて風が強い"]}]}, "words": [{"en": "traveler", "ja": "旅人", "ex": "TK is a fast traveler."}, {"en": "humid", "ja": "むしむしした", "ex": "Summer in Mississippi is humid."}, {"en": "hallway", "ja": "通路・ろうか", "ex": "The suitcase rolled down the hallway."}, {"en": "adventure", "ja": "冒険", "ex": "The adventure starts now."}, {"en": "grab", "ja": "つかむ", "ex": "Grab the handle quickly!"}, {"en": "welcome", "ja": "ようこそ", "ex": "Welcome to America!"}], "listen": [{"en": "Your American adventure starts now!", "c": ["The adventure is beginning.", "The adventure is over.", "The adventure is next year."], "a": 0, "ja": "冒険が始まる。", "cj": ["冒険が始まっている。", "冒険は終わった。", "冒険は来年だ。"]}, {"en": "The air was hot and humid.", "c": ["The weather was hot and sticky.", "The weather was cold.", "It was snowing."], "a": 0, "ja": "暑くてむしむししていた。", "cj": ["天気は暑くてべたべたしていた。", "天気は寒かった。", "雪がふっていた。"]}, {"en": "I am just a very fast traveler.", "c": ["He travels quickly.", "He is very tired.", "He is a pilot."], "a": 0, "ja": "とても速い旅人だ。", "cj": ["彼は速く旅をする。", "彼はとてもつかれている。", "彼はパイロットだ。"]}], "grammar": [{"q": "TK ___ off the plane yesterday.", "c": ["stepped", "steps", "stepping"], "a": 0, "qj": "TKはきのう飛行機を降りました。", "cj": ["過去形", "現在形", "-ing形"], "why": "Yesterday means the past, so use the past tense: stepped."}, {"q": "Nana and Papaw ___ waiting at the gate.", "c": ["were", "was", "is"], "a": 0, "qj": "ナナとパパウはゲートで待っていました。", "cj": ["複数・過去", "単数・過去", "単数・現在"], "why": "Nana and Papaw is plural, so use were."}, {"q": "There ___ many people at the airport.", "c": ["were", "was", "is"], "a": 0, "qj": "空港にはたくさんの人がいました。", "cj": ["複数・過去", "単数・過去", "単数・現在"], "why": "Many people is plural, and this was in the past, so use were."}], "build": [["Welcome", "to", "America!"], ["TK", "caught", "his", "suitcase."], ["The", "air", "was", "hot."]]}, {"id": "home", "icon": "🏡", "place": "Ellisville, Mississippi", "title": "Nana and Papaw's House", "ja": "ナナとパパウの家", "color": "#23a37a", "souvenir": {"icon": "🥤", "name": "Sweet Tea Jar", "ja": "スイートティーのびん", "desc": "Sweet tea is a famous Southern drink."}, "story": {"title": "Mission 2: The Backyard Showdown", "lines": [{"en": "Nana and Papaw's house had a big pool, a green yard, and a porch with rocking chairs.", "ja": "ナナとパパウの家には、大きなプール、緑の庭、ゆり椅子のあるポーチがありました。"}, {"en": "His cousins were waiting: Cayden, RhyLein, Leilani, and little CorTay.", "ja": "いとこたちが待っていました。ケイデン、ライリン、レイラニ、そして小さなコーテイです。"}, {"en": "Cayden wore his yellow flower costume. “I made it myself,” he said proudly.", "ja": "ケイデンは黄色い花の衣装を着ていました。「自分で作ったんだ」と得意げに言いました。"}, {"en": "“Nice style,” TK said. “But can your flowers win a water balloon battle?”", "ja": "「いいスタイルだね」とTK。「でも、その花で水風船バトルに勝てる？」"}, {"en": "The battle began! RhyLein told jokes to distract everyone, and Leilani threw the first balloon.", "ja": "バトル開始！ライリンは冗談でみんなの気をそらし、レイラニが最初の風船を投げました。"}, {"en": "CorTay giggled and hid behind Papaw, who got soaked from head to toe.", "ja": "コーテイはくすくす笑ってパパウの後ろにかくれ、パパウは頭からつま先までびしょぬれになりました。"}, {"en": "Afterward, Nana served barbecue, cornbread, and sweet tea on the porch.", "ja": "そのあと、ナナはポーチでバーベキュー、コーンブレッド、スイートティーを出しました。"}, {"en": "TK taught everyone to say “itadakimasu” before eating. It is a Japanese way to give thanks for the food.", "ja": "TKはみんなに、食べる前に「いただきます」と言うことを教えました。食べ物に感謝する日本のことばです。"}], "qs": [{"q": "Which cousin wore a yellow flower costume?", "c": ["Cayden", "CorTay", "Leilani"], "a": 0, "why": "Cayden wore his yellow flower costume and made it himself.", "qj": "黄色い花の衣装を着ていたいとこはだれ？", "cj": ["ケイデン", "コーテイ", "レイラニ"]}, {"q": "Who got soaked from head to toe?", "c": ["Papaw", "Nana", "TK"], "a": 0, "why": "CorTay hid behind Papaw, who got soaked from head to toe.", "qj": "頭からつま先までびしょぬれになったのはだれ？", "cj": ["パパウ", "ナナ", "TK"]}, {"q": "What food did Nana serve?", "c": ["Barbecue, cornbread, and sweet tea", "Sushi and miso soup", "Pizza and soda"], "a": 0, "why": "Nana served barbecue, cornbread, and sweet tea on the porch.", "qj": "ナナはどんな食べ物を出した？", "cj": ["バーベキュー、コーンブレッド、スイートティー", "おすしとみそ汁", "ピザとソーダ"]}, {"q": "What did TK teach his family?", "c": ["To say itadakimasu before eating", "How to swim", "How to drive"], "a": 0, "why": "TK taught everyone to say itadakimasu, a Japanese way to give thanks before a meal.", "qj": "TKは家族に何を教えた？", "cj": ["食べる前に「いただきます」と言うこと", "泳ぎ方", "運転のしかた"]}]}, "words": [{"en": "porch", "ja": "ポーチ・玄関前のテラス", "ex": "We ate dinner on the porch."}, {"en": "cousin", "ja": "いとこ", "ex": "Cayden is my cousin."}, {"en": "costume", "ja": "衣装", "ex": "He made his own costume."}, {"en": "soaked", "ja": "びしょぬれ", "ex": "Papaw got soaked."}, {"en": "proudly", "ja": "得意げに・ほこらしげに", "ex": "He smiled proudly."}, {"en": "barbecue", "ja": "バーベキュー", "ex": "Nana makes the best barbecue."}], "listen": [{"en": "I made it myself.", "c": ["Nobody helped him make it.", "He bought it at a store.", "His mom made it."], "a": 0, "ja": "自分で作った。", "cj": ["だれにも手伝ってもらわずに作った。", "お店で買った。", "お母さんが作った。"]}, {"en": "Papaw got soaked from head to toe.", "c": ["Papaw was completely wet.", "Papaw was a little dry.", "Papaw went to sleep."], "a": 0, "ja": "パパウは全身びしょぬれになった。", "cj": ["パパウは全身ぬれていた。", "パパウは少しかわいていた。", "パパウは寝てしまった。"]}, {"en": "Can your flowers win a water balloon battle?", "c": ["TK is joking and challenging Cayden.", "TK is angry at Cayden.", "TK wants to buy flowers."], "a": 0, "ja": "冗談で勝負をいどんでいる。", "cj": ["TKは冗談でケイデンに勝負をいどんでいる。", "TKはケイデンにおこっている。", "TKは花を買いたい。"]}], "grammar": [{"q": "Cayden is ___ than CorTay.", "c": ["taller", "more tall", "tallest"], "a": 0, "qj": "ケイデンはコーテイより背が高い。", "cj": ["比較級 -er", "more + 形容詞", "最上級 -est"], "why": "When comparing two people, add -er to short adjectives: taller."}, {"q": "RhyLein ___ jokes every day.", "c": ["tells", "tell", "telling"], "a": 0, "qj": "ライリンは毎日冗談を言います。", "cj": ["三人称単数・現在", "原形", "-ing形"], "why": "With he, she, or one person in the present, add -s: tells."}, {"q": "They ate dinner ___ the porch.", "c": ["on", "in", "at"], "a": 0, "qj": "みんなはポーチで夕食を食べました。", "cj": ["〜の上で", "〜の中で", "〜のところで"], "why": "We say on the porch."}], "build": [["Cayden", "is", "my", "cousin."], ["We", "ate", "on", "the", "porch."], ["Papaw", "got", "soaked."]]}, {"id": "courage", "icon": "🗳️", "place": "Hattiesburg, Mississippi", "title": "The Courage Trail", "ja": "勇気の道", "color": "#8a4fd1", "souvenir": {"icon": "🔘", "name": "Voting Rights Button", "ja": "投票権のバッジ", "desc": "“If you don't vote, you don't count.” — Vernon Dahmer"}, "story": {"title": "Mission 3: A Hero in the Family", "lines": [{"en": "Nana drove everyone to a quiet place near Hattiesburg called Kelly Settlement.", "ja": "ナナはみんなをハティスバーグ近くのケリー・セトルメントという静かな場所へ連れて行きました。"}, {"en": "“This is where your great-great-grandfather, Vernon Dahmer, lived,” she said.", "ja": "「ここは、あなたたちのひいひいおじいさん、バーノン・ダーマーが住んでいた場所よ」とナナは言いました。"}, {"en": "In the 1960s, many Black Americans in Mississippi were blocked from voting by unfair rules.", "ja": "1960年代、ミシシッピの多くの黒人アメリカ人は、不公平なきまりで投票をさまたげられていました。"}, {"en": "Vernon Dahmer helped people register to vote and even offered to pay their poll tax.", "ja": "バーノン・ダーマーは人々の有権者登録を手伝い、人頭税を代わりに払うとまで申し出ました。"}, {"en": "In 1966, the Ku Klux Klan attacked his home, and he died protecting his family.", "ja": "1966年、KKKが彼の家をおそい、彼は家族を守って亡くなりました。"}, {"en": "TK was quiet for a long time. Then he asked, “Why did he keep going when it was so dangerous?”", "ja": "TKは長い間だまっていました。そして「そんなに危険なのに、どうして続けたの？」と聞きました。"}, {"en": "Papaw answered, “Because he believed every person deserves a voice.”", "ja": "パパウは答えました。「すべての人に声を上げる権利があると信じていたからだよ」"}, {"en": "Leilani held TK's hand. “He was a real hero,” she said. TK nodded. “The strongest kind.”", "ja": "レイラニがTKの手をにぎりました。「本当のヒーローだね」TKはうなずきました。「いちばん強いヒーローだ」"}], "qs": [{"q": "Who was Vernon Dahmer?", "c": ["TK's great-great-grandfather and a civil rights hero", "A famous movie actor", "A baseball player"], "a": 0, "why": "Nana said he was their great-great-grandfather, and he helped people vote.", "qj": "バーノン・ダーマーはどんな人？", "cj": ["TKのひいひいおじいさんで、公民権運動のヒーロー", "有名な映画俳優", "野球選手"]}, {"q": "What problem did many Black Americans face in the 1960s?", "c": ["Unfair rules blocked them from voting.", "They could not find jobs at the airport.", "There were no schools."], "a": 0, "why": "Many Black Americans in Mississippi were blocked from voting by unfair rules.", "qj": "1960年代、多くの黒人アメリカ人はどんな問題にぶつかっていた？", "cj": ["不公平なきまりで投票をさまたげられた。", "空港で仕事が見つからなかった。", "学校がなかった。"]}, {"q": "How did Vernon Dahmer help people?", "c": ["He helped them register and offered to pay their poll tax.", "He built a new airport.", "He opened a restaurant."], "a": 0, "why": "He helped people register to vote and offered to pay their poll tax.", "qj": "バーノン・ダーマーはどうやって人々を助けた？", "cj": ["有権者登録を手伝い、人頭税を払うと申し出た。", "新しい空港を建てた。", "レストランを開いた。"]}, {"q": "What does Papaw mean by “every person deserves a voice”?", "c": ["Everyone should have the right to vote and be heard.", "Everyone should sing loudly.", "Only some people should speak."], "a": 0, "why": "A voice here means the right to vote and share your opinion.", "qj": "パパウの「すべての人に声がある」とはどういう意味？", "cj": ["だれもが投票し、意見を聞いてもらう権利がある。", "だれもが大声で歌うべきだ。", "一部の人だけが話すべきだ。"]}]}, "words": [{"en": "courage", "ja": "勇気", "ex": "He showed great courage."}, {"en": "vote", "ja": "投票する", "ex": "Every citizen should be able to vote."}, {"en": "unfair", "ja": "不公平な", "ex": "The rules were unfair."}, {"en": "protect", "ja": "守る", "ex": "He died to protect his family."}, {"en": "hero", "ja": "英雄・ヒーロー", "ex": "He was a real hero."}, {"en": "deserve", "ja": "〜に値する", "ex": "Every person deserves a voice."}], "listen": [{"en": "Every person deserves a voice.", "c": ["Everyone should be heard.", "Only adults should talk.", "Nobody should speak."], "a": 0, "ja": "すべての人に声を上げる権利がある。", "cj": ["だれもが意見を聞いてもらうべきだ。", "大人だけが話すべきだ。", "だれも話すべきではない。"]}, {"en": "The rules were unfair.", "c": ["The rules were not right or equal.", "The rules were easy.", "There were no rules."], "a": 0, "ja": "きまりが不公平だった。", "cj": ["きまりは正しくも平等でもなかった。", "きまりはかんたんだった。", "きまりはなかった。"]}, {"en": "He showed great courage.", "c": ["He was very brave.", "He was very tired.", "He was afraid to try."], "a": 0, "ja": "とても勇敢だった。", "cj": ["彼はとても勇敢だった。", "彼はとてもつかれていた。", "彼はこわくて挑戦できなかった。"]}], "grammar": [{"q": "Vernon Dahmer ___ people register to vote.", "c": ["helped", "help", "helping"], "a": 0, "qj": "バーノン・ダーマーは人々の有権者登録を手伝いました。", "cj": ["過去形", "原形", "-ing形"], "why": "This happened in the past, so use helped."}, {"q": "He was a hero ___ he protected his family.", "c": ["because", "but", "or"], "a": 0, "qj": "彼は家族を守ったのでヒーローでした。", "cj": ["〜なので", "しかし", "または"], "why": "Because gives the reason."}, {"q": "___ you know about Vernon Dahmer?", "c": ["Do", "Does", "Is"], "a": 0, "qj": "バーノン・ダーマーについて知っていますか？", "cj": ["you と使う", "he / she と使う", "be動詞"], "why": "With you, questions start with Do."}], "build": [["He", "was", "a", "real", "hero."], ["Every", "person", "deserves", "a", "voice."], ["He", "showed", "great", "courage."]]}, {"id": "jazz", "icon": "🎺", "place": "New Orleans, Louisiana", "title": "Jazz City", "ja": "ジャズの街", "color": "#e8952c", "souvenir": {"icon": "🎷", "name": "Mini Trumpet Keychain", "ja": "ミニトランペットのキーホルダー", "desc": "New Orleans is the birthplace of jazz."}, "story": {"title": "Mission 4: The Parade Chase", "lines": [{"en": "The family drove to New Orleans, the city where jazz music was born.", "ja": "家族は、ジャズが生まれた街ニューオーリンズへ車で行きました。"}, {"en": "Trumpets played on every corner, and people danced in the street.", "ja": "あちこちの角でトランペットが鳴り、人々は通りでおどっていました。"}, {"en": "RhyLein ate a powdered sugar beignet and sneezed a white cloud all over Cayden.", "ja": "ライリンは粉砂糖のベニエを食べて、ケイデンに白い雲のようなくしゃみをしました。"}, {"en": "“Now my flowers are covered in snow!” Cayden cried, and everyone laughed.", "ja": "「ぼくの花が雪だらけだ！」とケイデンがさけび、みんな笑いました。"}, {"en": "Then a parade passed by, and a band member dropped his hat.", "ja": "そのときパレードが通り、バンドの人が帽子を落としました。"}, {"en": "TK dashed through the crowd, caught the hat, and returned it with a cool bow.", "ja": "TKは人ごみを走りぬけて帽子をつかみ、かっこよくおじぎをして返しました。"}, {"en": "Papaw told them that in 2005, Hurricane Katrina flooded much of the city.", "ja": "パパウは、2005年にハリケーン・カトリーナが街の多くを水びたしにしたと話しました。"}, {"en": "“People lost so much, but they rebuilt together,” Nana said. “That is the spirit of New Orleans.”", "ja": "「多くを失ったけれど、みんなで立て直したのよ。それがニューオーリンズの心なの」とナナ。"}], "qs": [{"q": "What kind of music was born in New Orleans?", "c": ["Jazz", "Rock", "K-pop"], "a": 0, "why": "New Orleans is the city where jazz music was born.", "qj": "ニューオーリンズで生まれた音楽は？", "cj": ["ジャズ", "ロック", "K-POP"]}, {"q": "Why was Cayden covered in white?", "c": ["RhyLein sneezed powdered sugar on him.", "It started snowing.", "He fell into flour."], "a": 0, "why": "RhyLein ate a beignet and sneezed powdered sugar all over Cayden.", "qj": "ケイデンはなぜ白くなった？", "cj": ["ライリンが粉砂糖をくしゃみでかけたから。", "雪がふり始めたから。", "小麦粉の中に落ちたから。"]}, {"q": "What did TK do during the parade?", "c": ["He caught a band member's hat and returned it.", "He played the trumpet.", "He got lost."], "a": 0, "why": "He dashed through the crowd, caught the hat, and returned it with a bow.", "qj": "パレードのときTKは何をした？", "cj": ["バンドの人の帽子をつかまえて返した。", "トランペットをふいた。", "迷子になった。"]}, {"q": "What does the story say about the people of New Orleans?", "c": ["They rebuilt together after a terrible hurricane.", "They moved away forever.", "They stopped playing music."], "a": 0, "why": "Nana said people lost so much, but they rebuilt together.", "qj": "ニューオーリンズの人々について、物語は何と言っている？", "cj": ["ひどいハリケーンのあと、みんなで立て直した。", "永遠に引っこした。", "音楽をやめた。"]}]}, "words": [{"en": "parade", "ja": "パレード", "ex": "A parade passed by."}, {"en": "crowd", "ja": "人ごみ・群衆", "ex": "TK ran through the crowd."}, {"en": "flood", "ja": "水びたしにする・洪水", "ex": "The hurricane flooded the city."}, {"en": "rebuild", "ja": "再建する", "ex": "They worked together to rebuild."}, {"en": "sneeze", "ja": "くしゃみをする", "ex": "RhyLein sneezed sugar everywhere."}, {"en": "spirit", "ja": "精神・心", "ex": "That is the spirit of New Orleans."}], "listen": [{"en": "They rebuilt together.", "c": ["They worked as a team to fix the city.", "They left the city.", "They did nothing."], "a": 0, "ja": "みんなで立て直した。", "cj": ["チームで協力して街を直した。", "街を出ていった。", "何もしなかった。"]}, {"en": "A band member dropped his hat.", "c": ["A musician's hat fell.", "A musician lost his trumpet.", "A musician sat down."], "a": 0, "ja": "バンドの人が帽子を落とした。", "cj": ["演奏者の帽子が落ちた。", "演奏者がトランペットをなくした。", "演奏者がすわった。"]}, {"en": "Trumpets played on every corner.", "c": ["Music was everywhere.", "The streets were silent.", "Only one person played."], "a": 0, "ja": "あちこちで音楽が鳴っていた。", "cj": ["音楽がどこにでもあった。", "通りは静かだった。", "一人だけが演奏した。"]}], "grammar": [{"q": "TK ran ___ the crowd.", "c": ["through", "under", "over"], "a": 0, "qj": "TKは人ごみの中を走りぬけました。", "cj": ["〜を通りぬけて", "〜の下を", "〜の上を"], "why": "Through means from one side to the other side."}, {"q": "The hurricane happened ___ 2005.", "c": ["in", "on", "at"], "a": 0, "qj": "ハリケーンは2005年に起きました。", "cj": ["年・月の前", "日付・曜日の前", "時刻の前"], "why": "Use in with years: in 2005."}, {"q": "While the band ___ playing, TK caught the hat.", "c": ["was", "were", "is"], "a": 0, "qj": "バンドが演奏している間に、TKは帽子をつかみました。", "cj": ["単数・過去", "複数・過去", "単数・現在"], "why": "The band is one group in the past, so use was."}], "build": [["A", "parade", "passed", "by."], ["They", "rebuilt", "the", "city", "together."], ["TK", "caught", "the", "hat."]]}, {"id": "capital", "icon": "🏛️", "place": "Washington, D.C.", "title": "Capital Quest", "ja": "首都クエスト", "color": "#1f6fb2", "souvenir": {"icon": "🏛️", "name": "Capitol Snow Globe", "ja": "国会議事堂のスノードーム", "desc": "The U.S. Capitol is where Congress makes laws."}, "story": {"title": "Mission 5: Secrets of the Capital", "lines": [{"en": "In Washington, D.C., TK saw the tall Washington Monument and the white Capitol building.", "ja": "ワシントンD.C.で、TKは高いワシントン記念塔と白い国会議事堂を見ました。"}, {"en": "At the National Archives, they read the Constitution, the plan for the American government.", "ja": "国立公文書館で、アメリカの政府のしくみを定めた合衆国憲法を読みました。"}, {"en": "At the Lincoln Memorial, Papaw explained that Abraham Lincoln helped end slavery.", "ja": "リンカーン記念館で、パパウはエイブラハム・リンカーンが奴隷制度を終わらせる力になったと説明しました。"}, {"en": "On those same steps in 1963, Dr. Martin Luther King Jr. gave his “I Have a Dream” speech.", "ja": "1963年、同じ階段で、キング牧師が「私には夢がある」という演説をしました。"}, {"en": "At a museum, TK learned that during World War Two, the U.S. government forced about 120,000 Japanese Americans into camps.", "ja": "博物館でTKは、第二次世界大戦中、アメリカ政府が約12万人の日系アメリカ人を強制的に収容所へ入れたことを知りました。"}, {"en": "In 1988, the government officially apologized and said it was wrong.", "ja": "1988年、政府は正式に謝罪し、それはまちがいだったと認めました。"}, {"en": "“A strong country tells the truth about its mistakes,” Nana said softly.", "ja": "「強い国は、自分のまちがいについて本当のことを話すのよ」とナナは静かに言いました。"}, {"en": "TK looked at the Capitol. “Then I want to help make the future better,” he said.", "ja": "TKは国会議事堂を見て「じゃあ、ぼくは未来をもっとよくする手伝いがしたい」と言いました。"}], "qs": [{"q": "What is the Constitution?", "c": ["The plan for the American government", "A famous painting", "A kind of train"], "a": 0, "why": "The story says the Constitution is the plan for the American government.", "qj": "合衆国憲法とは何？", "cj": ["アメリカの政府のしくみを定めたもの", "有名な絵", "電車の一種"]}, {"q": "What important speech happened at the Lincoln Memorial in 1963?", "c": ["Dr. King's I Have a Dream speech", "A speech about sports", "The first moon landing"], "a": 0, "why": "Dr. Martin Luther King Jr. gave his I Have a Dream speech there.", "qj": "1963年にリンカーン記念館で行われた大切な演説は？", "cj": ["キング牧師の「私には夢がある」演説", "スポーツについての演説", "初めての月面着陸"]}, {"q": "What happened to Japanese Americans during World War Two?", "c": ["The government forced them into camps.", "They all moved to Japan.", "They became presidents."], "a": 0, "why": "About 120,000 Japanese Americans were forced into camps.", "qj": "第二次世界大戦中、日系アメリカ人に何が起きた？", "cj": ["政府が彼らを強制的に収容所に入れた。", "全員が日本に引っこした。", "大統領になった。"]}, {"q": "What lesson did Nana share?", "c": ["A strong country tells the truth about its mistakes.", "Mistakes should be hidden.", "History is not important."], "a": 0, "why": "Nana said a strong country tells the truth about its mistakes.", "qj": "ナナはどんな教えを伝えた？", "cj": ["強い国は、自分のまちがいについて本当のことを話す。", "まちがいはかくすべきだ。", "歴史は大切ではない。"]}]}, "words": [{"en": "government", "ja": "政府", "ex": "The Constitution is the plan for the government."}, {"en": "slavery", "ja": "奴隷制度", "ex": "Lincoln helped end slavery."}, {"en": "speech", "ja": "演説・スピーチ", "ex": "Dr. King gave a famous speech."}, {"en": "apologize", "ja": "謝罪する", "ex": "The government apologized in 1988."}, {"en": "mistake", "ja": "まちがい", "ex": "It is brave to admit a mistake."}, {"en": "future", "ja": "未来", "ex": "TK wants to make the future better."}], "listen": [{"en": "A strong country tells the truth about its mistakes.", "c": ["Being honest about the past makes a country stronger.", "Countries never make mistakes.", "The past does not matter."], "a": 0, "ja": "強い国は自分のまちがいについて本当のことを話す。", "cj": ["過去に正直になると、国はもっと強くなる。", "国は決してまちがえない。", "過去は関係ない。"]}, {"en": "The government officially apologized.", "c": ["The government said sorry.", "The government built a camp.", "The government stayed quiet."], "a": 0, "ja": "政府は正式に謝罪した。", "cj": ["政府があやまった。", "政府が収容所を建てた。", "政府はだまっていた。"]}, {"en": "I want to help make the future better.", "c": ["TK wants to improve things.", "TK wants to go home.", "TK wants to forget history."], "a": 0, "ja": "未来をもっとよくしたい。", "cj": ["TKは物事をよくしたい。", "TKは家に帰りたい。", "TKは歴史をわすれたい。"]}], "grammar": [{"q": "Dr. King ___ a famous speech in 1963.", "c": ["gave", "gives", "giving"], "a": 0, "qj": "キング牧師は1963年に有名な演説をしました。", "cj": ["過去形", "現在形", "-ing形"], "why": "Give is irregular. Its past tense is gave."}, {"q": "The Capitol is ___ building where Congress works.", "c": ["the", "an", "these"], "a": 0, "qj": "国会議事堂は、議会が仕事をする建物です。", "cj": ["特定の1つ", "母音の前の「1つの」", "これらの（複数）"], "why": "We mean one specific building, so use the."}, {"q": "It is important ___ learn from history.", "c": ["to", "for", "at"], "a": 0, "qj": "歴史から学ぶことは大切です。", "cj": ["to + 動詞", "〜のために", "〜で"], "why": "After important, use to plus a verb: to learn."}], "build": [["Lincoln", "helped", "end", "slavery."], ["The", "government", "apologized", "in", "1988."], ["I", "want", "a", "better", "future."]]}, {"id": "anime", "icon": "🎌", "place": "Los Angeles, California", "title": "Anime Con Showdown", "ja": "アニメコン決戦", "color": "#e8588a", "souvenir": {"icon": "🏆", "name": "Golden Anime Con Pass", "ja": "金のアニメコン・パス", "desc": "Proof you finished the whole American Adventure!"}, "story": {"title": "Mission 6: The Big Stage", "lines": [{"en": "The final stop was a giant anime convention in Los Angeles.", "ja": "最後の目的地は、ロサンゼルスの大きなアニメ・コンベンションでした。"}, {"en": "Thousands of fans from all over the world wore amazing cosplay costumes.", "ja": "世界中から来た何千人ものファンが、すごいコスプレ衣装を着ていました。"}, {"en": "Cayden entered the costume contest in his yellow flower outfit, and TK was his hype man.", "ja": "ケイデンは黄色い花の衣装でコスチューム・コンテストに出て、TKが盛り上げ役をしました。"}, {"en": "Right before they went on stage, Cayden's walking stick broke in half!", "ja": "ステージに出る直前、ケイデンのつえが真っ二つに折れてしまいました！"}, {"en": "TK stayed calm, borrowed tape from a friendly girl named Mia, and fixed it in thirty seconds.", "ja": "TKは落ち着いて、ミアという親切な女の子からテープを借り、30秒で直しました。"}, {"en": "On stage, TK spoke English to the crowd: “My cousin made this costume by hand. Give it up for Cayden!”", "ja": "ステージでTKは英語で観客に言いました。「いとこがこの衣装を手作りしました。ケイデンに拍手を！」"}, {"en": "The crowd cheered, and Cayden won second place.", "ja": "観客は大歓声を上げ、ケイデンは2位になりました。"}, {"en": "Nana hugged TK. “Your English sounds wonderful,” she said. TK grinned. “I had great teachers.”", "ja": "ナナはTKをハグしました。「英語がとてもすてきよ」TKはにっこり。「いい先生がいたからね」"}], "qs": [{"q": "Where was the anime convention?", "c": ["Los Angeles", "New Orleans", "Okinawa"], "a": 0, "why": "The final stop was a giant anime convention in Los Angeles.", "qj": "アニメ・コンベンションはどこで開かれた？", "cj": ["ロサンゼルス", "ニューオーリンズ", "沖縄"]}, {"q": "What problem happened before the contest?", "c": ["Cayden's walking stick broke.", "TK lost his sunglasses.", "The stage caught fire."], "a": 0, "why": "Right before they went on stage, Cayden's walking stick broke in half.", "qj": "コンテストの前にどんな問題が起きた？", "cj": ["ケイデンのつえが折れた。", "TKがサングラスをなくした。", "ステージが火事になった。"]}, {"q": "How did TK solve the problem?", "c": ["He borrowed tape and fixed the stick.", "He bought a new costume.", "He cried and went home."], "a": 0, "why": "TK stayed calm, borrowed tape from Mia, and fixed it in thirty seconds.", "qj": "TKはどうやって問題を解決した？", "cj": ["テープを借りてつえを直した。", "新しい衣装を買った。", "泣いて家に帰った。"]}, {"q": "What does “hype man” mean in the story?", "c": ["Someone who gets the crowd excited for another person", "A person who sells hot dogs", "A security guard"], "a": 0, "why": "TK cheered for Cayden and got the crowd excited. That is a hype man.", "qj": "物語の「hype man」とはどういう意味？", "cj": ["ほかの人のために観客を盛り上げる人", "ホットドッグを売る人", "警備員"]}]}, "words": [{"en": "convention", "ja": "大会・コンベンション", "ex": "The anime convention was huge."}, {"en": "contest", "ja": "コンテスト", "ex": "Cayden entered the costume contest."}, {"en": "calm", "ja": "落ち着いた", "ex": "TK stayed calm."}, {"en": "borrow", "ja": "借りる", "ex": "Can I borrow some tape?"}, {"en": "crowd", "ja": "観客・群衆", "ex": "The crowd cheered."}, {"en": "wonderful", "ja": "すばらしい", "ex": "Your English sounds wonderful."}], "listen": [{"en": "Can I borrow some tape?", "c": ["TK is asking to use some tape.", "TK is selling tape.", "TK is throwing tape away."], "a": 0, "ja": "テープを借りてもいい？", "cj": ["TKはテープを使わせてと頼んでいる。", "TKはテープを売っている。", "TKはテープをすてている。"]}, {"en": "Give it up for Cayden!", "c": ["Clap and cheer for Cayden!", "Stop talking to Cayden!", "Give Cayden your money!"], "a": 0, "ja": "ケイデンに拍手を！", "cj": ["ケイデンに拍手と声援を！", "ケイデンと話すのをやめて！", "ケイデンにお金をあげて！"]}, {"en": "I had great teachers.", "c": ["People helped TK learn.", "TK taught himself only.", "TK does not like teachers."], "a": 0, "ja": "いい先生がいた。", "cj": ["みんながTKの学びを助けてくれた。", "TKはひとりだけで学んだ。", "TKは先生が好きではない。"]}], "grammar": [{"q": "Can I ___ some tape, please?", "c": ["borrow", "borrows", "borrowed"], "a": 0, "qj": "テープを借りてもいいですか？", "cj": ["原形（Can のあと）", "三人称単数", "過去形"], "why": "After can, use the base verb: borrow."}, {"q": "Cayden won ___ place.", "c": ["second", "two", "twice"], "a": 0, "qj": "ケイデンは2位になりました。", "cj": ["2番目の", "2（数）", "2回"], "why": "For places in a contest, use ordinal numbers: first, second, third."}, {"q": "TK stayed calm ___ the stick broke.", "c": ["when", "what", "who"], "a": 0, "qj": "つえが折れたとき、TKは落ち着いていました。", "cj": ["〜とき", "何", "だれ"], "why": "When tells the time something happened."}], "build": [["The", "crowd", "cheered", "for", "Cayden."], ["TK", "stayed", "calm."], ["Can", "I", "borrow", "some", "tape?"]]}], "cheers": ["Correct!", "Nice work, TK!", "You got it!", "Excellent!", "Awesome!", "Great listening!"], "tries": ["Not quite. Try again.", "Almost! Look again.", "Good try. One more time."], "ui": ["Listen and choose the meaning.", "Put the words in order.", "Read the story, then answer the questions.", "Mission complete!", "Level up!", "You earned a new badge!", "Welcome back, TK! Ready for your next mission?", "Let's start the quest!", "You earned a new souvenir!", "Chapter unlocked!", "Choose the correct word."]};
+const MISSIONS = Q.missions;
+const PAPAW_SVG = "<svg class=\"coach\" viewBox=\"0 0 120 170\" role=\"img\" aria-label=\"Coach Croom\"><ellipse cx=\"60\" cy=\"166\" rx=\"40\" ry=\"4\" fill=\"rgba(0,0,0,.18)\"/><path d=\"M16 170 Q14 118 60 110 Q106 118 104 170Z\" fill=\"#3fae5a\" stroke=\"#2c8a45\" stroke-width=\"1.5\"/><path d=\"M44 112 L60 128 L76 112 L70 110 L60 120 L50 110Z\" fill=\"#2c8a45\"/><circle cx=\"60\" cy=\"134\" r=\"1.8\" fill=\"#7a2e2e\"/><circle cx=\"60\" cy=\"144\" r=\"1.8\" fill=\"#7a2e2e\"/><path d=\"M72 140 h16 v12 h-16z\" fill=\"none\" stroke=\"#2c8a45\" stroke-width=\"1.5\"/><circle cx=\"80\" cy=\"146\" r=\"1.5\" fill=\"#7a2e2e\"/><path d=\"M60 118 Q62 128 58 136\" stroke=\"#e8e8e8\" stroke-width=\"1.6\" fill=\"none\"/><circle cx=\"57\" cy=\"138\" r=\"3.2\" fill=\"#d9d9d9\" stroke=\"#999\" stroke-width=\"1\"/><path d=\"M98 128 Q108 148 100 162\" stroke=\"#3fae5a\" stroke-width=\"15\" fill=\"none\" stroke-linecap=\"round\"/><g class=\"thumb\"><path d=\"M24 130 Q10 122 14 104\" stroke=\"#3fae5a\" stroke-width=\"15\" fill=\"none\" stroke-linecap=\"round\"/><rect x=\"7\" y=\"88\" width=\"15\" height=\"14\" rx=\"6\" fill=\"#3b2418\"/><rect x=\"10\" y=\"78\" width=\"6\" height=\"14\" rx=\"3\" fill=\"#3b2418\"/></g><g class=\"nod\"><rect x=\"50\" y=\"98\" width=\"20\" height=\"16\" rx=\"7\" fill=\"#3b2418\"/><ellipse cx=\"27\" cy=\"74\" rx=\"6\" ry=\"8\" fill=\"#3b2418\"/><ellipse cx=\"93\" cy=\"74\" rx=\"6\" ry=\"8\" fill=\"#3b2418\"/><path d=\"M27 66 Q25 104 60 108 Q95 104 93 66 Q92 44 60 44 Q28 44 27 66Z\" fill=\"#452a1c\"/><path d=\"M24 60 Q24 26 60 24 Q96 26 96 60Z\" fill=\"#1f5b35\"/><path d=\"M22 60 Q60 50 104 60 Q106 66 98 66 Q60 58 24 66 Q18 64 22 60Z\" fill=\"#f2c230\" stroke=\"#d9a816\" stroke-width=\"1\"/><circle cx=\"60\" cy=\"25\" r=\"2.5\" fill=\"#174a2a\"/><text x=\"60\" y=\"49\" text-anchor=\"middle\" font-family=\"Georgia,serif\" font-weight=\"700\" font-style=\"italic\" font-size=\"18\" fill=\"#fff\">C</text><path d=\"M42 70 Q48 67 54 70 M66 70 Q72 67 78 70\" stroke=\"#140c08\" stroke-width=\"2.6\" fill=\"none\" stroke-linecap=\"round\"/><g class=\"blink\"><ellipse cx=\"48\" cy=\"77\" rx=\"5\" ry=\"4.6\" fill=\"#fff\"/><ellipse cx=\"72\" cy=\"77\" rx=\"5\" ry=\"4.6\" fill=\"#fff\"/><circle cx=\"48.5\" cy=\"77.5\" r=\"3.2\" fill=\"#140c08\"/><circle cx=\"71.5\" cy=\"77.5\" r=\"3.2\" fill=\"#140c08\"/><circle cx=\"49.6\" cy=\"76.2\" r=\"1.1\" fill=\"#fff\"/><circle cx=\"72.6\" cy=\"76.2\" r=\"1.1\" fill=\"#fff\"/></g><path d=\"M57 82 Q60 88 63 82\" stroke=\"#2a1810\" stroke-width=\"2\" fill=\"none\" stroke-linecap=\"round\"/><path d=\"M44 90 Q60 108 76 90 Q60 95 44 90Z\" fill=\"#7a2323\"/><path d=\"M46 91 Q60 96 74 91 L72 94 Q60 98 48 94Z\" fill=\"#fff\"/><path d=\"M44 96 Q48 104 60 106 Q72 104 76 96\" stroke=\"#2a1810\" stroke-width=\"1.2\" fill=\"none\" opacity=\".35\"/></g></svg>";
+const NANA_SVG = "<svg class=\"nana\" viewBox=\"0 0 120 175\" role=\"img\" aria-label=\"Nana the cheerleader\"><ellipse cx=\"60\" cy=\"171\" rx=\"30\" ry=\"4\" fill=\"rgba(0,0,0,.18)\"/><g class=\"jump\"><g class=\"hairsw\"><path d=\"M26 58 Q22 30 60 24 Q98 30 94 58 L98 118 Q84 124 78 110 L42 110 Q36 124 22 118Z\" fill=\"#1a1412\"/></g><rect x=\"47\" y=\"134\" width=\"10\" height=\"28\" rx=\"5\" fill=\"#a86f4b\"/><rect x=\"63\" y=\"134\" width=\"10\" height=\"28\" rx=\"5\" fill=\"#a86f4b\"/><path d=\"M44 160 h16 v6 h-18z M60 160 h16 v6 h-16z\" fill=\"#fff\" stroke=\"#cfd6e4\" stroke-width=\"1\"/><path d=\"M38 118 L82 118 L90 140 L30 140Z\" fill=\"#23a37a\"/><path d=\"M34 128 L86 128\" stroke=\"#f6b73c\" stroke-width=\"3\"/><path d=\"M40 92 Q60 86 80 92 L82 120 L38 120Z\" fill=\"#141414\"/><path d=\"M40 92 Q60 98 80 92\" stroke=\"#23a37a\" stroke-width=\"3\" fill=\"none\"/><text x=\"60\" y=\"113\" text-anchor=\"middle\" font-family=\"Arial Black,Arial,sans-serif\" font-weight=\"900\" font-size=\"13\" fill=\"#f6b73c\">TK</text><rect x=\"53\" y=\"80\" width=\"14\" height=\"14\" rx=\"5\" fill=\"#a86f4b\"/><path d=\"M32 58 Q31 90 60 94 Q89 90 88 58 Q87 34 60 34 Q33 34 32 58Z\" fill=\"#b87e58\"/><path d=\"M30 60 Q30 30 60 28 Q88 30 90 56 Q80 40 64 38 Q52 44 36 46 Q32 52 30 60Z\" fill=\"#1a1412\"/><path d=\"M30 60 Q28 80 32 96 L28 96 Q24 76 26 60Z M90 58 Q92 80 88 96 L92 96 Q96 76 94 58Z\" fill=\"#1a1412\"/><path d=\"M42 56 Q48 53 54 56 M66 56 Q72 53 78 56\" stroke=\"#1a1412\" stroke-width=\"2.2\" fill=\"none\" stroke-linecap=\"round\"/><g class=\"blink\"><path d=\"M43 64 Q48 59 53 64\" stroke=\"#1a1412\" stroke-width=\"2.6\" fill=\"none\" stroke-linecap=\"round\"/><path d=\"M67 64 Q72 59 77 64\" stroke=\"#1a1412\" stroke-width=\"2.6\" fill=\"none\" stroke-linecap=\"round\"/></g><ellipse cx=\"41\" cy=\"72\" rx=\"5\" ry=\"3\" fill=\"#d9725f\" opacity=\".35\"/><ellipse cx=\"79\" cy=\"72\" rx=\"5\" ry=\"3\" fill=\"#d9725f\" opacity=\".35\"/><path d=\"M57 66 Q60 72 63 66\" stroke=\"#8a5536\" stroke-width=\"1.8\" fill=\"none\" stroke-linecap=\"round\"/><path d=\"M46 76 Q60 92 74 76 Q60 80 46 76Z\" fill=\"#7a2626\"/><path d=\"M48 77 Q60 81 72 77 L70 81 Q60 84 50 81Z\" fill=\"#fff\"/><circle cx=\"33\" cy=\"76\" r=\"2\" fill=\"#f6b73c\"/><circle cx=\"87\" cy=\"76\" r=\"2\" fill=\"#f6b73c\"/><g class=\"pomL\"><path d=\"M42 96 Q22 100 14 74\" stroke=\"#a86f4b\" stroke-width=\"8\" fill=\"none\" stroke-linecap=\"round\"/><g transform=\"translate(12 66)\"><circle r=\"12\" fill=\"#23a37a\"/><circle cx=\"-6\" cy=\"-5\" r=\"6\" fill=\"#2fc190\"/><circle cx=\"6\" cy=\"-4\" r=\"6\" fill=\"#f6b73c\"/><circle cx=\"0\" cy=\"6\" r=\"6\" fill=\"#2fc190\"/><circle cx=\"-7\" cy=\"5\" r=\"4\" fill=\"#f6b73c\"/><circle cx=\"7\" cy=\"6\" r=\"4\" fill=\"#1d8a66\"/></g></g><g class=\"pomR\"><path d=\"M78 96 Q98 100 106 74\" stroke=\"#a86f4b\" stroke-width=\"8\" fill=\"none\" stroke-linecap=\"round\"/><g transform=\"translate(108 66)\"><circle r=\"12\" fill=\"#f6b73c\"/><circle cx=\"-6\" cy=\"-5\" r=\"6\" fill=\"#ffd36b\"/><circle cx=\"6\" cy=\"-4\" r=\"6\" fill=\"#23a37a\"/><circle cx=\"0\" cy=\"6\" r=\"6\" fill=\"#ffd36b\"/><circle cx=\"-7\" cy=\"5\" r=\"4\" fill=\"#23a37a\"/><circle cx=\"7\" cy=\"6\" r=\"4\" fill=\"#e39a1f\"/></g></g></g></svg>";
+const CORTAY_SVG = "<svg class=\"cb\" viewBox=\"0 0 120 170\" role=\"img\" aria-label=\"CorTay the caveboy\"><defs><radialGradient id=\"ctSkin\" cx=\"45%\" cy=\"38%\" r=\"70%\"><stop offset=\"0\" stop-color=\"#ad7a52\"/><stop offset=\".65\" stop-color=\"#96623e\"/><stop offset=\"1\" stop-color=\"#784a2c\"/></radialGradient><linearGradient id=\"ctLimb\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#9c6842\"/><stop offset=\"1\" stop-color=\"#855634\"/></linearGradient><linearGradient id=\"ctTunic\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#f3d9a4\"/><stop offset=\"1\" stop-color=\"#e2b877\"/></linearGradient><radialGradient id=\"ctEye\" cx=\"45%\" cy=\"40%\" r=\"60%\"><stop offset=\"0\" stop-color=\"#8a5a34\"/><stop offset=\".7\" stop-color=\"#5a3419\"/><stop offset=\"1\" stop-color=\"#3a200e\"/></radialGradient><linearGradient id=\"ctHair\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#1c1614\"/><stop offset=\"1\" stop-color=\"#0a0706\"/></linearGradient></defs><ellipse cx=\"60\" cy=\"164\" rx=\"28\" ry=\"4\" fill=\"rgba(0,0,0,.12)\"/><g class=\"twinkle\" fill=\"#ffd96a\"><path d=\"M14 30 l2 5 l5 2 l-5 2 l-2 5 l-2 -5 l-5 -2 l5 -2z\"/><path d=\"M104 22 l1.5 4 l4 1.5 l-4 1.5 l-1.5 4 l-1.5 -4 l-4 -1.5 l4 -1.5z\" style=\"animation-delay:.8s\"/></g><g class=\"bounce\"><rect x=\"46\" y=\"126\" width=\"11\" height=\"30\" rx=\"5.5\" fill=\"url(#ctLimb)\"/><rect x=\"63\" y=\"126\" width=\"11\" height=\"30\" rx=\"5.5\" fill=\"url(#ctLimb)\"/><ellipse cx=\"51\" cy=\"158\" rx=\"9\" ry=\"4.6\" fill=\"#9a683f\"/><ellipse cx=\"69\" cy=\"158\" rx=\"9\" ry=\"4.6\" fill=\"#9a683f\"/><path d=\"M43 157 q8 -3 16 0 M61 157 q8 -3 16 0\" stroke=\"#e8b98a\" stroke-width=\"1.2\" fill=\"none\"/><path d=\"M38 94 Q26 108 30 122\" stroke=\"url(#ctLimb)\" stroke-width=\"10\" fill=\"none\" stroke-linecap=\"round\"/><g class=\"spear\"><rect x=\"27.6\" y=\"70\" width=\"4.2\" height=\"92\" rx=\"2\" fill=\"#8a5a32\" stroke=\"#6b4424\" stroke-width=\".8\"/><path d=\"M28 88 h3.6 M28 96 h3.6\" stroke=\"#c9a26a\" stroke-width=\"1.4\"/><path d=\"M29.7 50 L36 66 Q29.7 70 23.4 66Z\" fill=\"#9aa4ab\" stroke=\"#6f7a82\" stroke-width=\"1\"/><path d=\"M29.7 54 L32.6 65\" stroke=\"#dfe6ea\" stroke-width=\"1\"/><path d=\"M26 69 h7.4 v4 h-7.4z\" fill=\"#b08a55\"/><path d=\"M26 70 l7.4 2 M26 72 l7.4 -2\" stroke=\"#7a5a30\" stroke-width=\".8\"/></g><circle cx=\"30\" cy=\"124\" r=\"5.5\" fill=\"#96623e\"/><path d=\"M36 92 Q60 84 84 92 L88 128 Q82 124 78 130 Q72 124 66 130 Q60 124 54 130 Q48 124 42 130 Q38 124 32 128Z\" fill=\"url(#ctTunic)\" stroke=\"#d2a466\" stroke-width=\"1\" stroke-linejoin=\"round\"/><path d=\"M36 94 L72 86\" stroke=\"#c9975a\" stroke-width=\"4\" stroke-linecap=\"round\"/><circle cx=\"48\" cy=\"106\" r=\"2.6\" fill=\"#d6a566\" opacity=\".8\"/><circle cx=\"64\" cy=\"102\" r=\"2.2\" fill=\"#d6a566\" opacity=\".8\"/><circle cx=\"74\" cy=\"113\" r=\"2.8\" fill=\"#d6a566\" opacity=\".8\"/><circle cx=\"56\" cy=\"117\" r=\"2.3\" fill=\"#d6a566\" opacity=\".8\"/><path d=\"M60 99 l1.4 3 l3.2 .4 l-2.4 2.2 l.6 3.2 l-2.8 -1.6 l-2.8 1.6 l.6 -3.2 l-2.4 -2.2 l3.2 -.4z\" fill=\"#ffe08a\"/><g class=\"wave\"><path d=\"M84 96 Q98 88 99 72\" stroke=\"url(#ctLimb)\" stroke-width=\"10\" fill=\"none\" stroke-linecap=\"round\"/><circle cx=\"99\" cy=\"68\" r=\"6.2\" fill=\"#96623e\"/><path d=\"M95 63 l-1 -4 M99 61 l0 -4 M103 62 l1 -4\" stroke=\"#96623e\" stroke-width=\"2.6\" stroke-linecap=\"round\"/></g><rect x=\"54\" y=\"78\" width=\"12\" height=\"12\" rx=\"5\" fill=\"#8f5c38\"/><ellipse cx=\"33\" cy=\"60\" rx=\"4.5\" ry=\"6\" fill=\"#96623e\"/><ellipse cx=\"87\" cy=\"60\" rx=\"4.5\" ry=\"6\" fill=\"#96623e\"/><ellipse cx=\"60\" cy=\"56\" rx=\"27\" ry=\"27\" fill=\"url(#ctSkin)\"/><g class=\"locs\"><path d=\"M32 64 Q24 56 23 42 Q22 12 60 7 Q98 12 97 42 Q96 56 88 64 Q88 50 82 45 Q72 38 60 38 Q48 38 38 45 Q32 50 32 64Z\" fill=\"url(#ctHair)\"/><path d=\"M33 52 Q31 58 33 64 L36 64 Q35 57 37 51Z M87 52 Q89 58 87 64 L84 64 Q85 57 83 51Z\" fill=\"url(#ctHair)\"/><g fill=\"url(#ctHair)\"><path d=\"M21 43 Q24 34 26 30 Q28 34 31 43Z\"/><path d=\"M26 31 Q29 22 31 18 Q33 22 36 31Z\"/><path d=\"M33 22 Q36 13 38 9 Q40 13 43 22Z\"/><path d=\"M42 16 Q45 7 47 3 Q49 7 52 16Z\"/><path d=\"M51 13 Q54 4 56 0 Q58 4 61 13Z\"/><path d=\"M59 13 Q62 4 64 0 Q66 4 69 13Z\"/><path d=\"M68 16 Q71 7 73 3 Q75 7 78 16Z\"/><path d=\"M77 22 Q80 13 82 9 Q84 13 87 22Z\"/><path d=\"M84 31 Q87 22 89 18 Q91 22 94 31Z\"/><path d=\"M89 43 Q92 34 94 30 Q96 34 99 43Z\"/><path d=\"M39 24 Q42 15 44 11 Q46 15 49 24Z\"/><path d=\"M55 18 Q58 9 60 5 Q62 9 65 18Z\"/><path d=\"M71 24 Q74 15 76 11 Q78 15 81 24Z\"/></g><g fill=\"none\" stroke=\"#3a302c\" stroke-width=\"1\" opacity=\".55\"><path d=\"M34 26 q3 -2 6 0 M50 16 q3 -2 6 0 M64 16 q3 -2 6 0 M80 26 q3 -2 6 0 M42 32 q3 -2 6 0 M72 32 q3 -2 6 0 M28 42 q3 -2 6 0 M86 42 q3 -2 6 0\"/></g></g><path d=\"M43 51 Q49 48.5 55 50 M65 50 Q71 48.5 77 51\" stroke=\"#1c1210\" stroke-width=\"2.6\" fill=\"none\" stroke-linecap=\"round\"/><g class=\"blink\"><ellipse cx=\"49\" cy=\"63\" rx=\"6.4\" ry=\"7.4\" fill=\"#fff\"/><ellipse cx=\"71\" cy=\"63\" rx=\"6.4\" ry=\"7.4\" fill=\"#fff\"/><ellipse cx=\"49.5\" cy=\"64\" rx=\"5\" ry=\"6\" fill=\"url(#ctEye)\"/><ellipse cx=\"70.5\" cy=\"64\" rx=\"5\" ry=\"6\" fill=\"url(#ctEye)\"/><circle cx=\"49.5\" cy=\"65\" r=\"2.6\" fill=\"#1e1008\"/><circle cx=\"70.5\" cy=\"65\" r=\"2.6\" fill=\"#1e1008\"/><circle cx=\"51.6\" cy=\"61.4\" r=\"2\" fill=\"#fff\"/><circle cx=\"72.6\" cy=\"61.4\" r=\"2\" fill=\"#fff\"/><circle cx=\"47.8\" cy=\"67\" r=\"1\" fill=\"#fff\"/><circle cx=\"68.8\" cy=\"67\" r=\"1\" fill=\"#fff\"/><path d=\"M42.4 60 Q49 54.6 55.6 60 M64.4 60 Q71 54.6 77.6 60\" stroke=\"#2a1810\" stroke-width=\"1.4\" fill=\"none\" stroke-linecap=\"round\"/></g><path d=\"M58.6 70 Q60 72.2 61.4 70\" stroke=\"#9a643e\" stroke-width=\"1.4\" fill=\"none\" stroke-linecap=\"round\"/><ellipse cx=\"41\" cy=\"71\" rx=\"5.4\" ry=\"3.4\" fill=\"#d97a6a\" opacity=\".22\"/><ellipse cx=\"79\" cy=\"71\" rx=\"5.4\" ry=\"3.4\" fill=\"#d97a6a\" opacity=\".22\"/><path d=\"M51 75 Q60 83 70 74 Q60 78.5 51 75Z\" fill=\"#9e4a44\"/><path d=\"M53.5 75.6 Q60 78 66.5 75.6 L65.6 77 Q60 78.8 54.4 77Z\" fill=\"#fff\"/><ellipse cx=\"54\" cy=\"44\" rx=\"7\" ry=\"3.5\" fill=\"#fff\" opacity=\".12\"/></g></svg>";
+const CAYDEN_SVG = "<svg class=\"cay\" viewBox=\"0 0 120 185\" role=\"img\" aria-label=\"Cousin Cayden\"><defs><radialGradient id=\"cyF\" cx=\"50%\" cy=\"40%\" r=\"60%\"><stop offset=\"0\" stop-color=\"#fff27a\"/><stop offset=\".6\" stop-color=\"#ffd21f\"/><stop offset=\"1\" stop-color=\"#e8a800\"/></radialGradient><linearGradient id=\"cyRobe\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ffe45c\"/><stop offset=\"1\" stop-color=\"#f2b705\"/></linearGradient><linearGradient id=\"cySkin\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#b8784c\"/><stop offset=\"1\" stop-color=\"#9c6238\"/></linearGradient><g id=\"fl\"><path d=\"M0 -4 L1.4 -1.2 L4.4 -1.2 L2 0.8 L2.8 3.8 L0 2 L-2.8 3.8 L-2 0.8 L-4.4 -1.2 L-1.4 -1.2Z\" fill=\"url(#cyF)\" stroke=\"#d99a00\" stroke-width=\".35\"/><circle r=\"1\" fill=\"#f59e0b\"/></g><g id=\"yarn\"><path d=\"M-4 0 Q-4 -4 0 -4 Q4 -4 4 0 Q4 4 0 4 Q-4 4 -4 0Z\" fill=\"#f5c21a\"/><path d=\"M0 0 Q1.6 -.4 1.4 1.2 Q.6 2.8 -1.2 2 Q-3 .8 -2 -1.4 Q-.6 -3.4 1.8 -2.8 Q3.8 -2 3.4 .6\" fill=\"none\" stroke=\"#c98f00\" stroke-width=\".7\" stroke-linecap=\"round\"/><path d=\"M-3.6 -1 Q-4.6 -3.2 -2.4 -4 M3 -3 Q4.6 -2.6 4.2 -.8\" fill=\"none\" stroke=\"#ffe27a\" stroke-width=\".7\"/></g></defs><ellipse cx=\"60\" cy=\"181\" rx=\"36\" ry=\"4\" fill=\"rgba(0,0,0,.25)\"/><g class=\"sway\"><rect x=\"47\" y=\"134\" width=\"11\" height=\"38\" rx=\"4\" fill=\"#fbfbf7\"/><rect x=\"62\" y=\"134\" width=\"11\" height=\"38\" rx=\"4\" fill=\"#fbfbf7\"/><path d=\"M41 170 Q42 165 50 165 L59 166 L59 176 L40 176 Q38 173 41 170Z\" fill=\"#f6b400\" stroke=\"#c98a00\" stroke-width=\".8\"/><path d=\"M61 166 L70 165 Q78 165 79 170 Q81 173 79 176 L61 176Z\" fill=\"#f6b400\" stroke=\"#c98a00\" stroke-width=\".8\"/><path d=\"M42 174 h16 M62 174 h16\" stroke=\"#fff6cc\" stroke-width=\"1.6\"/><path d=\"M28 90 Q60 80 92 90 L104 158 Q90 164 82 150 L60 106 L38 150 Q30 164 16 158Z\" fill=\"url(#cyRobe)\" stroke=\"#e0a800\" stroke-width=\"1\"/><path d=\"M34 100 Q30 126 22 148 M86 100 Q90 126 98 148\" stroke=\"#fff3a6\" stroke-width=\"3\" fill=\"none\" opacity=\".6\"/><path d=\"M46 90 L60 106 L74 90 L74 136 L46 136Z\" fill=\"#fdfdf9\"/><path d=\"M49 90 L60 103 L71 90\" fill=\"none\" stroke=\"#dcdcd0\" stroke-width=\"2\"/><rect x=\"46\" y=\"115\" width=\"28\" height=\"5\" fill=\"#fdfdf9\" stroke=\"#d6d6ca\" stroke-width=\".8\"/><path d=\"M28 96 Q10 118 16 140 L32 142 Q28 122 38 102Z\" fill=\"url(#cyRobe)\" stroke=\"#e0a800\" stroke-width=\"1\"/><g><path d=\"M20 140 Q14 150 10 164 M24 142 Q22 154 20 168 M28 142 Q30 152 32 164\" stroke=\"#6b4a2a\" stroke-width=\"1\" fill=\"none\"/><use href=\"#fl\" x=\"12\" y=\"146\" class=\"bloom\"/><use href=\"#fl\" x=\"18\" y=\"150\"/><use href=\"#fl\" x=\"24\" y=\"147\" class=\"bloom\"/><use href=\"#fl\" x=\"30\" y=\"152\"/><use href=\"#fl\" x=\"10\" y=\"156\"/><use href=\"#fl\" x=\"17\" y=\"160\" class=\"bloom\"/><use href=\"#fl\" x=\"25\" y=\"158\"/><use href=\"#fl\" x=\"32\" y=\"162\"/><use href=\"#fl\" x=\"12\" y=\"166\"/><use href=\"#fl\" x=\"21\" y=\"168\" class=\"bloom\"/><use href=\"#yarn\" x=\"20\" y=\"143\"/><use href=\"#yarn\" x=\"27\" y=\"145\"/><path d=\"M14 152 l-3 2 M30 157 l3 1 M20 163 l-2 3\" stroke=\"#5aa24a\" stroke-width=\"1.4\" stroke-linecap=\"round\"/><use href=\"#fl\" x=\"16\" y=\"172\" class=\"fall\"/></g><g class=\"staff\"><path d=\"M97 102 Q106 116 94 128\" stroke=\"url(#cyRobe)\" stroke-width=\"13\" fill=\"none\" stroke-linecap=\"round\"/><rect x=\"93\" y=\"18\" width=\"7\" height=\"160\" rx=\"3.5\" fill=\"#ffd21f\" stroke=\"#e0a800\" stroke-width=\".8\" transform=\"rotate(7 96 100)\"/><path d=\"M92 30 l9 5 M91 46 l9 5 M90 62 l9 5 M89 78 l9 5\" stroke=\"#e8b000\" stroke-width=\"1.4\" transform=\"rotate(7 96 100)\"/><circle cx=\"95\" cy=\"122\" r=\"5.5\" fill=\"url(#cySkin)\"/><path d=\"M99 128 Q106 140 100 152 Q108 160 102 172\" stroke=\"#6b4a2a\" stroke-width=\"1\" fill=\"none\"/><use href=\"#fl\" x=\"101\" y=\"130\" class=\"bloom\"/><use href=\"#fl\" x=\"106\" y=\"137\"/><use href=\"#fl\" x=\"99\" y=\"141\"/><use href=\"#fl\" x=\"105\" y=\"147\" class=\"bloom\"/><use href=\"#fl\" x=\"100\" y=\"153\"/><use href=\"#fl\" x=\"107\" y=\"159\"/><use href=\"#fl\" x=\"101\" y=\"165\" class=\"bloom\"/><use href=\"#fl\" x=\"106\" y=\"171\"/><use href=\"#yarn\" x=\"103\" y=\"143\"/><use href=\"#yarn\" x=\"98\" y=\"158\"/><use href=\"#fl\" x=\"92\" y=\"24\" class=\"bloom\"/><use href=\"#fl\" x=\"97\" y=\"48\"/><use href=\"#fl\" x=\"91\" y=\"56\" class=\"bloom\"/><use href=\"#fl\" x=\"96\" y=\"70\"/><use href=\"#fl\" x=\"90\" y=\"80\"/><use href=\"#fl\" x=\"97\" y=\"92\" class=\"bloom\"/><use href=\"#fl\" x=\"91\" y=\"104\"/><path d=\"M94 46 Q90 62 95 76 Q90 90 94 106\" stroke=\"#6b4a2a\" stroke-width=\".8\" fill=\"none\"/><use href=\"#yarn\" x=\"94\" y=\"62\"/><use href=\"#yarn\" x=\"93\" y=\"86\"/><use href=\"#fl\" x=\"99\" y=\"30\"/><use href=\"#fl\" x=\"94\" y=\"36\"/><path d=\"M103 134 l4 -2 M98 150 l-4 1 M104 162 l4 1\" stroke=\"#5aa24a\" stroke-width=\"1.4\" stroke-linecap=\"round\"/></g><path d=\"M54 76 L66 76 L65 92 L55 92Z\" fill=\"url(#cySkin)\"/><path d=\"M36 50 Q35 72 46 82 Q54 90 60 90 Q66 90 74 82 Q85 72 84 50 Q83 28 60 28 Q37 28 36 50Z\" fill=\"#c68a5c\"/><ellipse cx=\"84\" cy=\"58\" rx=\"4\" ry=\"6\" fill=\"#b87a4e\"/><path d=\"M33 54 Q30 30 44 22 L42 14 L52 20 L55 10 L62 19 L70 11 L71 21 L81 16 L79 26 Q90 34 87 54 Q84 42 76 38 L74 44 L68 36 L63 44 L58 36 L52 44 L48 37 Q38 42 33 54Z\" fill=\"#1b1310\"/><path d=\"M46 24 L50 30 M60 20 L60 27 M72 22 L69 29\" stroke=\"#3a2a22\" stroke-width=\"1.2\"/><path d=\"M65 54 Q72 50 79 54\" stroke=\"#1b1310\" stroke-width=\"2.4\" fill=\"none\" stroke-linecap=\"round\"/><g class=\"blink\"><path d=\"M64 63 Q64 56 71.5 56 Q79 56 79 63 Q79 70 71.5 70 Q64 70 64 63Z\" fill=\"#fff\"/><ellipse cx=\"71\" cy=\"63.5\" rx=\"5\" ry=\"6\" fill=\"#5a3218\"/><ellipse cx=\"71\" cy=\"64.5\" rx=\"3\" ry=\"3.8\" fill=\"#1a0e08\"/><circle cx=\"73\" cy=\"61\" r=\"1.8\" fill=\"#fff\"/><circle cx=\"69\" cy=\"66.5\" r=\".9\" fill=\"#fff\"/><path d=\"M63.5 58 Q71.5 53.5 80 58\" stroke=\"#1b1310\" stroke-width=\"2\" fill=\"none\" stroke-linecap=\"round\"/></g><path d=\"M59 70 Q61 74 63 72\" stroke=\"#8a5534\" stroke-width=\"1.4\" fill=\"none\" stroke-linecap=\"round\"/><path d=\"M58 80 Q64 84 70 79\" stroke=\"#7a3328\" stroke-width=\"2\" fill=\"none\" stroke-linecap=\"round\"/><ellipse cx=\"76\" cy=\"73\" rx=\"4\" ry=\"2.2\" fill=\"#e08070\" opacity=\".35\"/><g><path d=\"M61 22 L61 92 Q48 92 38 82 Q27 66 29 46 Q32 26 50 20Z\" fill=\"#f2bb12\" stroke=\"#d09a00\" stroke-width=\".8\"/><use href=\"#yarn\" x=\"44\" y=\"30\"/><use href=\"#yarn\" x=\"51\" y=\"27\"/><use href=\"#yarn\" x=\"57\" y=\"33\"/><use href=\"#yarn\" x=\"40\" y=\"38\"/><use href=\"#yarn\" x=\"48\" y=\"37\"/><use href=\"#yarn\" x=\"56\" y=\"43\"/><use href=\"#yarn\" x=\"38\" y=\"47\"/><use href=\"#yarn\" x=\"46\" y=\"46\"/><use href=\"#yarn\" x=\"54\" y=\"52\"/><use href=\"#yarn\" x=\"40\" y=\"56\"/><use href=\"#yarn\" x=\"48\" y=\"56\"/><use href=\"#yarn\" x=\"56\" y=\"61\"/><use href=\"#yarn\" x=\"42\" y=\"65\"/><use href=\"#yarn\" x=\"50\" y=\"66\"/><use href=\"#yarn\" x=\"57\" y=\"71\"/><use href=\"#yarn\" x=\"45\" y=\"74\"/><use href=\"#yarn\" x=\"53\" y=\"77\"/><use href=\"#yarn\" x=\"50\" y=\"84\"/><use href=\"#yarn\" x=\"58\" y=\"82\"/><use href=\"#fl\" x=\"36\" y=\"26\" class=\"bloom\"/><use href=\"#fl\" x=\"30\" y=\"36\"/><use href=\"#fl\" x=\"29\" y=\"50\" class=\"bloom\"/><use href=\"#fl\" x=\"31\" y=\"62\"/><use href=\"#fl\" x=\"35\" y=\"74\" class=\"bloom\"/><use href=\"#fl\" x=\"42\" y=\"84\"/><use href=\"#fl\" x=\"52\" y=\"21\"/><use href=\"#fl\" x=\"24\" y=\"44\"/><use href=\"#fl\" x=\"26\" y=\"58\" class=\"bloom\"/><path d=\"M33 30 l-5 -4 M26 52 l-5 1 M30 70 l-4 3\" stroke=\"#5aa24a\" stroke-width=\"1.5\" stroke-linecap=\"round\"/></g></g></svg>";
+const CAYDEN_LINES=[["You got this, cuz!","いけるよ、いとこ！"],["Every mission makes your English stronger.","ミッションごとに英語が強くなる！"],["Mistakes are part of the adventure.","まちがいも冒険の一部だよ。"],["I’m proud of you, TK!","TK、誇りに思うよ！"],["Say it out loud. You sound great!","声に出して！いい感じ！"]];
+const TK_SVG = "<svg class=\"tk\" viewBox=\"0 0 120 170\" role=\"img\" aria-label=\"TK\"><ellipse cx=\"60\" cy=\"165\" rx=\"34\" ry=\"4\" fill=\"rgba(0,0,0,.25)\"/><path d=\"M24 170 Q24 118 60 112 Q96 118 96 170Z\" fill=\"#f4f1ea\" stroke=\"#d8d2c4\" stroke-width=\"1.5\"/><path d=\"M50 113 L60 126 L70 113\" fill=\"#f0913a\"/><path d=\"M60 126 L60 170\" stroke=\"#2a2a2a\" stroke-width=\"2.2\"/><path d=\"M46 114 Q52 122 60 126 Q68 122 74 114\" fill=\"none\" stroke=\"#d8d2c4\" stroke-width=\"3\"/><g class=\"wave\"><path d=\"M90 128 Q104 118 104 100\" stroke=\"#f4f1ea\" stroke-width=\"13\" fill=\"none\" stroke-linecap=\"round\"/><circle cx=\"104\" cy=\"95\" r=\"7\" fill=\"#c98a5c\"/></g><path d=\"M30 130 Q20 146 24 160\" stroke=\"#f4f1ea\" stroke-width=\"13\" fill=\"none\" stroke-linecap=\"round\"/><g class=\"head\"><rect x=\"52\" y=\"96\" width=\"16\" height=\"18\" rx=\"6\" fill=\"#bf7f52\"/><ellipse cx=\"30\" cy=\"66\" rx=\"6\" ry=\"9\" fill=\"#c98a5c\"/><ellipse cx=\"90\" cy=\"66\" rx=\"6\" ry=\"9\" fill=\"#c98a5c\"/><path d=\"M31 58 Q30 96 60 102 Q90 96 89 58 Q88 30 60 30 Q32 30 31 58Z\" fill=\"#cf9264\"/><g class=\"hair\" fill=\"#1d1612\"><path d=\"M28 62 Q22 34 40 22 Q48 10 62 14 Q70 6 80 14 Q96 20 94 40 Q98 50 92 62 Q88 44 80 42 Q74 50 62 46 Q66 54 52 52 Q44 56 40 48 Q34 52 32 64Z\"/><path d=\"M44 16 Q46 4 54 8 M66 12 Q72 0 78 8 M58 12 Q58 2 64 6\" stroke=\"#1d1612\" stroke-width=\"4\" stroke-linecap=\"round\" fill=\"none\"/><path d=\"M40 48 Q44 40 50 44 M56 50 Q60 42 66 46 M70 46 Q76 38 80 44\" stroke=\"#3a2c24\" stroke-width=\"1.5\" fill=\"none\" opacity=\".8\"/></g><path d=\"M42 57 Q48 54 54 57 M66 57 Q72 54 78 57\" stroke=\"#1d1612\" stroke-width=\"2.6\" fill=\"none\" stroke-linecap=\"round\"/><g class=\"blink\"><ellipse cx=\"48\" cy=\"65\" rx=\"5.5\" ry=\"4.4\" fill=\"#fff\"/><ellipse cx=\"72\" cy=\"65\" rx=\"5.5\" ry=\"4.4\" fill=\"#fff\"/><circle cx=\"49\" cy=\"65.5\" r=\"3.6\" fill=\"#1b120c\"/><circle cx=\"71\" cy=\"65.5\" r=\"3.6\" fill=\"#1b120c\"/><circle cx=\"50.3\" cy=\"64\" r=\"1.2\" fill=\"#fff\"/><circle cx=\"72.3\" cy=\"64\" r=\"1.2\" fill=\"#fff\"/></g><circle cx=\"44\" cy=\"72\" r=\"1\" fill=\"#6b4630\"/><path d=\"M58 70 Q60 78 62 70\" stroke=\"#a4683f\" stroke-width=\"1.8\" fill=\"none\" stroke-linecap=\"round\"/><ellipse cx=\"41\" cy=\"79\" rx=\"5\" ry=\"2.6\" fill=\"#d9725f\" opacity=\".3\"/><ellipse cx=\"79\" cy=\"79\" rx=\"5\" ry=\"2.6\" fill=\"#d9725f\" opacity=\".3\"/><path d=\"M51 85 Q60 91 70 84\" stroke=\"#7a3a2c\" stroke-width=\"2.4\" fill=\"none\" stroke-linecap=\"round\"/></g></svg>";
+const LEVELS=[[0,"Rookie","ルーキー"],[200,"Explorer","たんけん家"],[500,"Navigator","ナビゲーター"],[900,"Captain","キャプテン"],[1400,"Legend","レジェンド"]];
+const PARTS=[["words","🔤","Words","単語"],["listen","🎧","Listen","リスニング"],["story","📖","Story","ストーリー"],["build","🧩","Build","文を作ろう"],["grammar","✏️","Grammar","文法"]];
+
+/* ============ STATE ============ */
+const KEY="tk.englishquest.v1";
+let S={xp:0,voice:true,hintMode:"fade",streakRight:0,done:{},badges:[],days:{},seconds:0,minutes:0,words:[],stats:{}};
+try{Object.assign(S,JSON.parse(localStorage.getItem(KEY)||"{}"))}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function dayKey(d=new Date()){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function D(k=dayKey()){if(!S.days||typeof S.days!=="object")S.days={};return S.days[k]||(S.days[k]={sec:0,xp:0,right:0,tries:0,words:[]})}
+function stat(mid,part){S.stats[mid]=S.stats[mid]||{};return S.stats[mid][part]||(S.stats[mid][part]={right:0,tries:0})}
+
+/* ============ ENGINE (Nana's voice + sounds) ============ */
+const VOICE={clips:{},files:{},bufs:{},ready:false};
+async function loadVoicePack(){
+  try{
+    const j=await (await fetch("voice/clips.json")).json();
+    VOICE.clips=j.clips;VOICE.files=j.files;
+    const c=ctx();if(!c)return;
+    await Promise.all(Object.entries(j.files).map(async([name,url])=>{
+      const ab=await (await fetch(url)).arrayBuffer();
+      VOICE.bufs[name]=await new Promise((ok,no)=>{const p=c.decodeAudioData(ab,ok,no);if(p&&p.then)p.then(ok,no)});
+    }));
+    VOICE.ready=true;
+  }catch(e){VOICE.ready=false}
+}
+function vnorm(t){return String(t).toLowerCase().replace(/[’‘]/g,"'").replace(/[^a-z0-9' ]/g," ").replace(/\s+/g," ").trim()}
+function vsents(t){
+  const out=[];let cur="";
+  for(let i=0;i<t.length;i++){
+    cur+=t[i];
+    if(".!?".includes(t[i])){
+      while(i+1<t.length&&"\"”’'".includes(t[i+1])){i++;cur+=t[i]}
+      if(i+1===t.length||t[i+1]===" "){out.push(cur.trim());cur=""}
+    }
+  }
+  if(cur.trim())out.push(cur.trim());
+  return out;
+}
+/* Returns the list of Nana clips for a line (or list of lines), or null if any piece is missing. */
+function clipSeq(parts){
+  if(!VOICE.ready)return null;
+  const seq=[];
+  for(const p of (Array.isArray(parts)?parts:[parts])){
+    const whole=VOICE.clips[vnorm(p)];
+    if(whole){seq.push(whole);continue}
+    for(const s of vsents(p)){const c=VOICE.clips[vnorm(s)];if(!c)return null;seq.push(c)}
+  }
+  return seq.length?seq:null;
+}
+let vSources=[],vTimer=null;
+function stopClips(){vSources.forEach(s=>{try{s.onended=null;s.stop()}catch(e){}});vSources=[];clearTimeout(vTimer)}
+function playSeq(seq,onend,gap=.28){
+  const c=ctx();let t=c.currentTime+.05;
+  seq.forEach(([f,start,dur],n)=>{
+    const src=c.createBufferSource();src.buffer=VOICE.bufs[f];src.connect(c.destination);
+    src.start(t,start,dur);t+=dur+gap;vSources.push(src);
+    if(n===seq.length-1)src.onended=()=>{vSources=[];onend&&onend()};
+  });
+}
+
+let voices=[];
+function loadVoices(){try{voices=speechSynthesis.getVoices()}catch(e){}}
+try{loadVoices();speechSynthesis.onvoiceschanged=loadVoices}catch(e){}
+function pickVoice(){
+  const en=voices.filter(v=>/^en/i.test(v.lang));
+  const q=v=>/premium/i.test(v.name)?3:/enhanced|natural|neural|online/i.test(v.name)?2:0;
+  const pref=["Ava","Zoe","Samantha","Allison","Susan","Nicky","Karen","Moira","Tessa","Aria","Jenny","Google US English"];
+  for(const tier of [3,2]){for(const n of pref){const v=en.find(v=>v.name.includes(n)&&q(v)===tier);if(v)return v}const any=en.find(v=>q(v)===tier&&/en[-_]US/i.test(v.lang));if(any)return any}
+  for(const n of pref){const v=en.find(v=>v.name.includes(n));if(v)return v}
+  return voices.find(v=>/^en[-_]US/i.test(v.lang))||voices.find(v=>/^en/i.test(v.lang))||null;
+}
+let audioEl=null;
+function stopTalking(){try{speechSynthesis.cancel()}catch(e){} if(audioEl){audioEl.pause();audioEl=null} stopClips()}
+/* say() takes a line or a list of lines. It plays Nana's recordings when every piece is recorded,
+   and falls back to the device's reading voice for anything new (like made-up silly words). */
+function say(text,{rate=.88,onword,onend}={}){
+  if(!S.voice){onend&&onend();return}
+  stopTalking();
+  const seq=clipSeq(text);
+  if(seq){try{playSeq(seq,onend);return}catch(e){}}
+  if(Array.isArray(text))text=text.join(" ");
+  try{
+    const u=new SpeechSynthesisUtterance(text);const v=pickVoice();if(v)u.voice=v;
+    u.rate=Math.min(1,rate+.05);u.pitch=1;
+    if(onword)u.onboundary=e=>{if(e.name==="word"||e.charIndex!==undefined)onword(e.charIndex)};
+    u.onend=()=>onend&&onend();
+    speechSynthesis.speak(u);
+  }catch(e){onend&&onend()}
+}
+let actx=null;
+function ctx(){if(!actx){try{actx=new (window.AudioContext||window.webkitAudioContext)()}catch(e){}}if(actx&&actx.state==="suspended")actx.resume();return actx}
+function tone(f,t0,d,vol=.12,type="sine"){const c=ctx();if(!c)return;const o=c.createOscillator(),g=c.createGain();o.type=type;o.frequency.value=f;g.gain.setValueAtTime(0,c.currentTime+t0);g.gain.linearRampToValueAtTime(vol,c.currentTime+t0+.02);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+t0+d);o.connect(g).connect(c.destination);o.start(c.currentTime+t0);o.stop(c.currentTime+t0+d+.05)}
+function chime(){[1047,1319,1568,2093].forEach((f,i)=>tone(f,i*.08,.5,.08,"triangle"))}
+function boop(){tone(330,0,.18,.08,"sine");tone(262,.12,.25,.07,"sine")}
+let musicTimer=null;
+const MUSIC=[523,587,659,784,880,784,659,587,523,659,784,1047,880,784,659,587];
+function startMusic(){stopMusic();let i=0;musicTimer=setInterval(()=>{tone(MUSIC[i%MUSIC.length],0,1.1,.035,"triangle");if(i%4===0)tone(MUSIC[i%MUSIC.length]/2,0,1.6,.025,"sine");i++},520)}
+function stopMusic(){clearInterval(musicTimer);musicTimer=null}
+
+
+const cv=document.getElementById("confetti"),cx2=cv.getContext("2d");let bits=[];
+function celebrate(){
+  if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+  cv.width=innerWidth;cv.height=innerHeight;
+  const cols=["#f4b23c","#e8588a","#5b1f96","#3d7fd6","#2f9e7a"];
+  for(let i=0;i<90;i++)bits.push({x:innerWidth/2,y:innerHeight/2.4,vx:(Math.random()-.5)*14,vy:Math.random()*-12-3,r:Math.random()*6+4,c:cols[i%5],a:1,s:Math.random()<.4});
+  if(bits.length<=90)requestAnimationFrame(drawBits);
+}
+function drawBits(){cx2.clearRect(0,0,cv.width,cv.height);bits.forEach(b=>{b.x+=b.vx;b.y+=b.vy;b.vy+=.35;b.a-=.012;cx2.globalAlpha=Math.max(b.a,0);cx2.fillStyle=b.c;if(b.s){cx2.font=b.r*3+"px serif";cx2.fillText("★",b.x,b.y)}else cx2.fillRect(b.x,b.y,b.r,b.r*1.6)});bits=bits.filter(b=>b.a>0&&b.y<cv.height+40);if(bits.length)requestAnimationFrame(drawBits);else cx2.clearRect(0,0,cv.width,cv.height)}
+
+
+function sayJa(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="ja-JP";const v=speechSynthesis.getVoices().find(v=>/^ja/i.test(v.lang));if(v)u.voice=v;u.rate=.9;speechSynthesis.speak(u)}catch(e){}}
+
+/* ============ HELPERS ============ */
+const app=document.getElementById("app");
+const $=(s,r=document)=>r.querySelector(s);
+function h(html){app.innerHTML=html;window.scrollTo(0,0)}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+function toast(m){const t=document.createElement("div");t.className="toast";t.textContent=m;document.body.appendChild(t);setTimeout(()=>t.remove(),2600)}
+function level(xp=S.xp){let L=LEVELS[0],i=0;LEVELS.forEach((l,j)=>{if(xp>=l[0]){L=l;i=j}});const next=LEVELS[i+1];return{i,name:L[1],ja:L[2],from:L[0],to:next?next[0]:null,nextName:next?next[1]:null}}
+function streakDays(){let n=0;for(let i=0;i<400;i++){const d=new Date();d.setDate(d.getDate()-i);const v=S.days&&S.days[dayKey(d)];if(v&&v.sec>=60)n++;else if(i>0)break}return n}
+
+/* Hints fade: shown at first; after 3 first-try answers in a row they hide behind a ヒント button. */
+function jaOn(){return S.hintMode!=="off"}
+function optHtml(q,j){return esc(q.c[j])+(q.cj&&q.cj[j]&&jaOn()?`<span class="oja"> / ${esc(q.cj[j])}</span>`:"")}
+function qjHtml(q){return q.qj&&jaOn()?`<p class="qja ja">${esc(q.qj)}</p>`:""}
+function hintsVisible(){return S.hintMode==="on"||(S.hintMode==="fade"&&S.streakRight<3)}
+function hintHtml(ja,id){
+  if(!ja||S.hintMode==="off")return "";
+  if(hintsVisible())return `<div class="hint ja">💡 ${esc(ja)} <button aria-label="Japanese audio" data-ja="${esc(ja)}">🔈</button></div>`;
+  return `<button class="hintbtn ja" data-showhint="${id}">ヒント 💡</button><div class="hint ja" id="h_${id}" hidden>💡 ${esc(ja)} <button aria-label="Japanese audio" data-ja="${esc(ja)}">🔈</button></div>`;
+}
+function wireHints(root=app){
+  root.querySelectorAll("[data-showhint]").forEach(b=>b.onclick=()=>{b.hidden=true;const el=$("#h_"+b.dataset.showhint);if(el)el.hidden=false});
+  root.querySelectorAll("[data-ja]").forEach(b=>b.onclick=e=>{e.stopPropagation();sayJa(b.dataset.ja)});
+}
+
+let combo=0;
+const CAYDEN_CHEERS=["That’s my cousin!","Let’s go, TK!","Unstoppable!"];
+function sayCayden(t,now){if(!S.voice)return;const c=VOICE.ready&&VOICE.clips["cayden|"+vnorm(t)];if(!c)return;
+  if(now){stopTalking();try{playSeq([c])}catch(e){};return}
+  let tries=0;const go=()=>{const busy=vSources.length||(window.speechSynthesis&&speechSynthesis.speaking);if(busy&&tries++<25){setTimeout(go,200);return}if(!busy){try{playSeq([c])}catch(e){}}};setTimeout(go,300)}
+const CHEERS=["Yes! 🎉","I got it!","Awesome! ⭐","Nailed it!","Too easy! 😎","Keep going! 💪"];
+function cheer(text){const cyLine=(!text&&combo>=3)?pick(CAYDEN_CHEERS):null;if(cyLine)sayCayden(cyLine);document.querySelectorAll(".cheerpop").forEach(x=>x.remove());const c=document.createElement("div");c.className="cheerpop";c.innerHTML=`<div class="say">${esc(cyLine?cyLine+" 🔥 x"+combo:(text||pick(CHEERS)))}</div>${(combo>=3||/BADGE|RECORD|CHAMPION/.test(text||""))?`<span class="cypop">${CAYDEN_SVG}</span>`:`<img class="tkpop" src="img/tk-anime.png" alt="">`}`;document.body.appendChild(c);setTimeout(()=>c.remove(),2000)}
+function comboTag(){return combo>=2?`<span class="combo">🔥 Combo x${combo}</span>`:""}
+/* Scoring: the tapped answer is compared with the correct answer by its ORIGINAL index, never by screen position. */
+function award(mid,part,firstTry){
+  const st=stat(mid,part);st.tries++;D().tries++;
+  let gain=0;
+  if(firstTry){st.right++;D().right++;S.streakRight++;combo++;gain=10+Math.min(combo-1,5)*2}else{S.streakRight=0;combo=0;gain=5}
+  addXP(gain);cheer();return gain;
+}
+function addXP(n){
+  const before=level().i;S.xp+=n;D().xp+=n;save();
+  const after=level();
+  if(after.i>before){setTimeout(()=>{celebrate();chime();toast(`⭐ Level up! ${after.name} · ${after.ja}`);say("Level up!")},900)}
+}
+function markDone(mid,part){
+  S.done[mid]=S.done[mid]||{};const was=!!S.done[mid][part];S.done[mid][part]=true;
+  if(!was)addXP(20);
+  const all=PARTS.every(p=>S.done[mid][p[0]]);
+  if(all&&!S.badges.includes(mid)){S.badges.push(mid);S.souvenirs=S.souvenirs||[];if(!S.souvenirs.includes(mid))S.souvenirs.push(mid);addXP(50);save();return true}
+  save();return false;
+}
+
+/* ============ PLAY TIMER ============ */
+let lastTick=Date.now();
+setInterval(()=>{if(document.hidden){lastTick=Date.now();return}const now=Date.now(),dt=Math.min(now-lastTick,5000)/1000;S.seconds+=dt;D().sec+=dt;lastTick=now;const m=Math.floor(S.seconds/60);if(m!==S.minutes){S.minutes=m;save()}},1000);
+
+/* ============ NAV ============ */
+const ROUTES={home,map,mission,family,lightning,daily,boss,crew,suitcase};
+let gateOk=false;
+function go(r,...a){if(r!=="family")gateOk=false;if(r==="family"&&!gateOk)return gate(()=>go("family"));stopTalking();$("#homeBtn").hidden=(r==="home");(ROUTES[r]||home)(...a)}
+$("#homeBtn").onclick=()=>go("home");
+$("#voiceBtn").onclick=e=>{S.voice=!S.voice;save();e.currentTarget.setAttribute("aria-pressed",String(S.voice));if(!S.voice)stopTalking()};
+$("#voiceBtn").setAttribute("aria-pressed",String(S.voice));
+function gate(then){
+  const a=6+Math.floor(Math.random()*4),b=5+Math.floor(Math.random()*4);
+  const o=document.createElement("div");o.className="overlay";
+  o.innerHTML=`<div class="panel"><div style="font-size:44px">🔐</div><h2 style="margin:4px 0">Family only · 家族用</h2><p>What is ${a} × ${b}?</p><input id="gA" inputmode="numeric" autocomplete="off" style="font:inherit;font-size:1.4rem;width:120px;text-align:center;padding:8px;border-radius:12px;border:2px solid var(--line);-webkit-user-select:text;user-select:text"><div class="row" style="justify-content:center;margin-top:12px"><button class="btn" id="gGo">Open</button><button class="btn soft" id="gNo">Back</button></div><p class="small" id="gM" style="min-height:1.4em"></p></div>`;
+  document.body.appendChild(o);const inp=$("#gA",o);setTimeout(()=>inp.focus(),50);
+  const t=()=>{if(+inp.value===a*b){gateOk=true;o.remove();then()}else{$("#gM",o).textContent="Not quite.";inp.value=""}};
+  $("#gGo",o).onclick=t;inp.onkeydown=e=>{if(e.key==="Enter")t()};$("#gNo",o).onclick=()=>o.remove();
+}
+
+/* ============ HOME ============ */
+function home(){
+  const L=level(),pct=L.to?Math.round((S.xp-L.from)/(L.to-L.from)*100):100;
+  const nb=MISSIONS.map(m=>`<span title="${esc(m.title)}" style="font-size:22px;${S.badges.includes(m.id)?"":"filter:grayscale(1);opacity:.35"}">${m.icon}</span>`).join(" ");
+  h(`<section class="cover"><img src="img/tk-cover.jpg" alt="TK's English Adventure Quest: Look sharp. Think fast. Keep learning. TK on an Okinawan harbor adventure."><button class="coverbtn" id="start" aria-label="Start the quest"></button></section>
+  <div class="panel xpbox"><div class="tkhello"><img src="img/tk-anime.png" alt=""><span>Hi, I'm TK! Ready for today's mission? · 今日のミッション、準備はいい？</span></div>
+      <div class="top"><span>⭐ ${esc(L.name)} · <span class="ja">${esc(L.ja)}</span></span><span>${S.xp} XP${L.to?` / ${L.to}`:""}</span></div><div class="meter"><i style="width:${pct}%"></i></div>${L.to?`<div class="small" style="margin-top:4px">${L.to-S.xp} XP to ${esc(L.nextName)}</div>`:""}
+      <div class="chips"><span class="chip">🔥 ${streakDays()} day streak</span><span class="chip">🏅 ${nb}</span></div>
+  </div>
+  <div class="row homebtns"><button class="btn sun" id="toMap">🗺️ Story Map</button><button class="btn soft" id="toCrew">👨‍👩‍👧‍👦 Family Crew</button><button class="btn soft" id="toSuit">🧳 Souvenirs (${(S.souvenirs||[]).length}/${MISSIONS.length})</button></div>
+  ${caydenCard()}
+  <h2 style="margin-top:18px">Challenges · <span class="ja">チャレンジ</span></h2>
+  ${challengeButtons()}
+  <div class="row" style="justify-content:space-between;margin-top:14px">
+    <p class="small" style="margin:0">Japanese hints fade as you get stronger. · 強くなるとヒントが消えていくよ。</p>
+    <button class="pill" id="fam">🔐 Family</button>
+  </div>`);
+  $("#start").onclick=()=>go("map");$("#toMap").onclick=()=>go("map");$("#toCrew").onclick=()=>go("crew");$("#toSuit").onclick=()=>go("suitcase");{const cy=$(".cousin");if(cy)cy.onclick=()=>sayCayden(cy.dataset.cy,true)}$("#fam").onclick=()=>go("family");wireChallenges();
+  say(S.xp>0?"Welcome back, TK! Ready for your next mission?":"Let's start the quest!");
+}
+
+/* ============ COUSIN CAYDEN ============ */
+function caydenCard(){const l=pick(CAYDEN_LINES);return `<div class="cousin" role="button" tabindex="0" data-cy="${esc(l[0])}"><span class="cyfig">${CAYDEN_SVG}</span><span><b>Cousin Cayden</b><span class="bubble">“${esc(l[0])}”${S.hintMode!=="off"?`<span class="ja">${esc(l[1])}</span>`:""}</span></span></div>`}
+
+/* ============ QUEST MAP ============ */
+function unlocked(i){return i===0||S.badges.includes(MISSIONS[i-1].id)}
+function map(){
+  const nextIdx=MISSIONS.findIndex(m=>!S.badges.includes(m.id));
+  h(`<h2>Story Map · <span class="ja">ストーリーマップ</span></h2><p class="sub">Finish all five parts of a chapter to earn its souvenir and unlock the next stop. <span class="ja">5つクリアでおみやげ＆次のステージ！</span></p>
+  <div class="map">
+    <div class="end"><span>🏝️</span>Okinawa · 沖縄</div>
+    ${MISSIONS.map((m,i)=>{const d=S.done[m.id]||{},open=unlocked(i),got=S.badges.includes(m.id);return `<div class="path"></div><button class="node ${i===nextIdx?"next":""} ${open?"":"lockd"}" data-m="${i}"><span class="ic" style="background:${m.color}">${open?m.icon:"🔒"}</span><span><b>${i+1}. ${esc(m.title)}</b><span class="place">📍 ${esc(m.place)}</span><span class="ja">${esc(m.ja)}</span><span class="dots">${PARTS.map(p=>`<i class="${d[p[0]]?"on":""}"></i>`).join("")}</span></span><span class="badge ${got?"got":""}">${m.souvenir.icon}</span></button>`}).join("")}
+    <div class="path"></div><div class="end"><span>🏆</span>American Adventure Champion</div>
+  </div>`);
+  app.querySelectorAll("[data-m]").forEach(b=>b.onclick=()=>{const i=+b.dataset.m;if(!unlocked(i)){toast("Finish the chapter before this one to unlock it! · 前の章をクリアしよう");return}go("mission",i)});
+}
+
+/* ============ FAMILY CREW ============ */
+const CREW=[
+ {art:()=>`<img src="img/tk-anime.png" alt="">`,name:"TK",role:"The hero. Suave, funny, and always cool under pressure.",ja:"主人公。クールでおもしろい。"},
+ {art:()=>NANA_SVG,name:"Nana",role:"Your biggest cheerleader. She believes in you every step of the way.",ja:"ナナ（おばあちゃん）。いちばんの応援団。"},
+ {art:()=>PAPAW_SVG,name:"Papaw",role:"Tells the best stories and always has a plan.",ja:"パパウ（おじいちゃん）。話がうまくて、いつも頼れる。"},
+ {art:()=>CAYDEN_SVG,name:"Cayden",role:"Your oldest cousin. A creative performer who makes his own costumes.",ja:"いちばん年上のいとこ。衣装を手作りするアーティスト。"},
+ {art:()=>`<img src="img/rhylein-face.png" alt="">`,name:"RhyLein",role:"The funniest cousin. Her jokes can stop a battle.",ja:"いちばんおもしろいいとこ。"},
+ {art:()=>`<img src="img/leilani-face.png" alt="">`,name:"Leilani",role:"The kindest cousin. She notices how everyone feels.",ja:"いちばんやさしいいとこ。"},
+ {art:()=>CORTAY_SVG,name:"CorTay",role:"The littlest cousin. Brave, giggly, and full of energy.",ja:"いちばん小さいいとこ。元気いっぱい。"}];
+function crew(){
+  h(`<h2>Family Crew · <span class="ja">ファミリー・クルー</span></h2><p class="sub">Your story companions on the American Adventure.</p>
+    <div class="crew">${CREW.map(c=>`<div class="crewcard"><span class="crewart">${c.art()}</span><span><b>${esc(c.name)}</b><span>${esc(c.role)}</span>${S.hintMode!=="off"?`<span class="ja">${esc(c.ja)}</span>`:""}</span></div>`).join("")}</div>`);
+}
+
+/* ============ SOUVENIR SUITCASE ============ */
+function suitcase(){
+  const got=S.souvenirs||[];const champ=got.length===MISSIONS.length;
+  h(`<h2>🧳 Souvenir Suitcase · <span class="ja">おみやげ</span></h2><p class="sub">Earn one souvenir for every chapter you finish. Collect all ${MISSIONS.length} to become the American Adventure Champion!</p>
+    <div class="suit">${MISSIONS.map(m=>{const has=got.includes(m.id);return `<div class="souv ${has?"has":""}"><span class="si">${has?m.souvenir.icon:"❔"}</span><b>${has?esc(m.souvenir.name):"???"}</b><small>${has?esc(m.souvenir.desc):"Finish “"+esc(m.title)+"” to unlock"}</small>${has&&S.hintMode!=="off"?`<small class="ja">${esc(m.souvenir.ja)}</small>`:""}</div>`}).join("")}</div>
+    <div class="panel awards"><h3>🏅 Awards</h3>
+      <p>${got.length>=1?"✅":"⬜"} First Souvenir &nbsp; ${got.length>=3?"✅":"⬜"} Halfway Hero &nbsp; ${champ?"✅":"⬜"} American Adventure Champion</p>
+      <p>${(S.bossWins||0)>0?"✅":"⬜"} Dragon Slayer &nbsp; ${((S.best||{}).lightning||0)>=10?"✅":"⬜"} Lightning Fast (10+) &nbsp; ${(S.dailyCount||0)>=5?"✅":"⬜"} Daily Grinder (5 days)</p></div>`);
+}
+
+/* ============ MISSION ============ */
+function mission(mi){
+  const m=MISSIONS[mi],d=S.done[m.id]||{};
+  h(`<h2>${m.icon} ${esc(m.title)}</h2><p class="sub">📍 ${esc(m.place)} · <span class="ja">${esc(m.ja)}</span></p>
+    <div class="parts">${PARTS.map(p=>`<button class="part ${d[p[0]]?"done":""}" data-p="${p[0]}"><span class="ic">${p[1]}</span><b>${p[2]}</b><small class="ja">${p[3]}</small></button>`).join("")}</div>
+    <div class="row" style="margin-top:14px"><button class="btn soft" id="back">◀ Quest Map</button></div>`);
+  say(m.title+".");
+  app.querySelectorAll("[data-p]").forEach(b=>b.onclick=()=>({words,listen,story,build,grammar})[b.dataset.p](mi));
+  $("#back").onclick=()=>go("map");
+}
+function finishPart(mi,part,summary){
+  const m=MISSIONS[mi],badge=markDone(m.id,part);celebrate();chime();
+  h(`<h2>Mission part complete! 🎉</h2><div class="panel" style="text-align:center">
+    <p style="font-size:1.2rem">${summary}</p><p class="small">+20 XP bonus · ${S.xp} XP total</p>
+    ${badge?`<p style="font-size:3.4rem;margin:6px 0">${m.souvenir.icon}</p><p><b>New souvenir: ${esc(m.souvenir.name)}!</b><br><span class="small">${esc(m.souvenir.desc)} · +50 XP</span></p>${MISSIONS[MISSIONS.indexOf(m)+1]?`<p><b>🔓 Chapter unlocked: ${esc(MISSIONS[MISSIONS.indexOf(m)+1].title)}</b></p>`:`<p><b>🏆 You are the American Adventure Champion!</b></p>`}`:""}
+    <div class="row" style="justify-content:center"><button class="btn" id="next">Back to mission</button><button class="btn soft" id="mapb">Quest Map</button></div></div>`);
+  cheer(badge?"NEW SOUVENIR! 🧳":"Mission complete! 🎉");say(badge?["Mission complete!","You earned a new souvenir!","Chapter unlocked!"]:"Mission complete!");
+  $("#next").onclick=()=>mission(mi);$("#mapb").onclick=()=>go("map");
+}
+
+/* --- Words --- */
+function words(mi){
+  const m=MISSIONS[mi];let i=0;
+  function show(){
+    const w=m.words[i];
+    h(`<h2>🔤 Words · <span class="ja">単語</span></h2><p class="sub">${esc(m.title)} · Tap to hear Nana say each word.</p>
+      <div class="panel wcard">
+        <div class="en">${esc(w.en)}</div>
+        <div>${hintHtml(w.ja,"w"+i)}</div>
+        <p class="ex">“${esc(w.ex)}”</p>
+        <div class="row" style="justify-content:center;margin-top:10px"><button class="btn sun" id="hear">🔊 Hear it</button></div>
+        <div class="prog">${m.words.map((_,j)=>`<i class="${j<i?"on":j===i?"cur":""}"></i>`).join("")}</div>
+      </div>
+      <div class="row" style="justify-content:space-between;margin-top:12px"><button class="btn soft" id="prev" ${i===0?"disabled":""}>◀</button><button class="btn" id="nxt">${i<m.words.length-1?"Next word ▶":"Finish ✓"}</button></div>`);
+    wireHints();
+    const hear=()=>say([w.en,w.ex]);$("#hear").onclick=hear;hear();
+    if(!S.words.includes(w.en)){S.words.push(w.en);D().words.push(w.en);save()}
+    $("#prev").onclick=()=>{i--;show()};
+    $("#nxt").onclick=()=>{if(i<m.words.length-1){i++;show()}else finishPart(mi,"words",`You learned ${m.words.length} words: <b>${m.words.map(x=>esc(x.en)).join(", ")}</b>`)};
+  }
+  show();
+}
+
+/* --- Multiple choice engine (Listen + Story questions) --- */
+function quiz({mi,part,items,title,sub,intro,render,onDone}){
+  let i=0,firstRight=0;
+  function show(){
+    const it=items[i];let first=true,solved=false;
+    const order=shuffle(it.c.map((_,j)=>j));
+    h(`<h2>${title}</h2><p class="sub">${sub} · ${i+1} / ${items.length}</p>
+      <div class="panel">${render(it,i)}
+        <div class="opts">${order.map(j=>`<button class="opt ${it.jaOpts?"ja":""}" data-j="${j}">${optHtml(it,j)}</button>`).join("")}</div>
+        <div class="fb" id="fb" aria-live="polite"></div>
+        <div class="row" id="nav" style="justify-content:center;margin-top:8px"></div>
+        <div class="prog">${items.map((_,j)=>`<i class="${j<i?"on":j===i?"cur":""}"></i>`).join("")}</div>
+      </div>`);
+    wireHints();
+    const readIt=()=>say(it.speak);
+    const hb=$("#hearq");if(hb)hb.onclick=readIt;
+    if(i===0&&intro)say([intro,...[].concat(it.speak)]);else readIt();
+    app.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{
+      if(solved)return;
+      const j=Number(b.dataset.j);
+      if(j===it.a){
+        solved=true;b.classList.add("right");chime();
+        const gain=award(MISSIONS[mi].id,part,first);if(first)firstRight++;
+        app.querySelectorAll(".opt").forEach(x=>x.disabled=true);
+        const fb=$("#fb");fb.className="fb good";fb.innerHTML=`✔ Correct! ${it.why?esc(it.why):""}<span class="xpgain">+${gain} XP</span>${comboTag()}`;
+        say([pick(Q.cheers)].concat(it.why?[it.why]:[]));
+        $("#nav").innerHTML=`<button class="btn" id="go">${i<items.length-1?"Next ▶":"Finish ✓"}</button>`;
+        $("#go").onclick=()=>{i++;i<items.length?show():onDone(firstRight)};
+      }else{
+        first=false;b.classList.add("wrong");b.disabled=true;boop();
+        const fb=$("#fb");fb.className="fb bad";fb.innerHTML=`✖ Not quite. Try again! <span class="ja">もう一度！</span>`;
+        say(pick(Q.tries));
+      }
+    });
+  }
+  show();
+}
+
+/* --- Listen --- */
+function listen(mi){
+  const m=MISSIONS[mi];
+  quiz({mi,part:"listen",title:`🎧 Listen · <span class="ja">リスニング</span>`,sub:"Hear the English. Choose what it means.",
+    intro:"Listen and choose the meaning.",
+    items:m.listen.map(l=>({...l,jaOpts:false,speak:l.en})),
+    render:(it)=>`<div class="row" style="justify-content:center;margin-bottom:12px"><button class="btn sun" id="hearq">🔊 Play again</button></div><p class="small" style="text-align:center">Tap 🔊 as many times as you want. · 何回でも聞けるよ</p><div style="text-align:center;margin-bottom:10px">${hintHtml(it.ja,"l"+Math.random().toString(36).slice(2,6))}</div>`,
+    onDone:r=>finishPart(mi,"listen",`You got <b>${r} / ${m.listen.length}</b> right on the first try.`)});
+}
+
+/* --- Grammar --- */
+function grammar(mi){
+  const m=MISSIONS[mi];
+  quiz({mi,part:"grammar",title:`✏️ Grammar · <span class="ja">文法</span>`,sub:"Choose the correct word.",intro:"Choose the correct word.",
+    items:m.grammar.map(g=>({...g,speak:g.q.replace(/_+/g,"blank")})),
+    render:it=>`<p class="qtext">${esc(it.q)}</p>${qjHtml(it)}<div class="row" style="justify-content:center;margin-bottom:12px"><button class="btn sun" id="hearq">🔊 Hear it</button></div>`,
+    onDone:r=>finishPart(mi,"grammar",`You got <b>${r} / ${m.grammar.length}</b> right on the first try.`)});
+}
+
+/* --- Story --- */
+function story(mi){
+  const m=MISSIONS[mi],st=m.story;
+  h(`<h2>📖 ${esc(st.title)}</h2><p class="sub">Read along with Nana. Tap a line to hear it again.</p>
+    <div class="row" style="margin-bottom:10px"><button class="btn sun" id="all">▶ Read to me</button></div>
+    <div class="story">${st.lines.map((l,i)=>`<button class="line" data-l="${i}">${esc(l.en)}${hintsVisible()&&S.hintMode!=="off"?`<span class="ja">${esc(l.ja)}</span>`:""}</button>`).join("")}</div>
+    ${!hintsVisible()&&S.hintMode!=="off"?`<div class="row" style="margin-top:8px"><button class="hintbtn ja" id="showja">ヒント：日本語を見る 💡</button></div>`:""}
+    <div class="row" style="justify-content:flex-end;margin-top:14px"><button class="btn" id="qs">Answer questions ▶</button></div>`);
+  const lines=[...app.querySelectorAll(".line")];
+  const hl=i=>lines.forEach((x,j)=>x.classList.toggle("on",j===i));
+  function readFrom(i){if(i>=lines.length){hl(-1);return}hl(i);say(st.lines[i].en,{onend:()=>{if(reading)readFrom(i+1)}})}
+  let reading=false;
+  $("#all").onclick=()=>{reading=true;say(st.title+".",{onend:()=>readFrom(0)})};
+  lines.forEach((b,i)=>b.onclick=()=>{reading=false;hl(i);say(st.lines[i].en)});
+  const sj=$("#showja");if(sj)sj.onclick=()=>{lines.forEach((b,i)=>{if(!b.querySelector(".ja"))b.insertAdjacentHTML("beforeend",`<span class="ja">${esc(st.lines[i].ja)}</span>`)});sj.remove()};
+  $("#qs").onclick=()=>{reading=false;quiz({mi,part:"story",title:`📖 ${esc(st.title)}`,sub:"Think about the story.",intro:"Read the story, then answer the questions.",
+    items:st.qs.map(q=>({...q,speak:[q.q,...q.c]})),
+    render:it=>`<p class="qtext">${esc(it.q)}</p>${qjHtml(it)}<div class="row" style="justify-content:center;margin-bottom:12px"><button class="btn sun" id="hearq">🔊 Hear it</button></div>`,
+    onDone:r=>finishPart(mi,"story",`You got <b>${r} / ${st.qs.length}</b> right on the first try.`)})};
+  setTimeout(()=>{if(S.voice&&document.body.contains($("#all")))$("#all").click()},400);
+}
+
+/* --- Build --- */
+function build(mi){
+  const m=MISSIONS[mi];let n=0,firstRight=0;
+  function show(){
+    const target=m.build[n];let built=[],first=true;let bank=shuffle(target.map((w,i)=>({w,i})));if(bank.every((b,i)=>b.i===i))bank.reverse();
+    function draw(){
+      h(`<h2>🧩 Build · <span class="ja">文を作ろう</span></h2><p class="sub">Put the words in order. · ${n+1} / ${m.build.length}</p>
+        <div class="panel">
+          <div class="slots">${built.map((b,j)=>`<button class="wchip" data-back="${j}">${esc(b.w)}</button>`).join("")||'<span class="small">Tap the words below…</span>'}</div>
+          <div class="bank">${bank.map((b,j)=>`<button class="wchip" data-take="${j}">${esc(b.w)}</button>`).join("")}</div>
+          <div class="fb" id="fb"></div>
+          <div class="row" id="nav" style="justify-content:center;margin-top:8px"><button class="btn soft" id="hint">🔊 Hear the sentence</button></div>
+        </div>`);
+      app.querySelectorAll("[data-take]").forEach(b=>b.onclick=()=>{const it=bank.splice(+b.dataset.take,1)[0];built.push(it);say(it.w.replace(/[.?!,]/g,""),{rate:.8});check()});
+      app.querySelectorAll("[data-back]").forEach(b=>b.onclick=()=>{bank.push(built.splice(+b.dataset.back,1)[0]);draw()});
+      $("#hint").onclick=()=>say(target.join(" "));
+    }
+    function check(){
+      if(bank.length){draw();return}
+      const ok=built.every((b,i)=>b.w===target[i]);draw();
+      if(ok){
+        chime();const gain=award(m.id,"build",first);if(first)firstRight++;
+        $("#fb").className="fb good";$("#fb").innerHTML=`✔ Correct! “${esc(target.join(" "))}”<span class="xpgain">+${gain} XP</span>${comboTag()}`;
+        say([pick(Q.cheers),target.join(" ")]);
+        app.querySelectorAll(".wchip").forEach(x=>x.disabled=true);
+        $("#nav").innerHTML=`<button class="btn" id="go">${n<m.build.length-1?"Next ▶":"Finish ✓"}</button>`;
+        $("#go").onclick=()=>{n++;n<m.build.length?show():finishPart(mi,"build",`You built <b>${firstRight} / ${m.build.length}</b> sentences on the first try.`)};
+      }else{
+        first=false;boop();$("#fb").className="fb bad";$("#fb").innerHTML=`Almost! Tap a word to move it back. <span class="ja">言葉をタップしてもどそう</span>`;say(pick(Q.tries));
+      }
+    }
+    draw();
+  }
+  show();
+}
+
+/* ============ CHALLENGES ============ */
+const ALLWORDS=MISSIONS.flatMap(m=>m.words.map(w=>({...w,mid:m.id})));
+const jaShort=t=>t.replace(/（.*?）/g,"");
+function vocabQ(){const w=pick(ALLWORDS);const oth=shuffle(ALLWORDS.filter(x=>x.en!==w.en)).slice(0,2),others=oth.map(x=>x.en);const re=new RegExp("\\b"+w.en.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"\\w*","i");const blank=w.ex.replace(re,"_____");return{big:null,q:blank,c:[w.en,...others],cj:[w.ja,...oth.map(x=>x.ja)].map(jaShort),a:0,jaOpts:false,speak:w.ex,prompt:"Which word fits? · どの単語が入る？"}}
+function listenQ(){const m=pick(MISSIONS),l=pick(m.listen);return{big:"🎧",c:l.c,cj:l.cj,a:l.a,jaOpts:false,speak:l.en,prompt:"Listen. What does it mean? · 聞いて選ぼう"}}
+function storyQ(){const m=pick(MISSIONS),q=pick(m.story.qs);return{big:null,q:q.q,qj:q.qj,c:q.c,cj:q.cj,a:q.a,speak:[q.q,...q.c],prompt:"From “"+m.story.title+"”"}}
+function mixQ(){const r=Math.random();return r<.45?vocabQ():r<.8?listenQ():storyQ()}
+function challengeButtons(){
+  S.best=S.best||{};const dailyDone=S.dailyDone===dayKey();const bossOpen=S.badges.length>=2;
+  return `<div class="chal">
+    <button class="cbtn" id="c_light" style="background:linear-gradient(150deg,#ef6a5b,#e8952c)"><span class="big">⚡</span><b>⚡ Lightning Round</b><small>60 seconds. Beat your record!</small><small>🏆 Best: ${S.best.lightning||0}</small></button>
+    <button class="cbtn" id="c_daily" style="background:linear-gradient(150deg,#1a8fb0,#1f8a66)"><span class="big">📅</span><b>📅 Daily Challenge</b><small>5 questions · Double XP</small><small>${dailyDone?"✔ Done today! Come back tomorrow":"Ready today!"}</small></button>
+    <button class="cbtn ${bossOpen?"":"locked"}" id="c_boss" style="background:linear-gradient(150deg,#5b2a86,#101c4a)"><span class="big">🐉</span><b>🐉 Boss Challenge</b><small>${bossOpen?"Defeat the Word Dragon!":"🔒 Earn 2 badges to unlock"}</small><small>${S.bossWins?`🏆 Wins: ${S.bossWins}`:"3 lives ❤️❤️❤️"}</small></button>
+  </div>`}
+function wireChallenges(){
+  $("#c_light").onclick=()=>go("lightning");
+  $("#c_daily").onclick=()=>{if(S.dailyDone===dayKey()){toast("Done for today! Come back tomorrow. · また明日！");return}go("daily")};
+  $("#c_boss").onclick=()=>{if(S.badges.length<2){toast("Earn 2 mission badges to unlock the Boss! · バッジを2つ集めよう");return}go("boss")};
+}
+/* One question. Right/wrong is decided by the option's ORIGINAL index (q.a), never its screen position. */
+function askQ(q,onAnswer){
+  window.__q=q;
+  const order=shuffle(q.c.map((_,j)=>j));let first=true,solved=false;
+  const box=$("#qbox");
+  box.innerHTML=`${q.big?`<div class="bigword">${esc(q.big)}</div>`:`<p class="qtext">${esc(q.q)}</p>${qjHtml(q)}`}<p class="small" style="text-align:center;margin:0 0 8px">${esc(q.prompt)} <button class="hintbtn" id="rep" aria-label="Play again">🔊</button></p>
+    <div class="opts">${order.map(j=>`<button class="opt ${q.jaOpts?"ja":""}" data-j="${j}">${optHtml(q,j)}</button>`).join("")}</div><div class="fb" id="fb" aria-live="polite"></div>`;
+  $("#rep").onclick=()=>say(q.speak);say(q.speak);
+  box.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{
+    if(solved)return;const j=Number(b.dataset.j);
+    if(j===q.a){solved=true;b.classList.add("right");chime();box.querySelectorAll(".opt").forEach(x=>x.disabled=true);$("#fb").className="fb good";$("#fb").textContent="✔ Correct!";onAnswer(true,first)}
+    else{first=false;b.classList.add("wrong");b.disabled=true;boop();$("#fb").className="fb bad";$("#fb").textContent="✖ Not quite!";onAnswer(false,false)}
+  });
+}
+function lightning(){
+  S.best=S.best||{};let score=0,left=60,timer=null,over=false;
+  h(`<h2>⚡ Lightning Round</h2><p class="sub">Answer as many as you can in 60 seconds! · 60秒でいくつ答えられる？</p>
+    <div class="panel"><div class="scoreline"><span>⭐ Score: <span id="sc">0</span></span><span>⏱️ <span id="tl">60</span>s</span></div><div class="timer"><i id="tb" style="width:100%"></i></div><div id="qbox"></div></div>`);
+  function next(){if(over)return;askQ(Math.random()<.6?vocabQ():listenQ(),(ok)=>{if(over)return;if(ok){score++;combo++;addXP(5);cheer(combo>=3?`Combo x${combo}! 🔥`:null);$("#sc").textContent=score;setTimeout(next,650)}else{combo=0;setTimeout(()=>{if(!over)next()},700)}})}
+  timer=setInterval(()=>{left--;const tl=$("#tl"),tb=$("#tb");if(!tl){clearInterval(timer);over=true;return}tl.textContent=left;tb.style.width=(left/60*100)+"%";if(left<=0){clearInterval(timer);over=true;end()}},1000);
+  function end(){stopTalking();const rec=score>(S.best.lightning||0);if(rec)S.best.lightning=score;save();celebrate();chime();
+    h(`<h2>⚡ Time's up!</h2><div class="panel" style="text-align:center"><p style="font-size:1.4rem">You answered <b>${score}</b> correctly!</p>${rec?`<p style="font-size:2.4rem;margin:4px 0">🏆</p><p><b>New record!</b> · 新記録！</p>`:`<p>Your record: <b>${S.best.lightning}</b>. Can you beat it?</p>`}<p class="small">+${score*5} XP</p><div class="row" style="justify-content:center"><button class="btn sun" id="again">⚡ Play again</button><button class="btn soft" id="hm">Home</button></div></div>`);
+    say(rec?"Excellent!":"Awesome!");cheer(rec?"NEW RECORD! 🏆":"Great job! 💪");$("#again").onclick=()=>go("lightning");$("#hm").onclick=()=>go("home")}
+  next();
+}
+function daily(){
+  const qs=[mixQ(),mixQ(),mixQ(),mixQ(),mixQ()];let i=0,right=0;
+  h(`<h2>📅 Daily Challenge</h2><p class="sub">5 questions · Double XP today! · 今日はXP2倍！</p><div class="panel"><div class="scoreline"><span>Question <span id="qi">1</span> / 5</span><span>⭐ <span id="sc">0</span></span></div><div id="qbox" style="margin-top:10px"></div><div class="row" id="nav" style="justify-content:center;margin-top:8px"></div></div>`);
+  function show(){$("#qi").textContent=i+1;$("#nav").innerHTML="";askQ(qs[i],(ok,first)=>{if(!ok){combo=0;return}if(first){right++;combo++}addXP(first?20:10);cheer();$("#sc").textContent=right;$("#nav").innerHTML=`<button class="btn" id="go">${i<4?"Next ▶":"Finish ✓"}</button>`;$("#go").onclick=()=>{i++;i<5?show():end()}})}
+  function end(){S.dailyDone=dayKey();S.dailyCount=(S.dailyCount||0)+1;save();celebrate();chime();
+    h(`<h2>📅 Daily Challenge complete!</h2><div class="panel" style="text-align:center"><p style="font-size:1.3rem"><b>${right} / 5</b> right on the first try!</p><p style="font-size:2rem">${"⭐".repeat(right)}${"☆".repeat(5-right)}</p><p class="small">Come back tomorrow for a new challenge. · また明日チャレンジしよう！</p><button class="btn" id="hm">Home</button></div>`);
+    say("Mission complete!");cheer("See you tomorrow! 👋");$("#hm").onclick=()=>go("home")}
+  show();
+}
+function boss(){
+  const N=10;let hits=0,lives=3;
+  h(`<h2>🐉 Boss Challenge</h2><p class="sub">Defeat the Word Dragon! Each right answer is a hit. You have 3 lives. · ドラゴンをたおせ！</p>
+    <div class="panel"><div class="boss" id="dragon">🐉</div><div class="hp"><i id="hp" style="width:100%"></i></div>
+    <div class="scoreline"><span class="hearts" id="hearts">❤️❤️❤️</span><span>Hits: <span id="hits">0</span> / ${N}</span></div><div id="qbox" style="margin-top:10px"></div></div>`);
+  function show(){askQ(mixQ(),(ok)=>{
+    if(ok){hits++;combo++;addXP(10);cheer(combo>=3?`Combo x${combo}! 🔥`:"Hit! 💥");const d=$("#dragon");d.classList.remove("hit");void d.offsetWidth;d.classList.add("hit");$("#hp").style.width=((N-hits)/N*100)+"%";$("#hits").textContent=hits;
+      if(hits>=N)setTimeout(win,700);else setTimeout(show,800)}
+    else{lives--;combo=0;$("#hearts").textContent="❤️".repeat(Math.max(lives,0))+"🤍".repeat(3-Math.max(lives,0));if(lives<=0)setTimeout(lose,700)}
+  })}
+  function win(){S.bossWins=(S.bossWins||0)+1;addXP(100);save();celebrate();setTimeout(celebrate,500);chime();
+    h(`<h2>🏆 You defeated the Word Dragon!</h2><div class="panel" style="text-align:center"><p style="font-size:3rem;margin:0">🏆🐉💫</p><p style="font-size:1.2rem"><b>+100 XP bonus!</b> Boss wins: ${S.bossWins}</p><p class="ja">ドラゴンをたおした！すごい！</p><div class="row" style="justify-content:center"><button class="btn sun" id="again">Fight again</button><button class="btn soft" id="hm">Home</button></div></div>`);
+    say("Excellent!");cheer("CHAMPION! 🏆");$("#again").onclick=()=>go("boss");$("#hm").onclick=()=>go("home")}
+  function lose(){save();
+    h(`<h2>🐉 The dragon got away…</h2><div class="panel" style="text-align:center"><p style="font-size:1.2rem">You made <b>${hits}</b> hits. Practice the missions and try again!</p><p class="ja">ミッションで練習して、もう一度！</p><div class="row" style="justify-content:center"><button class="btn sun" id="again">Try again</button><button class="btn soft" id="mp">Quest Map</button></div></div>`);
+    say("Good try. One more time.");cheer("You’ll get him next time! 💪");$("#again").onclick=()=>go("boss");$("#mp").onclick=()=>go("map")}
+  show();
+}
+
+/* ============ FAMILY DASHBOARD ============ */
+function family(){
+  const L=level();
+  const last=n=>{const o=[];for(let i=n-1;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);o.push({d,v:(S.days&&S.days[dayKey(d)])||{sec:0,xp:0,right:0,tries:0,words:[]}})}return o};
+  const wk=last(7),sum=f=>wk.reduce((a,x)=>a+f(x.v),0);
+  const wkMin=Math.round(sum(v=>v.sec)/60),wkXP=sum(v=>v.xp),wkR=sum(v=>v.right),wkT=sum(v=>v.tries);
+  const acc=wkT?Math.round(wkR/wkT*100):null;
+  const dl=d=>d.toLocaleDateString(undefined,{weekday:"short",month:"short",day:"numeric"});
+  const rows=MISSIONS.map(m=>{const s=S.stats[m.id]||{};const cell=p=>{const x=s[p];return x&&x.tries?`${Math.round(x.right/x.tries*100)}%`:(S.done[m.id]&&S.done[m.id][p]?"✓":"–")};return {m,cells:["words","listen","story","build"].map(p=>p==="words"?(S.done[m.id]&&S.done[m.id].words?"✓":"–"):cell(p))}});
+  const report=`TK's English Adventure Quest report ✨ (${dl(new Date())})\n\nLevel: ${L.name} (${L.ja}), ${S.xp} XP\nBadges: ${S.badges.length} of ${MISSIONS.length}\n⚡ Lightning Round best: ${(S.best&&S.best.lightning)||0}\n📅 Daily Challenges done: ${S.dailyCount||0}\n🐉 Boss wins: ${S.bossWins||0}\n🔥 ${streakDays()} day streak\n\nThis week:\n⏱️ ${wkMin} minutes\n⭐ ${wkXP} XP earned\n🎯 ${acc===null?"No answers yet":acc+"% right on the first try"}\n\nMissions (first-try accuracy: Listen / Story / Build):\n${rows.map(r=>`${r.m.icon} ${r.m.title}: words ${r.cells[0]}, listen ${r.cells[1]}, story ${r.cells[2]}, build ${r.cells[3]}`).join("\n")}\n\nWords learned (${S.words.length}): ${S.words.join(", ")||"none yet"}\n\nDay by day:\n${wk.map(x=>`${dl(x.d)}: ${Math.round(x.v.sec/60)} min, ${x.v.xp} XP`).join("\n")}`;
+  h(`<h2>Family Dashboard · <span class="ja">家族用</span></h2><p class="sub">TK's progress, settings and reports.</p>
+  <div class="gu">
+    <div class="panel"><h3>This week</h3><div class="stats">
+      <div><b>${wkMin}</b><span>minutes</span></div><div><b>${wkXP}</b><span>XP earned</span></div>
+      <div><b>${acc===null?"–":acc+"%"}</b><span>right first try</span></div><div><b>${streakDays()}</b><span>day streak 🔥</span></div>
+      <div><b>${L.name}</b><span>${S.xp} XP total</span></div><div><b>${S.badges.length}/${MISSIONS.length}</b><span>badges</span></div><div><b>${(S.best&&S.best.lightning)||0}</b><span>⚡ Lightning best</span></div><div><b>${S.bossWins||0}</b><span>🐉 boss wins</span></div></div></div>
+    <div class="panel"><h3>Missions</h3><table><thead><tr><th>Mission</th><th>Words</th><th>Listen</th><th>Story</th><th>Build</th></tr></thead><tbody>
+      ${rows.map(r=>`<tr><td>${r.m.icon} ${esc(r.m.title)}</td>${r.cells.map(c=>`<td>${c}</td>`).join("")}</tr>`).join("")}</tbody></table>
+      <p class="small">Percent = answers right on the first try.</p></div>
+    <div class="panel"><h3>Send progress to Nana</h3><textarea id="rep" rows="9" readonly>${esc(report)}</textarea>
+      <div class="row" style="margin-top:10px"><button class="btn sun" id="share">💌 Send to Nana</button><button class="btn soft" id="copy">Copy</button></div></div>
+    <div class="panel"><h3>Japanese hints · ヒント</h3>
+      <select id="hm"><option value="fade" ${S.hintMode==="fade"?"selected":""}>Fade as he improves (recommended)</option><option value="on" ${S.hintMode==="on"?"selected":""}>Always show</option><option value="off" ${S.hintMode==="off"?"selected":""}>Off (English only)</option></select>
+      <p class="small">In fade mode, hints show at first and hide behind a ヒント button after three first-try answers in a row. A wrong answer brings them back.</p></div>
+    <div class="panel"><h3>Nana's voice</h3><p class="small">Every English word, sentence, story and question is read in Nana's own voice. The 🔈 buttons next to Japanese hints use the device's Japanese voice.</p>
+      <div class="row"><button class="btn soft" id="tv">🔊 Test Nana's voice</button></div><p class="small" id="vs"></p></div>
+    <div class="panel"><h3>Add to Home Screen</h3><p class="small">On iPhone or iPad, open this page in Safari, tap Share, then <b>Add to Home Screen</b>.</p></div>
+    <div class="panel"><h3>Start over</h3><div class="row"><button class="btn soft" id="r1">Reset progress…</button><button class="btn" id="r2" hidden style="background:var(--coral)">Yes, erase progress</button></div></div>
+  </div>`);
+  $("#share").onclick=async()=>{const t=$("#rep").value;if(navigator.share){try{await navigator.share({title:"TK's English report",text:t});return}catch(e){if(e&&e.name==="AbortError")return}}$("#copy").click()};
+  $("#copy").onclick=async()=>{try{await navigator.clipboard.writeText($("#rep").value);toast("Copied!")}catch(e){const t=$("#rep");t.focus();t.select();toast("Press and hold to copy.")}};
+  $("#hm").onchange=e=>{S.hintMode=e.target.value;save();toast("Saved")};
+  $("#tv").onclick=()=>say("Welcome back, TK! Ready for your next mission?");$("#vs").textContent=VOICE.ready?"✔ Nana's voice is loaded.":"Nana's voice is loading…";
+  $("#r1").onclick=()=>{$("#r2").hidden=false};
+  $("#r2").onclick=()=>{Object.assign(S,{xp:0,streakRight:0,done:{},badges:[],days:{},seconds:0,minutes:0,words:[],stats:{},best:{},dailyDone:null,dailyCount:0,bossWins:0});save();toast("Progress erased");family()};
+}
+
+/* ============ AUTO PAGE TURN ============
+   After a page is finished being read aloud, if nobody taps for 10 seconds, turn to the next page. */
+const IDLE_MS=10000;let lastAct=Date.now(),talkSince=0;
+["pointerdown","keydown","touchstart","wheel"].forEach(ev=>addEventListener(ev,()=>{lastAct=Date.now()},{passive:true,capture:true}));
+function busyTalking(){try{return (vSources&&vSources.length>0)||speechSynthesis.speaking||(audioEl&&!audioEl.paused)}catch(e){return false}}
+setInterval(()=>{
+  const talking=busyTalking();if(!talking)talkSince=0;else if(!talkSince)talkSince=Date.now();
+  const busy=(talking&&Date.now()-talkSince<90000)||(typeof turning!=="undefined"&&turning)||document.hidden||document.querySelector(".overlay");
+  if(busy)lastAct=Date.now();
+  const idle=Date.now()-lastAct,h=hintTarget();
+  document.querySelectorAll(".hintme").forEach(x=>{if(x!==h||idle<2000)x.classList.remove("hintme")});
+  if(h&&!h.disabled&&idle>=2000)h.classList.add("hintme");
+  if(busy)return;
+  const b=autoNext();
+  if(!b||b.disabled){lastAct=Date.now();return}
+  if(idle>=IDLE_MS){lastAct=Date.now();b.classList.remove("hintme");b.click()}
+},500);
+function hintTarget(){return document.querySelector(".story")?document.querySelector("#qs"):null}
+function autoNext(){return document.querySelector(".story")?document.querySelector("#qs"):null}
+
+home();
+loadVoicePack();
+</script>
+</body></html>
+
+</body></html>
